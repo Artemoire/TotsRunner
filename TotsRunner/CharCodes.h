@@ -3,19 +3,20 @@
 #include "defs.h"
 
 #define LOADS(V)\
-V(LdNeg)	\
-V(Ld0)		\
-V(LdI8)		\
-V(LdI16)	\
-V(LdI32)	\
+V(kLVI_1)	\
+V(kLVI0)		\
+V(kLVI8)		\
+V(kLVI16)	\
+V(kLVI32)	\
+V(kLVF)		\
 
 #define ARITH(V)\
-V(Add)		\
-V(Sub)		\
-V(Mul)		\
-V(Div)		\
+V(kADD)		\
+V(kSUB)		\
+V(kMUL)		\
+V(kDIV)		\
 
-enum CharCodes : uchar {
+enum CharCodes : UCHAR {
 #define DECLARE_CHARCODE(Name) Name,
 	LOADS(DECLARE_CHARCODE)
 	ARITH(DECLARE_CHARCODE)
@@ -23,3 +24,4 @@ enum CharCodes : uchar {
 };
 
 #undef LOADS
+#undef ARITH

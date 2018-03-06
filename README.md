@@ -1,3 +1,3 @@
 ## TotsRunner
 
-Virtual machine for executing **Tots** compiled code
+Virtual execution of **Tots** compiled code

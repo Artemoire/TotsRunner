@@ -5,16 +5,17 @@
 using namespace std;
 
 class MethodBuilder {
-	vector<uchar> charcodes;
+	vector<UCHAR> charcodes;
 
 public:
-	vector<uchar> build();
+	vector<UCHAR> build();
 
-	MethodBuilder ldNeg();
-	MethodBuilder ld0();
-	MethodBuilder ldi8(WORD);
-	MethodBuilder ldi16(WORD);
-	MethodBuilder ldi32(WORD);
+	MethodBuilder LVI_1();
+	MethodBuilder LVI0();
+	MethodBuilder LVI8(WORD);
+	MethodBuilder LVI16(WORD);
+	MethodBuilder LVI32(WORD);
+	MethodBuilder LVF(FLOAT);
 	MethodBuilder add();
 	MethodBuilder sub();
 	MethodBuilder mul();

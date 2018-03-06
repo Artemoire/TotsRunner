@@ -5,15 +5,8 @@
 int main()
 {
 	MethodBuilder builder;
-	vector<uchar> code = builder.ldi8(2).ldi8(2).add().ldi8(3).mul().ldi8(6).div().build();
+	vector<UCHAR> code = builder.LVI8(2).LVI8(2).add().LVI8(3).mul().LVF(0.333F).div().build();
 	TotsRunner t;
-
-	cout << &t << endl;
-
-	WORD * h = (WORD*)&t;
-	t = *(TotsRunner*)h;
-
-	cout << &t << endl;
 
 	t.loadProgram(code);
 	t.execute();  

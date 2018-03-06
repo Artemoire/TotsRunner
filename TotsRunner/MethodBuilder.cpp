@@ -1,43 +1,54 @@
 #include "MethodBuilder.h"
 #include "CharCodes.h"
 
-#define CODE(X) static_cast<uchar>(X)
+#define CODE(X) static_cast<UCHAR>(X)
 
-vector<uchar> MethodBuilder::build()
+vector<UCHAR> MethodBuilder::build()
 {
 	return charcodes;
 }
 
-MethodBuilder MethodBuilder::ldNeg()
+MethodBuilder MethodBuilder::LVI_1()
 {
-	charcodes.push_back(CODE(CharCodes::LdNeg));
+	charcodes.push_back(CODE(CharCodes::kLVI_1));
 	return *this;
 }
 
-MethodBuilder MethodBuilder::ld0()
+MethodBuilder MethodBuilder::LVI0()
 {
-	charcodes.push_back(CODE(CharCodes::Ld0));
+	charcodes.push_back(CODE(CharCodes::kLVI0));
 	return *this;
 }
 
-MethodBuilder MethodBuilder::ldi8(WORD i8)
+MethodBuilder MethodBuilder::LVI8(WORD i8)
 {
-	charcodes.push_back(CODE(CharCodes::LdI8));
+	charcodes.push_back(CODE(CharCodes::kLVI8));
 	charcodes.push_back(CODE(i8));
 	return *this;
 }
 
-MethodBuilder MethodBuilder::ldi16(WORD i16)
+MethodBuilder MethodBuilder::LVI16(WORD i16)
 {
-	charcodes.push_back(CODE(CharCodes::LdI16));
+	charcodes.push_back(CODE(CharCodes::kLVI16));
 	charcodes.push_back(CODE(i16));
 	charcodes.push_back(CODE(i16 >> 8));
 	return *this;
 }
 
-MethodBuilder MethodBuilder::ldi32(WORD i32)
+MethodBuilder MethodBuilder::LVI32(WORD i32)
 {
-	charcodes.push_back(CODE(CharCodes::LdI32));
+	charcodes.push_back(CODE(CharCodes::kLVI32));
+	charcodes.push_back(CODE(i32));
+	charcodes.push_back(CODE(i32 >> 8));
+	charcodes.push_back(CODE(i32 >> 16));
+	charcodes.push_back(CODE(i32 >> 24));
+	return *this;
+}
+
+MethodBuilder MethodBuilder::LVF(FLOAT f)
+{
+	WORD i32 = *(WORD*)&f;
+	charcodes.push_back(CODE(CharCodes::kLVF));
 	charcodes.push_back(CODE(i32));
 	charcodes.push_back(CODE(i32 >> 8));
 	charcodes.push_back(CODE(i32 >> 16));
@@ -47,25 +58,25 @@ MethodBuilder MethodBuilder::ldi32(WORD i32)
 
 MethodBuilder MethodBuilder::add()
 {
-	charcodes.push_back(CODE(CharCodes::Add));
+	charcodes.push_back(CODE(CharCodes::kADD));
 	return *this;
 }
 
 MethodBuilder MethodBuilder::sub()
 {
-	charcodes.push_back(CODE(CharCodes::Sub));
+	charcodes.push_back(CODE(CharCodes::kSUB));
 	return *this;
 }
 
 MethodBuilder MethodBuilder::mul()
 {
-	charcodes.push_back(CODE(CharCodes::Mul));
+	charcodes.push_back(CODE(CharCodes::kMUL));
 	return *this;
 }
 
 MethodBuilder MethodBuilder::div()
 {
-	charcodes.push_back(CODE(CharCodes::Div));
+	charcodes.push_back(CODE(CharCodes::kDIV));
 	return *this;
 }
 

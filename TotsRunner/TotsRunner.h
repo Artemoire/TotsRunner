@@ -2,20 +2,21 @@
 
 #include <vector>
 #include "defs.h"
+#include "ValueObject.h"
 
 using namespace std;
 
 class TotsRunner {
 
-	vector<uchar> charCodeArray;
-	vector<WORD> stack;
+	vector<UCHAR> charCodeArray;
+	vector<ValueObject> stack;
 	WORD pc;
 	WORD sp;
 
 public:
 	TotsRunner();
 
-	void loadProgram(vector<uchar>);
+	void loadProgram(vector<UCHAR>);
 	void print();
 	void execute();
 };

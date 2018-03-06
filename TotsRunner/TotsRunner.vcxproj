@@ -115,11 +115,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Arith.cpp" />
     <ClCompile Include="MethodBuilder.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="TotsRunner.cpp" />
+    <ClCompile Include="ValueObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Arith.h" />
     <ClInclude Include="MethodBuilder.h" />
     <ClInclude Include="CharCodes.h" />
     <ClInclude Include="defs.h" />

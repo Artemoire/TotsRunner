@@ -1,15 +1,16 @@
 #include "TotsRunner.h"
 #include <iostream>
 #include "CharCodes.h"
+#include "Arith.h"
 
 TotsRunner::TotsRunner()
 {
 	sp = -1;
 	pc = 0;
-	stack = vector<WORD>(1000);
+	stack = vector<ValueObject>(1000);
 }
 
-void TotsRunner::loadProgram(vector<uchar> charCodeArray)
+void TotsRunner::loadProgram(vector<UCHAR> charCodeArray)
 {
 	TotsRunner::charCodeArray = charCodeArray;
 }
@@ -26,64 +27,70 @@ void TotsRunner::execute()
 		CharCodes code = static_cast<CharCodes>(charCodeArray[pc]);
 		switch (code)
 		{
-		case CharCodes::LdNeg:
+		case CharCodes::kLVI_1:
 		{
-			stack[++sp] = -1;
+			stack[++sp] = ValueObject(Type::kINT, -1);
 			break;
 		}
-		case CharCodes::Ld0:
+		case CharCodes::kLVI0:
 		{
-			stack[++sp] = 0;
+			stack[++sp] = ValueObject(Type::kINT, 0);
 			break;
 		}
-		case CharCodes::LdI8:
+		case CharCodes::kLVI8:
 		{
 			WORD val = charCodeArray[++pc];
-			stack[++sp] = val;
+			stack[++sp] = ValueObject(Type::kINT, val);
 			break;
 		}
-		case CharCodes::LdI16:
+		case CharCodes::kLVI16:
 		{
 			WORD val = (charCodeArray[++pc]) | (charCodeArray[++pc] << 8);
-			stack[++sp] = val;
+			stack[++sp] = ValueObject(Type::kINT, val);
 			break;
 		}
-		case CharCodes::LdI32:
+		case CharCodes::kLVI32:
 		{
 			WORD val = (charCodeArray[++pc]) | (charCodeArray[++pc] << 8) | (charCodeArray[++pc] << 16) | (charCodeArray[++pc] << 24);
-			stack[++sp] = val;
+			stack[++sp] = ValueObject(Type::kINT, val);
 			break;
 		}
-		case CharCodes::Add:
+		case CharCodes::kLVF:
+		{
+			WORD val = (charCodeArray[++pc]) | (charCodeArray[++pc] << 8) | (charCodeArray[++pc] << 16) | (charCodeArray[++pc] << 24);
+			stack[++sp] = ValueObject(Type::kFLOAT, val);
+			break;
+		}
+		case CharCodes::kADD:
 		{
 #ifdef _DEBUG
 			cout << "+=" << endl;
 #endif // _DEBUG
-			stack[--sp] = stack[sp] + stack[sp + 1];
+			Arith::Add(&stack[--sp], &stack[sp + 1]);
 			break;
 		}
-		case CharCodes::Sub:
+		case CharCodes::kSUB:
 		{
 #ifdef _DEBUG
 			cout << "-=" << endl;
 #endif // _DEBUG
-			stack[--sp] = stack[sp] - stack[sp + 1];
+			Arith::Sub(&stack[--sp], &stack[sp + 1]);
 			break;
 		}
-		case CharCodes::Mul:
+		case CharCodes::kMUL:
 		{
 #ifdef _DEBUG
 			cout << "*=" << endl;
 #endif // _DEBUG
-			stack[--sp] = stack[sp] * stack[sp + 1];
+			Arith::Mul(&stack[--sp], &stack[sp + 1]);
 			break;
 		}
-		case CharCodes::Div:
+		case CharCodes::kDIV:
 		{
 #ifdef _DEBUG
 			cout << "/=" << endl;
 #endif // _DEBUG
-			stack[--sp] = stack[sp] / stack[sp + 1];
+			Arith::Div(&stack[--sp], &stack[sp + 1]);
 			break;
 		}
 		default:

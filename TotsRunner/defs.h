@@ -3,4 +3,5 @@
 typedef unsigned char tuchar;
 typedef unsigned long tWORD;
 #define WORD tWORD
-#define uchar tuchar
+#define UCHAR tuchar
+#define FLOAT float
