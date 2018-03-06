@@ -1,33 +1,33 @@
-#include "CharCodeBuilder.h"
+#include "MethodBuilder.h"
 #include "CharCodes.h"
 
 #define CODE(X) static_cast<uchar>(X)
 
-vector<uchar> CharCodeBuilder::build()
+vector<uchar> MethodBuilder::build()
 {
 	return charcodes;
 }
 
-CharCodeBuilder CharCodeBuilder::ldNeg()
+MethodBuilder MethodBuilder::ldNeg()
 {
 	charcodes.push_back(CODE(CharCodes::LdNeg));
 	return *this;
 }
 
-CharCodeBuilder CharCodeBuilder::ld0()
+MethodBuilder MethodBuilder::ld0()
 {
 	charcodes.push_back(CODE(CharCodes::Ld0));
 	return *this;
 }
 
-CharCodeBuilder CharCodeBuilder::ldi8(WORD i8)
+MethodBuilder MethodBuilder::ldi8(WORD i8)
 {
 	charcodes.push_back(CODE(CharCodes::LdI8));
 	charcodes.push_back(CODE(i8));
 	return *this;
 }
 
-CharCodeBuilder CharCodeBuilder::ldi16(WORD i16)
+MethodBuilder MethodBuilder::ldi16(WORD i16)
 {
 	charcodes.push_back(CODE(CharCodes::LdI16));
 	charcodes.push_back(CODE(i16));
@@ -35,7 +35,7 @@ CharCodeBuilder CharCodeBuilder::ldi16(WORD i16)
 	return *this;
 }
 
-CharCodeBuilder CharCodeBuilder::ldi32(WORD i32)
+MethodBuilder MethodBuilder::ldi32(WORD i32)
 {
 	charcodes.push_back(CODE(CharCodes::LdI32));
 	charcodes.push_back(CODE(i32));
@@ -45,25 +45,25 @@ CharCodeBuilder CharCodeBuilder::ldi32(WORD i32)
 	return *this;
 }
 
-CharCodeBuilder CharCodeBuilder::add()
+MethodBuilder MethodBuilder::add()
 {
 	charcodes.push_back(CODE(CharCodes::Add));
 	return *this;
 }
 
-CharCodeBuilder CharCodeBuilder::sub()
+MethodBuilder MethodBuilder::sub()
 {
 	charcodes.push_back(CODE(CharCodes::Sub));
 	return *this;
 }
 
-CharCodeBuilder CharCodeBuilder::mul()
+MethodBuilder MethodBuilder::mul()
 {
 	charcodes.push_back(CODE(CharCodes::Mul));
 	return *this;
 }
 
-CharCodeBuilder CharCodeBuilder::div()
+MethodBuilder MethodBuilder::div()
 {
 	charcodes.push_back(CODE(CharCodes::Div));
 	return *this;

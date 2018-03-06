@@ -115,14 +115,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CharCodeBuilder.cpp" />
+    <ClCompile Include="MethodBuilder.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="TotsRunner.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CharCodeBuilder.h" />
+    <ClInclude Include="MethodBuilder.h" />
     <ClInclude Include="CharCodes.h" />
+    <ClInclude Include="defs.h" />
     <ClInclude Include="TotsRunner.h" />
+    <ClInclude Include="ValueObject.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

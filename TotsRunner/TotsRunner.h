@@ -1,9 +1,7 @@
 #pragma once
 
-#include<vector>
-
-typedef unsigned char uchar;
-typedef unsigned long WORD;
+#include <vector>
+#include "defs.h"
 
 using namespace std;
 
@@ -19,5 +17,5 @@ public:
 
 	void loadProgram(vector<uchar>);
 	void print();
-	void execute();	
+	void execute();
 };

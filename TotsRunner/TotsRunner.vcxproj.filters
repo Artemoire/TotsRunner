@@ -21,7 +21,7 @@
     <ClCompile Include="TotsRunner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CharCodeBuilder.cpp">
+    <ClCompile Include="MethodBuilder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,7 +32,13 @@
     <ClInclude Include="TotsRunner.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CharCodeBuilder.h">
+    <ClInclude Include="ValueObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="defs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MethodBuilder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

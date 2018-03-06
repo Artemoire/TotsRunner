@@ -1,6 +1,6 @@
 #pragma once
 
-typedef unsigned char uchar;
+#include "defs.h"
 
 #define LOADS(V)\
 V(LdNeg)	\
