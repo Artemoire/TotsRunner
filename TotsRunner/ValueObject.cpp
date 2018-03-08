@@ -2,14 +2,21 @@
 
 ValueObject::ValueObject()
 {
-	this->type = kOBJECTREF;
-	this->value = (WORD)0;
+	this->type = kNONE;
 }
 
-ValueObject::ValueObject(Type type, WORD value)
+ValueObject::ValueObject(Type type, WORD v0)
 {
 	this->type = type;
-	this->value = value;
+	this->v0 = v0;
+	this->v1 = 0;
+}
+
+ValueObject::ValueObject(Type type, WORD v0, WORD v1)
+{
+	this->type = type;
+	this->v0 = v0;
+	this->v1 = v1;
 }
 
 ValueObject * ValueObject::ToInt()
@@ -22,8 +29,8 @@ ValueObject * ValueObject::ToInt()
 	}
 	case Type::kFLOAT:
 	{
-		FLOAT val = *(FLOAT*)&this->value;
-		this->value = (WORD)val;
+		Float val = *(Float*)&this->v0;
+		this->v0 = (WORD)val;
 		this->type = Type::kINT;
 		return this;
 	}
@@ -37,8 +44,8 @@ ValueObject * ValueObject::ToFloat()
 	{
 	case Type::kINT:
 	{
-		FLOAT val = (FLOAT)this->value;
-		this->value = *(WORD*)&val;
+		Float val = (Float)this->v0;
+		this->v0 = *(WORD*)&val;
 		this->type = Type::kFLOAT;
 	}
 	case Type::kFLOAT:
@@ -51,12 +58,12 @@ ValueObject * ValueObject::ToFloat()
 
 WORD ValueObject::AsInt()
 {
-	return this->value;
+	return this->v0;
 }
 
-FLOAT ValueObject::AsFloat()
+Float ValueObject::AsFloat()
 {
-	return *(FLOAT*)&this->value;
+	return *(Float*)&this->v0;
 }
 
 const char * ValueObject::TypeToCharArray(Type type)
@@ -83,16 +90,16 @@ ostream & operator<<(ostream & os, const ValueObject & dt)
 	switch (dt.type) {
 	case Type::kINT:
 	{
-		os << dt.value;
+		os << dt.v0;
 		break;
 	}
 	case Type::kFLOAT:
 	{
-		os << *(FLOAT*)&dt.value;
+		os << *(Float*)&dt.v0;
 		break;
 	}
 	case Type::kOBJECTREF:
-		os << hex << dt.value;
+		os << hex << dt.v0;
 		break;
 	}
 	return os;

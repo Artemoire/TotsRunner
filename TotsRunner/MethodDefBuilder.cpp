@@ -1,33 +1,33 @@
-#include "MethodBuilder.h"
+#include "MethodDefBuilder.h"
 #include "CharCodes.h"
 
-#define CODE(X) static_cast<UCHAR>(X)
+#define CODE(X) static_cast<UChar>(X)
 
-vector<UCHAR> MethodBuilder::build()
+vector<UChar> MethodDefBuilder::build()
 {
 	return charcodes;
 }
 
-MethodBuilder MethodBuilder::LVI_1()
+MethodDefBuilder MethodDefBuilder::LVI_1()
 {
 	charcodes.push_back(CODE(CharCodes::kLVI_1));
 	return *this;
 }
 
-MethodBuilder MethodBuilder::LVI0()
+MethodDefBuilder MethodDefBuilder::LVI0()
 {
 	charcodes.push_back(CODE(CharCodes::kLVI0));
 	return *this;
 }
 
-MethodBuilder MethodBuilder::LVI8(WORD i8)
+MethodDefBuilder MethodDefBuilder::LVI8(WORD i8)
 {
 	charcodes.push_back(CODE(CharCodes::kLVI8));
 	charcodes.push_back(CODE(i8));
 	return *this;
 }
 
-MethodBuilder MethodBuilder::LVI16(WORD i16)
+MethodDefBuilder MethodDefBuilder::LVI16(WORD i16)
 {
 	charcodes.push_back(CODE(CharCodes::kLVI16));
 	charcodes.push_back(CODE(i16));
@@ -35,7 +35,7 @@ MethodBuilder MethodBuilder::LVI16(WORD i16)
 	return *this;
 }
 
-MethodBuilder MethodBuilder::LVI32(WORD i32)
+MethodDefBuilder MethodDefBuilder::LVI32(WORD i32)
 {
 	charcodes.push_back(CODE(CharCodes::kLVI32));
 	charcodes.push_back(CODE(i32));
@@ -45,7 +45,7 @@ MethodBuilder MethodBuilder::LVI32(WORD i32)
 	return *this;
 }
 
-MethodBuilder MethodBuilder::LVF(FLOAT f)
+MethodDefBuilder MethodDefBuilder::LVF(Float f)
 {
 	WORD i32 = *(WORD*)&f;
 	charcodes.push_back(CODE(CharCodes::kLVF));
@@ -56,25 +56,25 @@ MethodBuilder MethodBuilder::LVF(FLOAT f)
 	return *this;
 }
 
-MethodBuilder MethodBuilder::add()
+MethodDefBuilder MethodDefBuilder::add()
 {
 	charcodes.push_back(CODE(CharCodes::kADD));
 	return *this;
 }
 
-MethodBuilder MethodBuilder::sub()
+MethodDefBuilder MethodDefBuilder::sub()
 {
 	charcodes.push_back(CODE(CharCodes::kSUB));
 	return *this;
 }
 
-MethodBuilder MethodBuilder::mul()
+MethodDefBuilder MethodDefBuilder::mul()
 {
 	charcodes.push_back(CODE(CharCodes::kMUL));
 	return *this;
 }
 
-MethodBuilder MethodBuilder::div()
+MethodDefBuilder MethodDefBuilder::div()
 {
 	charcodes.push_back(CODE(CharCodes::kDIV));
 	return *this;

@@ -8,7 +8,7 @@ using namespace std;
 
 class TotsRunner {
 
-	vector<UCHAR> charCodeArray;
+	vector<UChar> charCodeArray;
 	vector<ValueObject> stack;
 	WORD pc;
 	WORD sp;
@@ -16,7 +16,7 @@ class TotsRunner {
 public:
 	TotsRunner();
 
-	void loadProgram(vector<UCHAR>);
+	void loadProgram(vector<UChar>);
 	void print();
 	void execute();
 };

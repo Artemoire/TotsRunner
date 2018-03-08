@@ -1,32 +1,32 @@
 #pragma once
 
 #include "defs.h"
-#include <iostream>
 
-using namespace std;
-
-enum Type
+enum Type : UChar
 {
-	//NULL = 0,
 	kINT = 0,
 	kFLOAT,
+	kPOINTER,
 	//ARRAY,
-	kOBJECTREF
+	kOBJECTREF,
+	kNONE
 };
 
 class ValueObject
 {
 public:
 	Type type;
-	WORD value;
+	WORD v0;
+	WORD v1;
 
-	ValueObject();
+	ValueObject();	
 	ValueObject(Type, WORD);
+	ValueObject(Type, WORD, WORD);
 
 	ValueObject * ToInt();
 	ValueObject * ToFloat();
 	WORD AsInt();
-	FLOAT AsFloat();
+	Float AsFloat();
 
 	static const char * TypeToCharArray(Type);
 	friend ostream& operator<<(ostream& os, const ValueObject& dt);

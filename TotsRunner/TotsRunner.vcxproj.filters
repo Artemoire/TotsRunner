@@ -21,13 +21,16 @@
     <ClCompile Include="TotsRunner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MethodBuilder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ValueObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Arith.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="defs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MethodDefBuilder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -44,10 +47,16 @@
     <ClInclude Include="defs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MethodBuilder.h">
+    <ClInclude Include="Arith.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Arith.h">
+    <ClInclude Include="MethodDef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MethodDefBuilder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MethodInstance.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,8 +1,19 @@
 #include "Arith.h"
 
-#include <iostream>
+#define AS_F32(X) *(Float*)&X
+#define AS_I32(X) *(WORD*)&X
 
-using namespace std;
+#define ERR_ABORT(...) ERR(__VA_ARGS__, "Aborting...")
+
+// TODO: TEMPORARY
+#define ERR_TODO_PTR() ERR_ABORT("TODO: PTRS")
+
+#define ERR_ADD() ERR_ABORT("Illegal Add")
+#define ERR_SUB() ERR_ABORT("Illegal Sub")
+#define ERR_MUL() ERR_ABORT("Illegal Mul")
+#define ERR_DIV() ERR_ABORT("Illegal Div")
+
+#define ERR_DIV_ZERO() ERR_ABORT("Division By Zero. Oops")
 
 WORD max(WORD v1, WORD v2)
 {
@@ -11,154 +22,116 @@ WORD max(WORD v1, WORD v2)
 
 void Arith::Add(ValueObject * v1, ValueObject * v2)
 {
-	switch ((Type)max(v1->type, v2->type))
+	if (v1->type != Type::kPOINTER && v1->type != v2->type)
 	{
-	case Type::kINT: // both are ints
-	{
-		v1->value += v2->value;
-		return;
-	}
-	case Type::kFLOAT:
-	{
-		if (v1->type != Type::kFLOAT)
-		{
-			FLOAT val = v1->ToFloat()->AsFloat() + v2->AsFloat();
-			v1->value = *(WORD*)&val;
-			return;
-		}
-		else
-		{
-			FLOAT val = v1->AsFloat() + v2->ToFloat()->AsFloat();
-			v1->value = *(WORD*)&val;
-			return;
-		}
-	}
+		ERR_ADD();
 	}
 
-#ifdef _DEBUG
-	cout << "Illegal Operation" << endl;
-#endif // _DEBUG	
+	switch (v1->type)
+	{
+		case Type::kINT: // both are ints
+		{
+			v1->v0 += v2->v0;
+			return;
+		}
+		case Type::kFLOAT:
+		{
+			Float val = AS_F32(v1->v0) + AS_F32(v1->v0);		
+			v1->v0 = AS_I32(val);
+			return;
+		}
+		case Type::kPOINTER:
+		{
+			ERR_TODO_PTR();
+		}
+	}
+
+	ERR_ADD();
 }
 
 void Arith::Sub(ValueObject * v1, ValueObject * v2)
 {
-	switch ((Type)max(v1->type, v2->type))
+	if (v1->type != Type::kPOINTER && v1->type != v2->type)
 	{
-	case Type::kINT: // both are ints
-	{
-		v1->value -= v2->value;
-		return;
+		ERR_SUB();
 	}
-	case Type::kFLOAT:
+
+	switch (v1->type)
 	{
-		if (v1->type != Type::kFLOAT)
+		case Type::kINT: // both are ints
 		{
-			FLOAT val = v1->ToFloat()->AsFloat() - v2->AsFloat();
-			v1->value = *(WORD*)&val;
+			v1->v0 -= v2->v0;
 			return;
 		}
-		else
+		case Type::kFLOAT:
 		{
-			FLOAT val = v1->AsFloat() - v2->ToFloat()->AsFloat();
-			v1->value = *(WORD*)&val;
+			Float val = AS_F32(v1->v0) - AS_F32(v1->v0);
+			v1->v0 = AS_I32(val);
 			return;
 		}
-	}
-	}
-
-#ifdef _DEBUG
-	cout << "Illegal Operation" << endl;
-#endif // _DEBUG	
-}
-
-void Arith::Div(ValueObject * v1, ValueObject * v2)
-{
-	switch ((Type)max(v1->type, v2->type))
-	{
-	case Type::kINT: // both are ints
-	{
-		WORD v2val = v2->value;
-		if (v2val == 0)
+		case Type::kPOINTER:
 		{
-#ifdef _DEBUG
-			cout << "Division by zero. Oops" << endl;
-#endif // _DEBUG	
-			system("pause"); // TODO: Throw Exception
-			exit(1);
-		}
-
-		v1->value /= v2val;
-		return;
-	}
-	case Type::kFLOAT:
-	{
-		if (v1->type != Type::kFLOAT)
-		{
-			FLOAT v2val = v2->AsFloat();
-
-			if (v2val == 0.0F)
-			{
-#ifdef _DEBUG
-				cout << "Division by zero. Oops" << endl;
-#endif // _DEBUG	
-				//return;
-			}
-
-			FLOAT val = v1->ToFloat()->AsFloat() / v2val;
-			v1->value = *(WORD*)&val;
-			return;
-		}
-		else
-		{
-			FLOAT v2val = v2->ToFloat()->AsFloat();
-
-			if (v2val == 0.0F)
-			{
-#ifdef _DEBUG
-				cout << "Division by zero. Oops" << endl;
-#endif // _DEBUG	
-				//return;
-			}
-
-			FLOAT val = v1->AsFloat() / v2val;
-			v1->value = *(WORD*)&val;
-			return;
+			ERR_TODO_PTR();
 		}
 	}
-	}
 
-#ifdef _DEBUG
-	cout << "Illegal Operation" << endl;
-#endif // _DEBUG	
+	ERR_SUB();
 }
 
 void Arith::Mul(ValueObject * v1, ValueObject * v2)
 {
-	switch ((Type)max(v1->type, v2->type))
+	if (v1->type != v2->type)
 	{
-	case Type::kINT: // both are ints
-	{
-		v1->value *= v2->value;
-		return;
-	}
-	case Type::kFLOAT:
-	{
-		if (v1->type != Type::kFLOAT)
-		{
-			FLOAT val = v1->ToFloat()->AsFloat() * v2->AsFloat();
-			v1->value = *(WORD*)&val;
-			return;
-		}
-		else
-		{
-			FLOAT val = v1->AsFloat() * v2->ToFloat()->AsFloat();
-			v1->value = *(WORD*)&val;
-			return;
-		}
-	}
+		ERR_MUL();
 	}
 
-#ifdef _DEBUG
-	cout << "Illegal Operation" << endl;
-#endif // _DEBUG	
+	switch (v1->type)
+	{
+		case Type::kINT: // both are ints
+		{
+			v1->v0 *= v2->v0;
+			return;
+		}
+		case Type::kFLOAT:
+		{
+			Float val = AS_F32(v1->v0) * AS_F32(v1->v0);
+			v1->v0 = AS_I32(val);
+			return;
+		}
+	}
+
+	ERR_MUL();
+}
+
+void Arith::Div(ValueObject * v1, ValueObject * v2)
+{
+	if (v1->type != v2->type)
+	{
+		ERR_DIV();
+	}
+
+	switch (v1->type)
+	{
+		case Type::kINT: // both are ints
+		{
+			if (v2->v0 == 0)
+			{
+				ERR_DIV_ZERO();
+			}
+			v1->v0 /= v2->v0;
+			return;
+		}
+		case Type::kFLOAT:
+		{
+			if (AS_F32(v2->v0) == 0.0F)
+			{
+				ERR_DIV_ZERO();
+			}
+			Float val = AS_F32(v1->v0) / AS_F32(v1->v0);
+			v1->v0 = AS_I32(val);
+			return;
+		}
+	}
+
+	ERR_DIV();
 }

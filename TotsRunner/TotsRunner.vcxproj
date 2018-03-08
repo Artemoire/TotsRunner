@@ -76,6 +76,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>_MBCS;_VERBOSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -116,16 +117,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Arith.cpp" />
-    <ClCompile Include="MethodBuilder.cpp" />
+    <ClCompile Include="defs.cpp" />
+    <ClCompile Include="MethodDefBuilder.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="TotsRunner.cpp" />
     <ClCompile Include="ValueObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arith.h" />
-    <ClInclude Include="MethodBuilder.h" />
+    <ClInclude Include="MethodDef.h" />
+    <ClInclude Include="MethodDefBuilder.h" />
     <ClInclude Include="CharCodes.h" />
     <ClInclude Include="defs.h" />
+    <ClInclude Include="MethodInstance.h" />
     <ClInclude Include="TotsRunner.h" />
     <ClInclude Include="ValueObject.h" />
   </ItemGroup>

@@ -10,7 +10,7 @@ TotsRunner::TotsRunner()
 	stack = vector<ValueObject>(1000);
 }
 
-void TotsRunner::loadProgram(vector<UCHAR> charCodeArray)
+void TotsRunner::loadProgram(vector<UChar> charCodeArray)
 {
 	TotsRunner::charCodeArray = charCodeArray;
 }

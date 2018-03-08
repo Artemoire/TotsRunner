@@ -16,7 +16,7 @@ V(kSUB)		\
 V(kMUL)		\
 V(kDIV)		\
 
-enum CharCodes : UCHAR {
+enum CharCodes : UChar {
 #define DECLARE_CHARCODE(Name) Name,
 	LOADS(DECLARE_CHARCODE)
 	ARITH(DECLARE_CHARCODE)
