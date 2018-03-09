@@ -1,22 +1,37 @@
 #include "TotsRunner.h"
+#include "VirtualThreadWorker.h"
+#include "MethodDef.h"
 #include "MethodDefBuilder.h"
 
-#include <cstdio>
-
+// TODO: How to exception handling asm? 
 
 int main()
 {
 	DLOG("Running in Verbose...");
-	MethodDefBuilder builder;
+	MethodDefBuilder bldr;
+	starray<UChar> * code = bldr.LVI32(1).Shl32(2).build();
+	starray<DWRD> * args = new starray<DWRD>(0);
+	MethodDef def = MethodDef(code, 100, 0, 0);
+	VirtualThreadWorker vtw = VirtualThreadWorker();
+	vtw.start(def.call(args));
+
+	/*MethodDefBuilder builder;
 	vector<UChar> code = builder.LVI8(2).LVI8(2).add().LVI8(3).mul().LVF(0.333F).div().build();
 	TotsRunner t;
 
 	t.loadProgram(code);
-	t.execute();  
+	t.execute();  */
 
 	/*auto v = ValueObject(Type::kPOINTER, 1025, 1024 + 256 + 512);
 	unsigned long long i = 0x0000070000000401;
 	unsigned __int64 x = *(unsigned __int64 *)(((Word)&v + sizeof(Type)));*/
+	
+	/*starray<UInt64> s = starray<UInt64>(11);
+	UInt8 i = 128;
+	s.values[0] = i;
+	cout << (long)((Int8)s.values[0]) << endl;*/
+	/*cout << (UInt32)s.values[0] << endl;
+	cout << ((Int8)s.values[0]) << endl;*/
 
 	system("pause");
 	return 0;

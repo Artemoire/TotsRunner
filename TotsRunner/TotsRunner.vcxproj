@@ -76,7 +76,8 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <PreprocessorDefinitions>_MBCS;_VERBOSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_MBCS;_VERBOSE;_ILLEGAL_ACCESS_CATCH;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ExceptionHandling>Async</ExceptionHandling>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -116,22 +117,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Arith.cpp" />
-    <ClCompile Include="defs.cpp" />
+    <ClCompile Include="MethodContext.cpp" />
+    <ClCompile Include="Ops.cpp" />
     <ClCompile Include="MethodDefBuilder.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="TotsRunner.cpp" />
-    <ClCompile Include="ValueObject.cpp" />
+    <ClCompile Include="utils.cpp" />
+    <ClCompile Include="VirtualThreadWorker.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Arith.h" />
+    <ClInclude Include="Ops.h" />
     <ClInclude Include="MethodDef.h" />
     <ClInclude Include="MethodDefBuilder.h" />
     <ClInclude Include="CharCodes.h" />
     <ClInclude Include="defs.h" />
-    <ClInclude Include="MethodInstance.h" />
+    <ClInclude Include="MethodContext.h" />
+    <ClInclude Include="starray.h" />
+    <ClInclude Include="utils.h" />
+    <ClInclude Include="VirtualThreadWorker.h" />
     <ClInclude Include="TotsRunner.h" />
-    <ClInclude Include="ValueObject.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

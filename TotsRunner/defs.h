@@ -1,32 +1,36 @@
 #pragma once
 
-#include <iostream>
+#include "utils.h"
+#include "starray.h"
 
-using namespace std;
-
-#define EMPTY_OP(X) do{} while(0)
-
-void tprintf(const char* format);
-
-template<typename T, typename... Targs>
-void tprintf(T value, Targs... Fargs);
+#define EMPTY_OP do{} while(0)
 
 #define ERR(...) tprintf(__VA_ARGS__); exit(1)
 
 #ifdef _VERBOSE
+
 #define DLOG(X) cout << X << endl
+
+#undef ERR(...)
+
 #define ERR(...) tprintf(__VA_ARGS__); system("pause"); exit(1)
+
 #else
-#define DLOG(X) EMPTY_OP(X)
+#define DLOG(X) EMPTY_OP
 #endif // _VERBOSE
 
-typedef unsigned char UChar;
-typedef unsigned long WORD;
-typedef float Float;
+#ifdef _ILLEGAL_ACCESS_CATCH
+#define TRY_BLOCK_START try {
+#define TRY_BLOCK_END } catch(...) {}
+#define TRY_BLOCK_END_ERR(...) } catch(...) { ERR(__VA_ARGS__); }
+#else
+#define TRY_START EMPTY_OP
+#define TRY_BLOCK_END EMPTY_OP
+#define TRY_BLOCK_END_ERR EMPTY_OP
+#endif
 
-template<typename T, typename ...Targs>
-void tprintf(T value, Targs ...Fargs)
-{
-	cout << value << endl;
-	tprintf(Fargs...);
-}
+typedef unsigned char UChar;
+typedef unsigned short UShort;
+typedef unsigned long WRD;
+typedef unsigned long long DWRD;
+typedef float Float;
