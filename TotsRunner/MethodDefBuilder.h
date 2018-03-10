@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "defs.h"
+#include "CharCodes.h"
 
 using namespace std;
 
@@ -57,4 +58,6 @@ public:
 	MethodDefBuilder jleui32s(WRD);
 	MethodDefBuilder jlti32s(WRD);
 	MethodDefBuilder jltui32s(WRD);
+
+	MethodDefBuilder Cmp(CmpExtensions);
 };

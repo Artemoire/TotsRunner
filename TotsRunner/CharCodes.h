@@ -37,6 +37,7 @@ V(kSTLOCI16)	 \
 #define OPS(V)	\
 V(kOP)			\
 V(kJMPOP)		\
+V(kCMP)		\
 
 #define DECLARE_CHARCODE(Name) Name,
 
@@ -103,6 +104,24 @@ enum JmpExtensions : UChar
 {
 	JMPSX(DECLARE_CHARCODE)
 #undef JMPSX
+};
+
+#define CMPSX(V)\
+V(kCEQ32)		\
+V(kCNE32)		\
+V(kCGEI32)		\
+V(kCGEUI32)		\
+V(kCGTI32)		\
+V(kCGTUI32)		\
+V(kCLEI32)		\
+V(kCLEUI32)		\
+V(kCLTI32)		\
+V(kCLTUI32)		\
+
+enum CmpExtensions : UChar
+{
+	CMPSX(DECLARE_CHARCODE)
+#undef CMPSX
 };
 
 #undef DECLARE_CHARCODE	

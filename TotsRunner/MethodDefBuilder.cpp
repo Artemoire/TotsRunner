@@ -1,5 +1,4 @@
 #include "MethodDefBuilder.h"
-#include "CharCodes.h"
 
 #define CODE(X) static_cast<UChar>(X)
 
@@ -345,6 +344,13 @@ MethodDefBuilder MethodDefBuilder::jltui32s(WRD v)
 	charcodes.push_back(CODE(CharCodes::kJMPOP));
 	charcodes.push_back(CODE(JmpExtensions::kJLTUI32s));
 	charcodes.push_back(CODE(v));
+	return *this;
+}
+
+MethodDefBuilder MethodDefBuilder::Cmp(CmpExtensions op)
+{
+	charcodes.push_back(CODE(CharCodes::kCMP));
+	charcodes.push_back(CODE(op));
 	return *this;
 }
 

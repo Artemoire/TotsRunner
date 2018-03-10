@@ -212,6 +212,11 @@ void VirtualThreadWorker::run()
 				jump(static_cast<JmpExtensions>(CODE_AND_NEXT));
 				break;
 			}
+			case(CharCodes::kCMP):
+			{
+				Ops::Cmp(static_cast<CmpExtensions>(CODE_AND_NEXT), &stack->values[--*sp], &stack->values[*sp + 1]);
+				break;
+			}
 		}
 	}
 	handleReturn();

@@ -104,3 +104,78 @@ void Ops::Op(OpsExtensions op, DWRD * v1, DWRD * v2)
 		}
 	}
 }
+
+#define I32_COMPARE(CMPRTR) I32 w1 = *(I32*)v1; I32 w2 = *(I32*)v2; if(w1 CMPRTR w2) { *(WRD*)v1 = 1; DLOG("True"); } else { *(WRD*)v1 = 0; DLOG("False"); }
+
+#define WRD_COMPARE(CMPRTR) WRD w1 = *(WRD*)v1; WRD w2 = *(WRD*)v2; if(w1 CMPRTR w2) { *(WRD*)v1 = 1; DLOG("True"); } else { *(WRD*)v1 = 0; DLOG("False"); }
+
+void Ops::Cmp(CmpExtensions op, DWRD * v1, DWRD * v2)
+{
+	switch (op)
+	{	
+		case(CmpExtensions::kCEQ32):
+		{
+			DLOG("==");
+			WRD_COMPARE(== )
+			break;
+		}
+		case(CmpExtensions::kCNE32):
+		{
+			DLOG("!=");
+			WRD_COMPARE(!= )
+			break;
+		}
+		case (CmpExtensions::kCGEI32):
+		{
+			DLOG(">=");
+			I32_COMPARE(>= )
+			break;
+		}
+		case (CmpExtensions::kCGEUI32):
+		{
+			DLOG(">=");
+			WRD_COMPARE(>= )
+			break;
+		}
+		case (CmpExtensions::kCGTI32):
+		{
+			DLOG(">");
+			I32_COMPARE(> )
+			break;
+		}
+		case (CmpExtensions::kCGTUI32):
+		{
+			DLOG(">");
+			WRD_COMPARE(> )
+			break;
+		}
+		case (CmpExtensions::kCLEI32):
+		{
+			DLOG("<=");
+			I32_COMPARE(<= )
+			break;
+		}
+		case (CmpExtensions::kCLEUI32):
+		{
+			DLOG("<=");
+			WRD_COMPARE(<= )
+			break;
+		}
+		case (CmpExtensions::kCLTI32):
+		{
+			DLOG("<");
+			I32_COMPARE(< )
+			break;
+		}
+		case (CmpExtensions::kCLTUI32):
+		{
+			DLOG("<");
+			WRD_COMPARE(< )
+			break;
+		}
+	}
+}
+
+#undef I32_COMPARE
+#undef WRD_COMPARE
+#undef ERR_DIV_ZERO

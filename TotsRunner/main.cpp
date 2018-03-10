@@ -9,7 +9,7 @@ int main()
 {
 	DLOG("Running in Verbose...");
 	MethodDefBuilder bldr;
-	starray<UChar> * code = bldr.Lvf32(1.5F).Lvf32(1.73333F).Jgei32s(14).Lvi8(42UL).Lvi8(69UL).build();
+	starray<UChar> * code = bldr.Lvf32(1.5F).Lvf32(1.5F).Cmp(CmpExtensions::kCEQ32).build();
 		
 	starray<DWRD> * args = new starray<DWRD>(0);
 	MethodDef def = MethodDef(code, 8, 2, 0);
