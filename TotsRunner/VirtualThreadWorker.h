@@ -27,6 +27,8 @@ protected:
 	starray<DWRD> * locals;
 	starray<DWRD> * args;
 
+	void jump(JmpExtensions);
+
 	void handleCall(MethodContext * );
 	void handleReturn();
 };

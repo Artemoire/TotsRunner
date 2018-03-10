@@ -45,4 +45,16 @@ public:
 	MethodDefBuilder Xor(WRD);
 	MethodDefBuilder Shr32(WRD);
 	MethodDefBuilder Shl32(WRD);
+
+	MethodDefBuilder Jmps(WRD);
+	MethodDefBuilder Jeq32s(WRD);
+	MethodDefBuilder Jne32s(WRD);
+	MethodDefBuilder Jgei32s(WRD);
+	MethodDefBuilder Jgeui32s(WRD);
+	MethodDefBuilder jgti32s(WRD);
+	MethodDefBuilder jgtui32s(WRD);
+	MethodDefBuilder jlei32s(WRD);
+	MethodDefBuilder jleui32s(WRD);
+	MethodDefBuilder jlti32s(WRD);
+	MethodDefBuilder jltui32s(WRD);
 };

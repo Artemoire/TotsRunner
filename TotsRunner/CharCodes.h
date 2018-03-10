@@ -2,6 +2,10 @@
 
 #include "defs.h"
 
+#define BASE(V)	\
+V(kNOP)			\
+V(kPOP)			\
+
 #define LOADS(V)\
 V(kLCNEG1)		\
 V(kLC0)			\
@@ -32,46 +36,20 @@ V(kSTLOCI16)	 \
 
 #define OPS(V)	\
 V(kOP)			\
-
-#define JMPS(V)\
-V(kJEQ)			\
-V(kJEQs)		\
-V(kJNE)			\
-V(kJNEs)		\
-\
-V(kJGEI32)		\
-V(kJGEUI32)		\
-V(kJGEI32s)		\
-V(kJGEUI32s)	\
-\
-V(kJGTI32)		\
-V(kJGTUI32)		\
-V(kJGTI32s)		\
-V(kJGTUI32s)	\
-\
-V(kJLEI32)		\
-V(kJLEUI32)		\
-V(kJLEI32s)		\
-V(kJLEUI32s)	\
-\
-V(kJLTI32)		\
-V(kJLTUI32)		\
-V(kJLTI32s)		\
-V(kJLTUI32s)	\
-
+V(kJMPOP)		\
 
 #define DECLARE_CHARCODE(Name) Name,
 
 enum CharCodes : UChar
 {
+	BASE(DECLARE_CHARCODE)
+#undef BASE
 	LOADS(DECLARE_CHARCODE)
 #undef LOADS
 	STORES(DECLARE_CHARCODE)
 #undef STORES
 	OPS(DECLARE_CHARCODE)
 #undef OPS
-	JMPS(DECLARE_CHARCODE)
-#undef JMPS
 };
 
 
@@ -94,6 +72,37 @@ enum OpsExtensions : UChar
 {
 	OPSX(DECLARE_CHARCODE)
 #undef OPSX
+};
+
+#define JMPSX(V)\
+V(kJMP)			\
+V(kJEQ32)		\
+V(kJNE32)		\
+V(kJGEI32)		\
+V(kJGEUI32)		\
+V(kJGTI32)		\
+V(kJGTUI32)		\
+V(kJLEI32)		\
+V(kJLEUI32)		\
+V(kJLTI32)		\
+V(kJLTUI32)		\
+\
+V(kJMPs)		\
+V(kJEQ32s)		\
+V(kJNE32s)		\
+V(kJGEI32s)		\
+V(kJGEUI32s)	\
+V(kJGTI32s)		\
+V(kJGTUI32s)	\
+V(kJLEI32s)		\
+V(kJLEUI32s)	\
+V(kJLTI32s)		\
+V(kJLTUI32s)	\
+
+enum JmpExtensions : UChar
+{
+	JMPSX(DECLARE_CHARCODE)
+#undef JMPSX
 };
 
 #undef DECLARE_CHARCODE	

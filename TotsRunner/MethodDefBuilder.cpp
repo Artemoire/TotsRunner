@@ -152,7 +152,7 @@ MethodDefBuilder MethodDefBuilder::Stloci16(WRD v)
 }
 MethodDefBuilder MethodDefBuilder::Add(WRD v)
 {
-	Lvi32(v);
+	Lvi8(v);
 
 	charcodes.push_back(CODE(CharCodes::kOP));
 	charcodes.push_back(CODE(OpsExtensions::kADD_I32));
@@ -257,6 +257,94 @@ MethodDefBuilder MethodDefBuilder::Shl32(WRD v)
 
 	charcodes.push_back(CODE(CharCodes::kOP));
 	charcodes.push_back(CODE(OpsExtensions::kSHL32));
+	return *this;
+}
+
+MethodDefBuilder MethodDefBuilder::Jmps(WRD v)
+{
+	charcodes.push_back(CODE(CharCodes::kJMPOP));
+	charcodes.push_back(CODE(JmpExtensions::kJMPs));
+	charcodes.push_back(CODE(v));
+	return *this;
+}
+
+MethodDefBuilder MethodDefBuilder::Jeq32s(WRD v)
+{
+	charcodes.push_back(CODE(CharCodes::kJMPOP));
+	charcodes.push_back(CODE(JmpExtensions::kJEQ32s));
+	charcodes.push_back(CODE(v));
+	return *this;
+}
+
+MethodDefBuilder MethodDefBuilder::Jne32s(WRD v)
+{
+	charcodes.push_back(CODE(CharCodes::kJMPOP));
+	charcodes.push_back(CODE(JmpExtensions::kJNE32s));
+	charcodes.push_back(CODE(v));
+	return *this;
+}
+
+MethodDefBuilder MethodDefBuilder::Jgei32s(WRD v)
+{
+	charcodes.push_back(CODE(CharCodes::kJMPOP));
+	charcodes.push_back(CODE(JmpExtensions::kJGEI32s));
+	charcodes.push_back(CODE(v));
+	return *this;
+}
+
+MethodDefBuilder MethodDefBuilder::Jgeui32s(WRD v)
+{
+	charcodes.push_back(CODE(CharCodes::kJMPOP));
+	charcodes.push_back(CODE(JmpExtensions::kJGEUI32s));
+	charcodes.push_back(CODE(v));
+	return *this;
+}
+
+MethodDefBuilder MethodDefBuilder::jgti32s(WRD v)
+{
+	charcodes.push_back(CODE(CharCodes::kJMPOP));
+	charcodes.push_back(CODE(JmpExtensions::kJGTI32s));
+	charcodes.push_back(CODE(v));
+	return *this;
+}
+
+MethodDefBuilder MethodDefBuilder::jgtui32s(WRD v)
+{
+	charcodes.push_back(CODE(CharCodes::kJMPOP));
+	charcodes.push_back(CODE(JmpExtensions::kJGTUI32s));
+	charcodes.push_back(CODE(v));
+	return *this;
+}
+
+MethodDefBuilder MethodDefBuilder::jlei32s(WRD v)
+{
+	charcodes.push_back(CODE(CharCodes::kJMPOP));
+	charcodes.push_back(CODE(JmpExtensions::kJLEI32s));
+	charcodes.push_back(CODE(v));
+	return *this;
+}
+
+MethodDefBuilder MethodDefBuilder::jleui32s(WRD v)
+{
+	charcodes.push_back(CODE(CharCodes::kJMPOP));
+	charcodes.push_back(CODE(JmpExtensions::kJLEUI32s));
+	charcodes.push_back(CODE(v));
+	return *this;
+}
+
+MethodDefBuilder MethodDefBuilder::jlti32s(WRD v)
+{
+	charcodes.push_back(CODE(CharCodes::kJMPOP));
+	charcodes.push_back(CODE(JmpExtensions::kJLTI32s));
+	charcodes.push_back(CODE(v));
+	return *this;
+}
+
+MethodDefBuilder MethodDefBuilder::jltui32s(WRD v)
+{
+	charcodes.push_back(CODE(CharCodes::kJMPOP));
+	charcodes.push_back(CODE(JmpExtensions::kJLTUI32s));
+	charcodes.push_back(CODE(v));
 	return *this;
 }
 
