@@ -9,9 +9,9 @@ int main()
 {
 	DLOG("Running in Verbose...");
 	MethodDefBuilder bldr;
-	starray<UChar> * code = bldr.LVI32(1).Shl32(2).build();
+	starray<UChar> * code = bldr.Lvi8(255).Stloc0().Lvloc0().Add(23UL).Stloc1().Lvloc1().Add(1UL).build();
 	starray<DWRD> * args = new starray<DWRD>(0);
-	MethodDef def = MethodDef(code, 100, 0, 0);
+	MethodDef def = MethodDef(code, 8, 2, 0);
 	VirtualThreadWorker vtw = VirtualThreadWorker();
 	vtw.start(def.call(args));
 

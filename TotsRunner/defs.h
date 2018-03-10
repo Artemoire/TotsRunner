@@ -32,5 +32,7 @@
 typedef unsigned char UChar;
 typedef unsigned short UShort;
 typedef unsigned long WRD;
+typedef unsigned long UI32;
+typedef long I32;
 typedef unsigned long long DWRD;
 typedef float Float;

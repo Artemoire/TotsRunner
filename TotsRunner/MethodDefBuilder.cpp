@@ -12,26 +12,44 @@ starray<UChar> * MethodDefBuilder::build()
 	return stcodes;
 }
 
-MethodDefBuilder MethodDefBuilder::LVI_1()
+MethodDefBuilder MethodDefBuilder::Lcneg1()
 {
-	charcodes.push_back(CODE(CharCodes::kLVI_1));
+	charcodes.push_back(CODE(CharCodes::kLCNEG1));
 	return *this;
 }
 
-MethodDefBuilder MethodDefBuilder::LVI0()
+MethodDefBuilder MethodDefBuilder::Lc0()
 {
-	charcodes.push_back(CODE(CharCodes::kLVI0));
+	charcodes.push_back(CODE(CharCodes::kLC0));
 	return *this;
 }
 
-MethodDefBuilder MethodDefBuilder::LVI8(WRD i8)
+MethodDefBuilder MethodDefBuilder::Lc1()
+{
+	charcodes.push_back(CODE(CharCodes::kLC1));
+	return *this;
+}
+
+MethodDefBuilder MethodDefBuilder::Lc2()
+{
+	charcodes.push_back(CODE(CharCodes::kLC2));
+	return *this;
+}
+
+MethodDefBuilder MethodDefBuilder::Lc3()
+{
+	charcodes.push_back(CODE(CharCodes::kLC3));
+	return *this;
+}
+
+MethodDefBuilder MethodDefBuilder::Lvi8(WRD i8)
 {
 	charcodes.push_back(CODE(CharCodes::kLVI8));
 	charcodes.push_back(CODE(i8));
 	return *this;
 }
 
-MethodDefBuilder MethodDefBuilder::LVI16(WRD i16)
+MethodDefBuilder MethodDefBuilder::Lvi16(WRD i16)
 {
 	charcodes.push_back(CODE(CharCodes::kLVI16));
 	charcodes.push_back(CODE(i16));
@@ -39,7 +57,7 @@ MethodDefBuilder MethodDefBuilder::LVI16(WRD i16)
 	return *this;
 }
 
-MethodDefBuilder MethodDefBuilder::LVI32(WRD i32)
+MethodDefBuilder MethodDefBuilder::Lvi32(WRD i32)
 {
 	charcodes.push_back(CODE(CharCodes::kLVI32));
 	charcodes.push_back(CODE(i32));
@@ -49,7 +67,7 @@ MethodDefBuilder MethodDefBuilder::LVI32(WRD i32)
 	return *this;
 }
 
-MethodDefBuilder MethodDefBuilder::LVF32(Float f)
+MethodDefBuilder MethodDefBuilder::Lvf32(Float f)
 {
 	DWRD i32 = *(DWRD*)&f;
 	charcodes.push_back(CODE(CharCodes::kLVF32));
@@ -59,65 +77,138 @@ MethodDefBuilder MethodDefBuilder::LVF32(Float f)
 	charcodes.push_back(CODE(i32 >> 24));
 	return *this;
 }
-MethodDefBuilder MethodDefBuilder::add(WRD v)
+MethodDefBuilder MethodDefBuilder::Lvloc0()
 {
-	LVI32(v);
+	charcodes.push_back(CODE(CharCodes::kLVLOC0));
+	return *this;
+}
+MethodDefBuilder MethodDefBuilder::Lvloc1()
+{
+	charcodes.push_back(CODE(CharCodes::kLVLOC1));
+	return *this;
+}
+MethodDefBuilder MethodDefBuilder::Lvloc2()
+{
+	charcodes.push_back(CODE(CharCodes::kLVLOC2));
+	return *this;
+}
+MethodDefBuilder MethodDefBuilder::Lvloc3()
+{
+	charcodes.push_back(CODE(CharCodes::kLVLOC3));
+	return *this;
+}
+MethodDefBuilder MethodDefBuilder::Lvloci8(WRD v)
+{
+	charcodes.push_back(CODE(CharCodes::kLVLOCI8));
+	charcodes.push_back(CODE(v));
+	return *this;
+}
+MethodDefBuilder MethodDefBuilder::Lvloci16(WRD v)
+{
+	charcodes.push_back(CODE(CharCodes::kLVLOCI16));
+	charcodes.push_back(CODE(v));
+	charcodes.push_back(CODE(v >> 8));
+	return *this;
+}
+MethodDefBuilder MethodDefBuilder::Lvaloci16(WRD v)
+{
+	charcodes.push_back(CODE(CharCodes::kLVALOCI16));
+	charcodes.push_back(CODE(v));
+	charcodes.push_back(CODE(v >> 8));
+	return *this;
+}
+MethodDefBuilder MethodDefBuilder::Stloc0()
+{
+	charcodes.push_back(CODE(CharCodes::kSTLOC0));
+	return *this;
+}
+MethodDefBuilder MethodDefBuilder::Stloc1()
+{
+	charcodes.push_back(CODE(CharCodes::kSTLOC1));
+	return *this;
+}
+MethodDefBuilder MethodDefBuilder::Stloc2()
+{
+	charcodes.push_back(CODE(CharCodes::kSTLOC2));
+	return *this;
+}
+MethodDefBuilder MethodDefBuilder::Stloc3()
+{
+	charcodes.push_back(CODE(CharCodes::kSTLOC3));
+	return *this;
+}
+MethodDefBuilder MethodDefBuilder::Stloci8(WRD v)
+{
+	charcodes.push_back(CODE(CharCodes::kSTLOCI8));
+	charcodes.push_back(CODE(v));
+	return *this;
+}
+MethodDefBuilder MethodDefBuilder::Stloci16(WRD v)
+{
+	charcodes.push_back(CODE(CharCodes::kSTLOCI16));
+	charcodes.push_back(CODE(v));
+	charcodes.push_back(CODE(v >> 8));
+	return *this;
+}
+MethodDefBuilder MethodDefBuilder::Add(WRD v)
+{
+	Lvi32(v);
 
 	charcodes.push_back(CODE(CharCodes::kOP));
 	charcodes.push_back(CODE(OpsExtensions::kADD_I32));
 	return *this;
 }
-MethodDefBuilder MethodDefBuilder::add(Float v)
+MethodDefBuilder MethodDefBuilder::Add(Float v)
 {
-	LVF32(v);
+	Lvf32(v);
 
 	charcodes.push_back(CODE(CharCodes::kOP));
 	charcodes.push_back(CODE(OpsExtensions::kADD_F32));
 	return *this;
 }
-MethodDefBuilder MethodDefBuilder::sub(WRD v)
+MethodDefBuilder MethodDefBuilder::Sub(WRD v)
 {
-	LVI32(v);
+	Lvi32(v);
 
 	charcodes.push_back(CODE(CharCodes::kOP));
 	charcodes.push_back(CODE(OpsExtensions::kSUB_I32));
 	return *this;
 }
-MethodDefBuilder MethodDefBuilder::sub(Float v)
+MethodDefBuilder MethodDefBuilder::Sub(Float v)
 {
-	LVF32(v);
+	Lvf32(v);
 
 	charcodes.push_back(CODE(CharCodes::kOP));
 	charcodes.push_back(CODE(OpsExtensions::kSUB_F32));
 	return *this;
 }
-MethodDefBuilder MethodDefBuilder::mul(WRD v)
+MethodDefBuilder MethodDefBuilder::Mul(WRD v)
 {
-	LVI32(v);
+	Lvi32(v);
 
 	charcodes.push_back(CODE(CharCodes::kOP));
 	charcodes.push_back(CODE(OpsExtensions::kMUL_I32));
 	return *this;
 }
-MethodDefBuilder MethodDefBuilder::mul(Float v)
+MethodDefBuilder MethodDefBuilder::Mul(Float v)
 {
-	LVF32(v);
+	Lvf32(v);
 
 	charcodes.push_back(CODE(CharCodes::kOP));
 	charcodes.push_back(CODE(OpsExtensions::kMUL_F32));
 	return *this;
 }
-MethodDefBuilder MethodDefBuilder::div(WRD v)
+MethodDefBuilder MethodDefBuilder::Div(WRD v)
 {
-	LVI32(v);
+	Lvi32(v);
 
 	charcodes.push_back(CODE(CharCodes::kOP));
 	charcodes.push_back(CODE(OpsExtensions::kDIV_I32));
 	return *this;
 }
-MethodDefBuilder MethodDefBuilder::div(Float v)
+MethodDefBuilder MethodDefBuilder::Div(Float v)
 {
-	LVF32(v);
+	Lvf32(v);
 
 	charcodes.push_back(CODE(CharCodes::kOP));
 	charcodes.push_back(CODE(OpsExtensions::kDIV_F32));
@@ -126,7 +217,7 @@ MethodDefBuilder MethodDefBuilder::div(Float v)
 
 MethodDefBuilder MethodDefBuilder::And(WRD v)
 {
-	LVI32(v);
+	Lvi32(v);
 
 	charcodes.push_back(CODE(CharCodes::kOP));
 	charcodes.push_back(CODE(OpsExtensions::kAND));
@@ -135,7 +226,7 @@ MethodDefBuilder MethodDefBuilder::And(WRD v)
 
 MethodDefBuilder MethodDefBuilder::Or(WRD v)
 {
-	LVI32(v);
+	Lvi32(v);
 
 	charcodes.push_back(CODE(CharCodes::kOP));
 	charcodes.push_back(CODE(OpsExtensions::kOR));
@@ -144,7 +235,7 @@ MethodDefBuilder MethodDefBuilder::Or(WRD v)
 
 MethodDefBuilder MethodDefBuilder::Xor(WRD v)
 {
-	LVI32(v);
+	Lvi32(v);
 
 	charcodes.push_back(CODE(CharCodes::kOP));
 	charcodes.push_back(CODE(OpsExtensions::kXOR));
@@ -153,7 +244,7 @@ MethodDefBuilder MethodDefBuilder::Xor(WRD v)
 
 MethodDefBuilder MethodDefBuilder::Shr32(WRD v)
 {
-	LVI32(v);
+	Lvi32(v);
 
 	charcodes.push_back(CODE(CharCodes::kOP));
 	charcodes.push_back(CODE(OpsExtensions::kSHR32));
@@ -162,7 +253,7 @@ MethodDefBuilder MethodDefBuilder::Shr32(WRD v)
 
 MethodDefBuilder MethodDefBuilder::Shl32(WRD v)
 {
-	LVI32(v);
+	Lvi32(v);
 
 	charcodes.push_back(CODE(CharCodes::kOP));
 	charcodes.push_back(CODE(OpsExtensions::kSHL32));

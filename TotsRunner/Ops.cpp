@@ -13,6 +13,7 @@ void Ops::Op(OpsExtensions op, DWRD * v1, DWRD * v2)
 		{
 			DLOG("+=");
 			*(WRD*)v1 += *(WRD*)v2;
+			DLOG(*v1);
 			break;
 		}
 		case OpsExtensions::kSUB_I32:
