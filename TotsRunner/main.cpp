@@ -1,4 +1,3 @@
-#include "TotsRunner.h"
 #include "VirtualThreadWorker.h"
 #include "MethodDef.h"
 #include "MethodDefBuilder.h"
@@ -9,7 +8,7 @@ int main()
 {
 	DLOG("Running in Verbose...");
 	MethodDefBuilder bldr;
-	starray<UChar> * code = bldr.Lvf32(1.5F).Lvf32(1.5F).Cmp(CmpExtensions::kCEQ32).build();
+	starray<UChar> * code = bldr.Lvi8(32).Stloc0().Lvaloci16(0).Stindi32(64).Lvloc0().Dup().build();
 		
 	starray<DWRD> * args = new starray<DWRD>(0);
 	MethodDef def = MethodDef(code, 8, 2, 0);

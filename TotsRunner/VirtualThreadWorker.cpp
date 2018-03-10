@@ -62,6 +62,12 @@ void VirtualThreadWorker::run()
 				*(sp)--;
 				break;
 			}
+			case(CharCodes::kDUP):
+			{
+				NEXT_STACK = stack->values[*sp - 1];
+				DLOG(stack->values[*sp]);
+				break;
+			}
 			case (CharCodes::kLCNEG1):
 			{
 				AS_WRD(&NEXT_STACK) = -1;
@@ -164,6 +170,31 @@ void VirtualThreadWorker::run()
 				AS_WRD(&NEXT_STACK) = (WRD)&locals->values[idx]; // TODO: NATIVE
 				break;
 			}
+			case (kLVINDI8):
+			{
+				AS_WRD(&CURR_STACK) = AS_UI8(AS_WRD(&CURR_STACK));
+				break;
+			}
+			case (kLVINDI16):
+			{
+				AS_WRD(&CURR_STACK) = AS_UI16(AS_WRD(&CURR_STACK));
+				break;
+			}
+			case (kLVINDI32):
+			{
+				AS_WRD(&CURR_STACK) = AS_WRD(AS_WRD(&CURR_STACK));
+				break;
+			}
+			case (kLVINDF32):
+			{
+				AS_WRD(&CURR_STACK) = AS_WRD(AS_WRD(&CURR_STACK));
+				break;
+			}
+			case (kLVINDREF):
+			{
+				AS_WRD(&CURR_STACK) = AS_WRD(AS_WRD(&CURR_STACK));
+				break;
+			}
 			case (kSTLOC0):
 			{
 				ASSERT_SIZE(locals, 1);
@@ -202,6 +233,36 @@ void VirtualThreadWorker::run()
 				locals->values[idx] = STACK_AND_PREV;
 				break;
 			}
+			case (kSTINDI8):
+			{
+				UChar val = AS_UI8(&STACK_AND_PREV);
+				AS_UI8(AS_WRD(&STACK_AND_PREV)) = val;				
+				break;
+			}
+			case (kSTINDI16):
+			{
+				UShort val = AS_UI16(&STACK_AND_PREV);
+				AS_UI16(AS_WRD(&STACK_AND_PREV)) = val;
+				break;
+			}
+			case (kSTINDI32):
+			{
+				WRD val = AS_WRD(&STACK_AND_PREV);
+				AS_WRD(AS_WRD(&STACK_AND_PREV)) = val;
+				break;
+			}
+			case (kSTINDF32):
+			{
+				WRD val = AS_WRD(&STACK_AND_PREV);
+				AS_WRD(AS_WRD(&STACK_AND_PREV)) = val;
+				break;
+			}
+			case (kSTINDREF):
+			{
+				WRD val = AS_WRD(&STACK_AND_PREV);
+				AS_WRD(AS_WRD(&STACK_AND_PREV)) = val;
+				break;
+			}
 			case(CharCodes::kOP):
 			{
 				Ops::Op(static_cast<OpsExtensions>(CODE_AND_NEXT), &stack->values[--*sp], &stack->values[*sp + 1]);
@@ -232,6 +293,22 @@ void VirtualThreadWorker::jump(JmpExtensions op)
 			ASSERT_SIZE(charcodes, idx);
 			*pc = idx;
 			break;
+		}
+		case(JmpExtensions::kJTRUE):
+		{
+			LOCAL_WRD_FROM_CODE(idx);
+			ASSERT_SIZE(charcodes, idx);
+			WRD v = AS_WRD(&STACK_AND_PREV);
+			if (v == 1)
+				*pc = idx;
+		}
+		case(JmpExtensions::kJFALSE):
+		{
+			LOCAL_WRD_FROM_CODE(idx);
+			ASSERT_SIZE(charcodes, idx);
+			WRD v = AS_WRD(&STACK_AND_PREV);
+			if (v == 0)
+				*pc = idx;
 		}
 		case(JmpExtensions::kJEQ32):
 		{

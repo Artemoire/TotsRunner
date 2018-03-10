@@ -5,6 +5,7 @@
 #define BASE(V)	\
 V(kNOP)			\
 V(kPOP)			\
+V(kDUP)			\
 
 #define LOADS(V)\
 V(kLCNEG1)		\
@@ -23,6 +24,11 @@ V(kLVLOC3)		\
 V(kLVLOCI8)		\
 V(kLVLOCI16)	\
 V(kLVALOCI16)	\
+V(kLVINDI8)		\
+V(kLVINDI16)	\
+V(kLVINDI32)	\
+V(kLVINDF32)	\
+V(kLVINDREF)	\
 
 
 #define STORES(V)\
@@ -32,6 +38,11 @@ V(kSTLOC2)		 \
 V(kSTLOC3)		 \
 V(kSTLOCI8)		 \
 V(kSTLOCI16)	 \
+V(kSTINDI8)		 \
+V(kSTINDI16)	 \
+V(kSTINDI32)	 \
+V(kSTINDF32)	 \
+V(kSTINDREF)	 \
 
 
 #define OPS(V)	\
@@ -77,6 +88,8 @@ enum OpsExtensions : UChar
 
 #define JMPSX(V)\
 V(kJMP)			\
+V(kJTRUE)		\
+V(kJFALSE)		\
 V(kJEQ32)		\
 V(kJNE32)		\
 V(kJGEI32)		\

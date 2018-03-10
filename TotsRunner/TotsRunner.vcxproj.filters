@@ -19,9 +19,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="TotsRunner.cpp">
-      <Filter>Execution</Filter>
-    </ClCompile>
     <ClCompile Include="utils.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
@@ -41,9 +38,6 @@
   <ItemGroup>
     <ClInclude Include="defs.h">
       <Filter>Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="TotsRunner.h">
-      <Filter>Execution</Filter>
     </ClInclude>
     <ClInclude Include="CharCodes.h">
       <Filter>Domain</Filter>

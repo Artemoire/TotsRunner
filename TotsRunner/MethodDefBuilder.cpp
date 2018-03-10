@@ -11,6 +11,24 @@ starray<UChar> * MethodDefBuilder::build()
 	return stcodes;
 }
 
+MethodDefBuilder MethodDefBuilder::Nop()
+{
+	charcodes.push_back(CODE(CharCodes::kNOP));
+	return *this;
+}
+
+MethodDefBuilder MethodDefBuilder::Pop()
+{
+	charcodes.push_back(CODE(CharCodes::kPOP));
+	return *this;
+}
+
+MethodDefBuilder MethodDefBuilder::Dup()
+{
+	charcodes.push_back(CODE(CharCodes::kDUP));
+	return *this;
+}
+
 MethodDefBuilder MethodDefBuilder::Lcneg1()
 {
 	charcodes.push_back(CODE(CharCodes::kLCNEG1));
@@ -68,7 +86,7 @@ MethodDefBuilder MethodDefBuilder::Lvi32(WRD i32)
 
 MethodDefBuilder MethodDefBuilder::Lvf32(Float f)
 {
-	DWRD i32 = *(DWRD*)&f;
+	WRD i32 = *(WRD*)&f;
 	charcodes.push_back(CODE(CharCodes::kLVF32));
 	charcodes.push_back(CODE(i32));
 	charcodes.push_back(CODE(i32 >> 8));
@@ -116,6 +134,31 @@ MethodDefBuilder MethodDefBuilder::Lvaloci16(WRD v)
 	charcodes.push_back(CODE(v >> 8));
 	return *this;
 }
+MethodDefBuilder MethodDefBuilder::Lvindi8()
+{
+	charcodes.push_back(CODE(CharCodes::kLVINDI8));
+	return *this;
+}
+MethodDefBuilder MethodDefBuilder::Lvindi16()
+{
+	charcodes.push_back(CODE(CharCodes::kLVINDI16));
+	return *this;
+}
+MethodDefBuilder MethodDefBuilder::Lvindi32()
+{
+	charcodes.push_back(CODE(CharCodes::kLVINDI32));
+	return *this;
+}
+MethodDefBuilder MethodDefBuilder::Lvindf32()
+{
+	charcodes.push_back(CODE(CharCodes::kLVINDF32));
+	return *this;
+}
+MethodDefBuilder MethodDefBuilder::Lvindref()
+{
+	charcodes.push_back(CODE(CharCodes::kLVINDREF));
+	return *this;
+}
 MethodDefBuilder MethodDefBuilder::Stloc0()
 {
 	charcodes.push_back(CODE(CharCodes::kSTLOC0));
@@ -149,6 +192,38 @@ MethodDefBuilder MethodDefBuilder::Stloci16(WRD v)
 	charcodes.push_back(CODE(v >> 8));
 	return *this;
 }
+
+MethodDefBuilder MethodDefBuilder::Stindi8(WRD v)
+{
+	Lvi8(v);
+	charcodes.push_back(CODE(CharCodes::kSTINDI8));	
+	return *this;
+}
+MethodDefBuilder MethodDefBuilder::Stindi16(WRD v)
+{
+	Lvi16(v);
+	charcodes.push_back(CODE(CharCodes::kSTINDI16));	
+	return *this;
+}
+MethodDefBuilder MethodDefBuilder::Stindi32(WRD v)
+{
+	Lvi32(v);
+	charcodes.push_back(CODE(CharCodes::kSTINDI32));
+	return *this;
+}
+MethodDefBuilder MethodDefBuilder::Stindf32(Float f)
+{
+	Lvf32(f);
+	charcodes.push_back(CODE(CharCodes::kSTINDF32));	
+	return *this;
+}
+MethodDefBuilder MethodDefBuilder::Stindref(WRD v)
+{
+	Lvi32(v);
+	charcodes.push_back(CODE(CharCodes::kSTINDI32));	
+	return *this;
+}
+
 MethodDefBuilder MethodDefBuilder::Add(WRD v)
 {
 	Lvi8(v);

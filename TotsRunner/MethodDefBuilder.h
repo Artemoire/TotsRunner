@@ -11,6 +11,10 @@ class MethodDefBuilder {
 public:
 	starray<UChar> * build();
 
+	MethodDefBuilder Nop();
+	MethodDefBuilder Pop();
+	MethodDefBuilder Dup();	
+
 	MethodDefBuilder Lcneg1();
 	MethodDefBuilder Lc0();
 	MethodDefBuilder Lc1();
@@ -27,12 +31,26 @@ public:
 	MethodDefBuilder Lvloci8(WRD);
 	MethodDefBuilder Lvloci16(WRD);	
 	MethodDefBuilder Lvaloci16(WRD);
+
+	MethodDefBuilder Lvindi8();
+	MethodDefBuilder Lvindi16();
+	MethodDefBuilder Lvindi32();
+	MethodDefBuilder Lvindf32();
+	MethodDefBuilder Lvindref();
+
 	MethodDefBuilder Stloc0();
 	MethodDefBuilder Stloc1();
 	MethodDefBuilder Stloc2();
 	MethodDefBuilder Stloc3();
 	MethodDefBuilder Stloci8(WRD);
 	MethodDefBuilder Stloci16(WRD);
+
+	MethodDefBuilder Stindi8(WRD);
+	MethodDefBuilder Stindi16(WRD);
+	MethodDefBuilder Stindi32(WRD);
+	MethodDefBuilder Stindf32(Float);
+	MethodDefBuilder Stindref(WRD);
+
 	MethodDefBuilder Add(WRD);
 	MethodDefBuilder Add(Float);
 	MethodDefBuilder Sub(WRD);
