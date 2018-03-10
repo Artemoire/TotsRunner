@@ -117,7 +117,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ExecutionRegistry.cpp" />
     <ClCompile Include="MethodContext.cpp" />
+    <ClCompile Include="MethodDef.cpp" />
+    <ClCompile Include="MethodDefTableBuilder.cpp" />
     <ClCompile Include="Ops.cpp" />
     <ClCompile Include="MethodDefBuilder.cpp" />
     <ClCompile Include="main.cpp" />
@@ -125,6 +128,8 @@
     <ClCompile Include="VirtualThreadWorker.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ExecutionRegistry.h" />
+    <ClInclude Include="MethodDefTableBuilder.h" />
     <ClInclude Include="Ops.h" />
     <ClInclude Include="MethodDef.h" />
     <ClInclude Include="MethodDefBuilder.h" />

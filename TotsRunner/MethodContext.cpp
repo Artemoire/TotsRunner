@@ -7,7 +7,7 @@ MethodContext::MethodContext()
 	args = nullptr;
 }
 
-MethodContext::MethodContext(starray<UChar> * charcodes, WRD stack, WRD locals, starray<DWRD> * args)
+MethodContext::MethodContext(starray<UChar> * charcodes, WRD stack, WRD locals, starray<DWRD> * args, bool isReturn)
 {
 	this->pc = 0;
 	this->sp = -1;
@@ -15,6 +15,7 @@ MethodContext::MethodContext(starray<UChar> * charcodes, WRD stack, WRD locals, 
 	this->stack = new starray<DWRD>(stack);
 	this->locals = new starray<DWRD>(locals);
 	this->args = args;
+	this->isReturn = isReturn;
 }
 
 MethodContext::~MethodContext()

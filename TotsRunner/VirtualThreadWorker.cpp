@@ -1,5 +1,6 @@
 #include "VirtualThreadWorker.h"
 #include "Ops.h"
+#include "ExecutionRegistry.h"
 
 VirtualThreadWorker::VirtualThreadWorker()
 {
@@ -48,6 +49,7 @@ ERR("Invalid Program");		\
 
 void VirtualThreadWorker::run()
 {
+	ExecutionRegistry * er = ExecutionRegistry::getInstance();
 	while (*pc < charcodes->size)
 	{
 		CharCodes code = static_cast<CharCodes>(CODE_AND_NEXT);
@@ -59,14 +61,34 @@ void VirtualThreadWorker::run()
 			}
 			case(CharCodes::kPOP):
 			{
-				*(sp)--;
+				(*sp)--;
 				break;
 			}
 			case(CharCodes::kDUP):
 			{
 				NEXT_STACK = stack->values[*sp - 1];
-				DLOG(stack->values[*sp]);
+				DLOG("DUP: " << stack->values[*sp]);
 				break;
+			}
+			case(CharCodes::kRET):
+			{
+				handleReturn();
+				return;
+			}
+			case(CharCodes::kCALL):
+			{				
+				LOCAL_WRD_FROM_CODE(defIdx);
+				defIdx = defIdx & 0x00FFFFFF;				
+				MethodDef * def = er->methodDefTable->values[defIdx];
+				ASSERT_SIZE(stack, (def->args - 1));				
+
+				starray<DWRD> * args = new starray<DWRD>(def->args);
+				for (WRD i = 0; i < def->args; ++i)
+					args->values[i] = stack->values[*sp + 1 - def->args + i];
+				*sp -= def->args;
+
+				handleCall(def->call(args));
+				return;
 			}
 			case (CharCodes::kLCNEG1):
 			{
@@ -170,9 +192,65 @@ void VirtualThreadWorker::run()
 				AS_WRD(&NEXT_STACK) = (WRD)&locals->values[idx]; // TODO: NATIVE
 				break;
 			}
+			case (kLVARG0):
+			{
+				ASSERT_SIZE(args, 1);
+				NEXT_STACK = args->values[0];
+				DLOG("ARG0: " << args->values[0]);
+				break;
+			}
+			case (kLVARG1):
+			{
+				ASSERT_SIZE(args, 2);
+				NEXT_STACK = args->values[1];
+				break;
+			}
+			case (kLVARG2):
+			{
+				ASSERT_SIZE(args, 3);
+				NEXT_STACK = args->values[2];
+				break;
+			}
+			case (kLVARG3):
+			{
+				ASSERT_SIZE(args, 4);
+				NEXT_STACK = args->values[3];
+				break;
+			}
+			case (kLVARGI8):
+			{
+				LOCAL_UI8_FROM_CODE(idx);
+				ASSERT_SIZE(args, idx);
+				NEXT_STACK = args->values[idx];
+				break;
+			}
+			case (kLVARGI16):
+			{
+				LOCAL_UI16_FROM_CODE(idx);
+				ASSERT_SIZE(args, idx);
+				NEXT_STACK = args->values[idx];
+				break;
+			}
+
+			case (kLVAARGI8):
+			{
+				LOCAL_UI8_FROM_CODE(idx);
+				ASSERT_SIZE(args, idx);
+				AS_WRD(&NEXT_STACK) = (WRD)&args->values[idx]; // TODO: NATIVE
+				break;
+			}
+			case (kLVAARGI16):
+			{
+				LOCAL_UI16_FROM_CODE(idx);
+				ASSERT_SIZE(args, idx);
+				AS_WRD(&NEXT_STACK) = (WRD)&args->values[idx]; // TODO: NATIVE
+				break;
+			}
 			case (kLVINDI8):
 			{
+				DLOG(hex << AS_WRD(&CURR_STACK) << "->" << dec);
 				AS_WRD(&CURR_STACK) = AS_UI8(AS_WRD(&CURR_STACK));
+				DLOG(AS_UI8(&CURR_STACK));
 				break;
 			}
 			case (kLVINDI16):
@@ -182,7 +260,9 @@ void VirtualThreadWorker::run()
 			}
 			case (kLVINDI32):
 			{
+				DLOG(AS_WRD(&CURR_STACK) << " (0x" << hex << setfill('0') << setw(8) << AS_WRD(&CURR_STACK) << ")->" << dec);
 				AS_WRD(&CURR_STACK) = AS_WRD(AS_WRD(&CURR_STACK));
+				DLOG(AS_WRD(&CURR_STACK));
 				break;
 			}
 			case (kLVINDF32):
@@ -233,6 +313,20 @@ void VirtualThreadWorker::run()
 				locals->values[idx] = STACK_AND_PREV;
 				break;
 			}
+			case (kSTARGI8):
+			{
+				LOCAL_UI8_FROM_CODE(idx);
+				ASSERT_SIZE(args, idx);
+				args->values[idx] = STACK_AND_PREV;
+				break;
+			}
+			case (kSTARGI16):
+			{
+				LOCAL_UI16_FROM_CODE(idx);
+				ASSERT_SIZE(args, idx);
+				args->values[idx] = STACK_AND_PREV;
+				break;
+			}
 			case (kSTINDI8):
 			{
 				UChar val = AS_UI8(&STACK_AND_PREV);
@@ -279,8 +373,8 @@ void VirtualThreadWorker::run()
 				break;
 			}
 		}
-	}
-	handleReturn();
+	}	
+	ERR("Invalid Program", "Aborting...");
 }
 
 void VirtualThreadWorker::jump(JmpExtensions op)
@@ -543,6 +637,43 @@ void VirtualThreadWorker::handleCall(MethodContext * mi)
 void VirtualThreadWorker::handleReturn()
 {
 	MethodContext * mc = callstack->values[csp];
+	bool hasReturned = false;
+	DWRD retVal = 0;
+	if (mc->isReturn)
+	{		
+		if (*sp != 0)
+		{
+			ERR("Invalid Program", "Aborting...");
+		}
+		hasReturned = true;
+		retVal = stack->values[(*sp)--];
+	}
+	else
+	{
+		if (*sp != -1)
+		{
+			ERR("Invalid Program", "Aborting...");
+		}
+	}
+
 	delete mc;
 	--csp;
+
+	if (csp == -1)
+		return;
+
+	mc = callstack->values[csp];
+	pc = &mc->pc;
+	charcodes = mc->charcodes;
+	sp = &mc->sp;
+	stack = mc->stack;
+	locals = mc->locals;
+	args = mc->args;
+
+	if (hasReturned)
+	{
+		stack->values[++*sp] = retVal;
+		DLOG("RETVAL: " << retVal);
+	}
+		
 }

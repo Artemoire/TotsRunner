@@ -26,6 +26,7 @@ void Ops::Op(OpsExtensions op, DWRD * v1, DWRD * v2)
 		{
 			DLOG("*=");
 			*(WRD*)v1 *= *(WRD*)v2;
+			DLOG(*(WRD*)v1);
 			break;
 		}
 		case OpsExtensions::kDIV_I32:

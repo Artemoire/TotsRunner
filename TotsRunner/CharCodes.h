@@ -6,6 +6,8 @@
 V(kNOP)			\
 V(kPOP)			\
 V(kDUP)			\
+V(kRET)			\
+V(kCALL)		\
 
 #define LOADS(V)\
 V(kLCNEG1)		\
@@ -24,6 +26,14 @@ V(kLVLOC3)		\
 V(kLVLOCI8)		\
 V(kLVLOCI16)	\
 V(kLVALOCI16)	\
+V(kLVARG0)		\
+V(kLVARG1)		\
+V(kLVARG2)		\
+V(kLVARG3)		\
+V(kLVARGI8)		\
+V(kLVARGI16)	\
+V(kLVAARGI8)	\
+V(kLVAARGI16)	\
 V(kLVINDI8)		\
 V(kLVINDI16)	\
 V(kLVINDI32)	\
@@ -38,6 +48,8 @@ V(kSTLOC2)		 \
 V(kSTLOC3)		 \
 V(kSTLOCI8)		 \
 V(kSTLOCI16)	 \
+V(kSTARGI8)		 \
+V(kSTARGI16)	 \
 V(kSTINDI8)		 \
 V(kSTINDI16)	 \
 V(kSTINDI32)	 \

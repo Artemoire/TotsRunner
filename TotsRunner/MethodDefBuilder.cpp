@@ -8,6 +8,7 @@ starray<UChar> * MethodDefBuilder::build()
 	starray<UChar> * stcodes = new starray<UChar>(size);
 	for (WRD i = 0; i < size; ++i)
 		stcodes->values[i] = charcodes[i];
+	charcodes.clear();	
 	return stcodes;
 }
 
@@ -26,6 +27,22 @@ MethodDefBuilder MethodDefBuilder::Pop()
 MethodDefBuilder MethodDefBuilder::Dup()
 {
 	charcodes.push_back(CODE(CharCodes::kDUP));
+	return *this;
+}
+
+MethodDefBuilder MethodDefBuilder::Ret()
+{
+	charcodes.push_back(CODE(CharCodes::kRET));
+	return *this;
+}
+
+MethodDefBuilder MethodDefBuilder::Call(WRD i32)
+{
+	charcodes.push_back(CODE(CharCodes::kCALL));
+	charcodes.push_back(CODE(i32));
+	charcodes.push_back(CODE(i32 >> 8));
+	charcodes.push_back(CODE(i32 >> 16));
+	charcodes.push_back(CODE(i32 >> 24));
 	return *this;
 }
 
@@ -134,6 +151,56 @@ MethodDefBuilder MethodDefBuilder::Lvaloci16(WRD v)
 	charcodes.push_back(CODE(v >> 8));
 	return *this;
 }
+
+MethodDefBuilder MethodDefBuilder::Lvarg0()
+{
+	charcodes.push_back(CODE(CharCodes::kLVARG0));
+	return *this;
+}
+MethodDefBuilder MethodDefBuilder::Lvarg1()
+{
+	charcodes.push_back(CODE(CharCodes::kLVARG1));
+	return *this;
+}
+MethodDefBuilder MethodDefBuilder::Lvarg2()
+{
+	charcodes.push_back(CODE(CharCodes::kLVARG2));
+	return *this;
+}
+MethodDefBuilder MethodDefBuilder::Lvarg3()
+{
+	charcodes.push_back(CODE(CharCodes::kLVARG3));
+	return *this;
+}
+MethodDefBuilder MethodDefBuilder::Lvargi8(WRD v)
+{
+	charcodes.push_back(CODE(CharCodes::kLVARGI8));
+	charcodes.push_back(CODE(v));
+	return *this;
+}
+MethodDefBuilder MethodDefBuilder::Lvargi16(WRD v)
+{
+	charcodes.push_back(CODE(CharCodes::kLVARGI16));
+	charcodes.push_back(CODE(v));
+	charcodes.push_back(CODE(v >> 8));
+	return *this;
+}
+
+MethodDefBuilder MethodDefBuilder::Lvaargi8(WRD v)
+{
+	charcodes.push_back(CODE(CharCodes::kLVAARGI16));
+	charcodes.push_back(CODE(v));
+	return *this;
+}
+MethodDefBuilder MethodDefBuilder::Lvaargi16(WRD v)
+{
+	charcodes.push_back(CODE(CharCodes::kLVAARGI16));
+	charcodes.push_back(CODE(v));
+	charcodes.push_back(CODE(v >> 8));
+	return *this;
+}
+
+
 MethodDefBuilder MethodDefBuilder::Lvindi8()
 {
 	charcodes.push_back(CODE(CharCodes::kLVINDI8));
@@ -193,6 +260,20 @@ MethodDefBuilder MethodDefBuilder::Stloci16(WRD v)
 	return *this;
 }
 
+MethodDefBuilder MethodDefBuilder::Stargi8(WRD v)
+{
+	charcodes.push_back(CODE(CharCodes::kSTARGI8));
+	charcodes.push_back(CODE(v));
+	return *this;
+}
+MethodDefBuilder MethodDefBuilder::Stargi16(WRD v)
+{
+	charcodes.push_back(CODE(CharCodes::kSTARGI16));
+	charcodes.push_back(CODE(v));
+	charcodes.push_back(CODE(v >> 8));
+	return *this;
+}
+
 MethodDefBuilder MethodDefBuilder::Stindi8(WRD v)
 {
 	Lvi8(v);
@@ -203,6 +284,11 @@ MethodDefBuilder MethodDefBuilder::Stindi16(WRD v)
 {
 	Lvi16(v);
 	charcodes.push_back(CODE(CharCodes::kSTINDI16));	
+	return *this;
+}
+MethodDefBuilder MethodDefBuilder::Stindi32()
+{
+	charcodes.push_back(CODE(CharCodes::kSTINDI32));
 	return *this;
 }
 MethodDefBuilder MethodDefBuilder::Stindi32(WRD v)
@@ -221,6 +307,13 @@ MethodDefBuilder MethodDefBuilder::Stindref(WRD v)
 {
 	Lvi32(v);
 	charcodes.push_back(CODE(CharCodes::kSTINDI32));	
+	return *this;
+}
+
+MethodDefBuilder MethodDefBuilder::Addi32()
+{
+	charcodes.push_back(CODE(CharCodes::kOP));
+	charcodes.push_back(CODE(OpsExtensions::kADD_I32));
 	return *this;
 }
 
@@ -254,6 +347,12 @@ MethodDefBuilder MethodDefBuilder::Sub(Float v)
 
 	charcodes.push_back(CODE(CharCodes::kOP));
 	charcodes.push_back(CODE(OpsExtensions::kSUB_F32));
+	return *this;
+}
+MethodDefBuilder MethodDefBuilder::Muli32()
+{
+	charcodes.push_back(CODE(CharCodes::kOP));
+	charcodes.push_back(CODE(OpsExtensions::kMUL_I32));
 	return *this;
 }
 MethodDefBuilder MethodDefBuilder::Mul(WRD v)

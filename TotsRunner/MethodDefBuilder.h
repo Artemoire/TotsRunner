@@ -14,6 +14,8 @@ public:
 	MethodDefBuilder Nop();
 	MethodDefBuilder Pop();
 	MethodDefBuilder Dup();	
+	MethodDefBuilder Ret();
+	MethodDefBuilder Call(WRD);
 
 	MethodDefBuilder Lcneg1();
 	MethodDefBuilder Lc0();
@@ -32,6 +34,15 @@ public:
 	MethodDefBuilder Lvloci16(WRD);	
 	MethodDefBuilder Lvaloci16(WRD);
 
+	MethodDefBuilder Lvarg0();
+	MethodDefBuilder Lvarg1();
+	MethodDefBuilder Lvarg2();
+	MethodDefBuilder Lvarg3();
+	MethodDefBuilder Lvargi8(WRD);
+	MethodDefBuilder Lvargi16(WRD);
+	MethodDefBuilder Lvaargi8(WRD);
+	MethodDefBuilder Lvaargi16(WRD);
+
 	MethodDefBuilder Lvindi8();
 	MethodDefBuilder Lvindi16();
 	MethodDefBuilder Lvindi32();
@@ -45,16 +56,22 @@ public:
 	MethodDefBuilder Stloci8(WRD);
 	MethodDefBuilder Stloci16(WRD);
 
+	MethodDefBuilder Stargi8(WRD);
+	MethodDefBuilder Stargi16(WRD);
+
 	MethodDefBuilder Stindi8(WRD);
 	MethodDefBuilder Stindi16(WRD);
+	MethodDefBuilder Stindi32();
 	MethodDefBuilder Stindi32(WRD);
 	MethodDefBuilder Stindf32(Float);
 	MethodDefBuilder Stindref(WRD);
 
+	MethodDefBuilder Addi32();
 	MethodDefBuilder Add(WRD);
 	MethodDefBuilder Add(Float);
 	MethodDefBuilder Sub(WRD);
 	MethodDefBuilder Sub(Float);	
+	MethodDefBuilder Muli32();
 	MethodDefBuilder Mul(WRD);
 	MethodDefBuilder Mul(Float);
 	MethodDefBuilder Div(WRD);

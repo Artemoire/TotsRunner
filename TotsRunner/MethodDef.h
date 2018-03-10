@@ -9,27 +9,11 @@ public:
 	WRD stack;
 	WRD locals;
 	WRD args;	
+	bool isReturn;
 	/*starray<TypeDef> locals;
 	starray<TypeDef> args;*/
 
 	MethodDef();
-	MethodDef(starray<UChar> *, WRD, WRD, WRD);
+	MethodDef(starray<UChar> *, WRD, WRD, WRD, bool);
 	MethodContext * call(starray<DWRD> * args);
 };
-
-MethodDef::MethodDef()
-{
-}
-
-MethodDef::MethodDef(starray<UChar> * charcodes, WRD stack, WRD locals, WRD args)
-{
-	this->charcodes = charcodes;
-	this->stack = stack;
-	this->locals = locals;
-	this->args = args;
-}
-
-MethodContext * MethodDef::call(starray<DWRD> * args)
-{
-	return new MethodContext(charcodes, stack, locals, args);
-}
