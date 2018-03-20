@@ -40,9 +40,9 @@
 #include <cstring>
 #include <string>
 
-#include "Compiler/TotsParserDriver.h"
-#include "Compiler/SyntaxRoot.h"
-#include "Compiler/TotsAotCompiler.h"
+#include <TotsParserDriver.h>
+#include <SyntaxRoot.h>
+#include <TotsAotCompiler.h>
 
 using Driver = Tots::Language::Syntax::Parser::TotsParserDriver;
 using Compiler = Tots::Language::Compiler::TotsAotCompiler;

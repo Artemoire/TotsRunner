@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Language">
+      <UniqueIdentifier>{ba29b73f-504b-4c1b-b616-7b897ea2f465}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Language\Compiler">
+      <UniqueIdentifier>{b3ef543b-bebf-4d5c-a63f-ba4d464345e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Language\Syntax">
+      <UniqueIdentifier>{62fe0bc5-e9ac-499e-a179-874dd0fff589}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Language\Syntax\Errors">
+      <UniqueIdentifier>{efd28ae1-5bd8-4ea5-b20f-b9b5978ea26b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Language\Syntax\Expressions">
+      <UniqueIdentifier>{e2505907-f083-495d-8f9b-1cfe66a5b335}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Language\Syntax\Functions">
+      <UniqueIdentifier>{beef4f1f-b52c-49dc-9b1e-c15b8912db3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Language\Syntax\Types">
+      <UniqueIdentifier>{f160fed8-1cde-4a71-bd78-97c47a08f0e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Language\Syntax\Statements">
+      <UniqueIdentifier>{1939cdf1-2f48-4011-bae4-97aa86edae51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Language\Syntax\Variable">
+      <UniqueIdentifier>{cc93faf9-7331-4725-b114-4c3abd969451}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Language\Syntax::Parser">
+      <UniqueIdentifier>{69b1c881-7000-4af8-a179-6df3f7c992ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Language\Syntax::Parser\Flex &amp; Bison Files">
+      <UniqueIdentifier>{e90edcb4-efb2-469a-b511-d5bfcedc1593}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Language\Syntax::Parser\Flex &amp; Bison Files\Unused">
+      <UniqueIdentifier>{55425d78-3551-431e-9dd9-72e3d0a8829d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Language\Syntax::Parser\Generated Files">
+      <UniqueIdentifier>{e7f0048c-3f69-4cdd-94aa-39f6cba9d512}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ArgumentSyntax.cpp">
+      <Filter>Language\Syntax\Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="AssignmentExpression.cpp">
+      <Filter>Language\Syntax\Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="BinaryOperatorExpression.cpp">
+      <Filter>Language\Syntax\Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="ExpressionDefinedType.cpp">
+      <Filter>Language\Syntax\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="ExpressionStatement.cpp">
+      <Filter>Language\Syntax\Statements</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionDeclarationSyntax.cpp">
+      <Filter>Language\Syntax\Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="IdentifierExpression.cpp">
+      <Filter>Language\Syntax\Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="LocalDeclarationStatement.cpp">
+      <Filter>Language\Syntax\Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="NamedType.cpp">
+      <Filter>Language\Syntax\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="PredefinedType.cpp">
+      <Filter>Language\Syntax\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="StatementBlock.cpp">
+      <Filter>Language\Syntax\Statements</Filter>
+    </ClCompile>
+    <ClCompile Include="VariableDeclaratorSyntax.cpp">
+      <Filter>Language\Syntax\Variable</Filter>
+    </ClCompile>
+    <ClCompile Include="TypeSyntax.cpp">
+      <Filter>Language\Syntax\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="NumericLiteralExpression.cpp">
+      <Filter>Language\Syntax\Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="OperatorAssignExpression.cpp">
+      <Filter>Language\Syntax\Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="TotsAotCompiler.cpp">
+      <Filter>Language\Compiler</Filter>
+    </ClCompile>
+    <ClCompile Include="TotsParserDriver.cpp">
+      <Filter>Language\Syntax::Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="SyntaxError.cpp">
+      <Filter>Language\Syntax\Errors</Filter>
+    </ClCompile>
+    <ClCompile Include="SyntaxNode.cpp">
+      <Filter>Language\Syntax</Filter>
+    </ClCompile>
+    <ClCompile Include="SyntaxRoot.cpp">
+      <Filter>Language\Syntax</Filter>
+    </ClCompile>
+    <ClCompile Include="TotsParser.tab.cc">
+      <Filter>Language\Syntax::Parser\Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TotsScanner.yy.cc">
+      <Filter>Language\Syntax::Parser\Generated Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ArgumentSyntax.h">
+      <Filter>Language\Syntax\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="AssignmentExpression.h">
+      <Filter>Language\Syntax\Expressions</Filter>
+    </ClInclude>
+    <ClInclude Include="BinaryOperatorExpression.h">
+      <Filter>Language\Syntax\Expressions</Filter>
+    </ClInclude>
+    <ClInclude Include="ExpressionDefinedType.h">
+      <Filter>Language\Syntax\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="ExpressionStatement.h">
+      <Filter>Language\Syntax\Statements</Filter>
+    </ClInclude>
+    <ClInclude Include="ExpressionSyntax.h">
+      <Filter>Language\Syntax\Expressions</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionDeclarationSyntax.h">
+      <Filter>Language\Syntax\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="IdentifierExpression.h">
+      <Filter>Language\Syntax\Expressions</Filter>
+    </ClInclude>
+    <ClInclude Include="LocalDeclarationStatement.h">
+      <Filter>Language\Syntax\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="NamedType.h">
+      <Filter>Language\Syntax\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="PredefinedType.h">
+      <Filter>Language\Syntax\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="StatementBlock.h">
+      <Filter>Language\Syntax\Statements</Filter>
+    </ClInclude>
+    <ClInclude Include="StatementSyntax.h">
+      <Filter>Language\Syntax\Statements</Filter>
+    </ClInclude>
+    <ClInclude Include="VariableDeclaratorSyntax.h">
+      <Filter>Language\Syntax\Variable</Filter>
+    </ClInclude>
+    <ClInclude Include="TypeSyntax.h">
+      <Filter>Language\Syntax\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="NumericLiteralExpression.h">
+      <Filter>Language\Syntax\Expressions</Filter>
+    </ClInclude>
+    <ClInclude Include="OperatorAssignExpression.h">
+      <Filter>Language\Syntax\Expressions</Filter>
+    </ClInclude>
+    <ClInclude Include="TotsAotCompiler.h">
+      <Filter>Language\Compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="TotsParserDriver.h">
+      <Filter>Language\Syntax::Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="TotsScanner.h">
+      <Filter>Language\Syntax::Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="SyntaxError.h">
+      <Filter>Language\Syntax\Errors</Filter>
+    </ClInclude>
+    <ClInclude Include="SyntaxKind.h">
+      <Filter>Language\Syntax</Filter>
+    </ClInclude>
+    <ClInclude Include="SyntaxNode.h">
+      <Filter>Language\Syntax</Filter>
+    </ClInclude>
+    <ClInclude Include="SyntaxRoot.h">
+      <Filter>Language\Syntax</Filter>
+    </ClInclude>
+    <ClInclude Include="Keywords.h">
+      <Filter>Language</Filter>
+    </ClInclude>
+    <ClInclude Include="Operators.h">
+      <Filter>Language</Filter>
+    </ClInclude>
+    <ClInclude Include="PredefTypes.h">
+      <Filter>Language</Filter>
+    </ClInclude>
+    <ClInclude Include="stack.hh">
+      <Filter>Language\Syntax::Parser\Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TotsParser.tab.hh">
+      <Filter>Language\Syntax::Parser\Generated Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TotsParser_unused.y">
+      <Filter>Language\Syntax::Parser\Flex &amp; Bison Files\Unused</Filter>
+    </None>
+    <None Include="TotsLexer_unused.l">
+      <Filter>Language\Syntax::Parser\Flex &amp; Bison Files\Unused</Filter>
+    </None>
+    <None Include="TotsParser.output">
+      <Filter>Language\Syntax::Parser\Generated Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="TotsParser.yy">
+      <Filter>Language\Syntax::Parser\Flex &amp; Bison Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TotsScanner.l">
+      <Filter>Language\Syntax::Parser\Flex &amp; Bison Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>

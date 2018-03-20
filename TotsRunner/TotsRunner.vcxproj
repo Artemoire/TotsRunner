@@ -78,7 +78,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>_MBCS;_VERBOSE;_ILLEGAL_ACCESS_CATCH;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>Async</ExceptionHandling>
-      <AdditionalIncludeDirectories>F:\gnudev\cygwin64\home\User\flex-2.6.4\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\User\Source\Repos\TotsRunner\Tots.Compiler.Lib;C:\Users\User\Source\Repos\TotsRunner\Flex.Dist;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -119,28 +119,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Compiler\ArgumentSyntax.cpp" />
-    <ClCompile Include="Compiler\AssignmentExpression.cpp" />
-    <ClCompile Include="Compiler\BinaryOperatorExpression.cpp" />
-    <ClCompile Include="Compiler\ExpressionDefinedType.cpp" />
-    <ClCompile Include="Compiler\ExpressionStatement.cpp" />
-    <ClCompile Include="Compiler\FunctionDeclarationSyntax.cpp" />
-    <ClCompile Include="Compiler\IdentifierExpression.cpp" />
-    <ClCompile Include="Compiler\LocalDeclarationStatement.cpp" />
-    <ClCompile Include="Compiler\NamedType.cpp" />
-    <ClCompile Include="Compiler\NumericLiteralExpression.cpp" />
-    <ClCompile Include="Compiler\OperatorAssignExpression.cpp" />
-    <ClCompile Include="Compiler\PredefinedType.cpp" />
-    <ClCompile Include="Compiler\StatementBlock.cpp" />
-    <ClCompile Include="Compiler\SyntaxError.cpp" />
-    <ClCompile Include="Compiler\SyntaxNode.cpp" />
-    <ClCompile Include="Compiler\SyntaxRoot.cpp" />
-    <ClCompile Include="Compiler\TotsAotCompiler.cpp" />
-    <ClCompile Include="Compiler\TotsParser.tab.cc" />
-    <ClCompile Include="Compiler\TotsParserDriver.cpp" />
-    <ClCompile Include="Compiler\TotsScanner.yy.cc" />
-    <ClCompile Include="Compiler\TypeSyntax.cpp" />
-    <ClCompile Include="Compiler\VariableDeclaratorSyntax.cpp" />
     <ClCompile Include="ExecutionRegistry.cpp" />
     <ClCompile Include="MethodContext.cpp" />
     <ClCompile Include="MethodDef.cpp" />
@@ -152,35 +130,6 @@
     <ClCompile Include="VirtualThreadWorker.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Compiler\ArgumentSyntax.h" />
-    <ClInclude Include="Compiler\AssignmentExpression.h" />
-    <ClInclude Include="Compiler\BinaryOperatorExpression.h" />
-    <ClInclude Include="Compiler\ExpressionDefinedType.h" />
-    <ClInclude Include="Compiler\ExpressionStatement.h" />
-    <ClInclude Include="Compiler\ExpressionSyntax.h" />
-    <ClInclude Include="Compiler\FunctionDeclarationSyntax.h" />
-    <ClInclude Include="Compiler\IdentifierExpression.h" />
-    <ClInclude Include="Compiler\Keywords.h" />
-    <ClInclude Include="Compiler\LocalDeclarationStatement.h" />
-    <ClInclude Include="Compiler\NamedType.h" />
-    <ClInclude Include="Compiler\NumericLiteralExpression.h" />
-    <ClInclude Include="Compiler\OperatorAssignExpression.h" />
-    <ClInclude Include="Compiler\Operators.h" />
-    <ClInclude Include="Compiler\PredefinedType.h" />
-    <ClInclude Include="Compiler\PredefTypes.h" />
-    <ClInclude Include="Compiler\stack.hh" />
-    <ClInclude Include="Compiler\StatementBlock.h" />
-    <ClInclude Include="Compiler\StatementSyntax.h" />
-    <ClInclude Include="Compiler\SyntaxError.h" />
-    <ClInclude Include="Compiler\SyntaxKind.h" />
-    <ClInclude Include="Compiler\SyntaxNode.h" />
-    <ClInclude Include="Compiler\SyntaxRoot.h" />
-    <ClInclude Include="Compiler\TotsAotCompiler.h" />
-    <ClInclude Include="Compiler\TotsParser.tab.hh" />
-    <ClInclude Include="Compiler\TotsParserDriver.h" />
-    <ClInclude Include="Compiler\TotsScanner.h" />
-    <ClInclude Include="Compiler\TypeSyntax.h" />
-    <ClInclude Include="Compiler\VariableDeclaratorSyntax.h" />
     <ClInclude Include="ExecutionRegistry.h" />
     <ClInclude Include="MethodDefTableBuilder.h" />
     <ClInclude Include="Ops.h" />
@@ -194,19 +143,9 @@
     <ClInclude Include="VirtualThreadWorker.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Compiler\TotsLexer_unused.l" />
-    <CustomBuild Include="Compiler\TotsParser.yy">
-      <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">bison -d -v --file-prefix=Compiler\\TotsParser %(Identity)</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Compiler\\%(Filename).output Compiler\\%(Filename).tab.cc Compiler\\%(Filename).tab.hh Compiler\\stack.hh</Outputs>
-    </CustomBuild>
-    <None Include="Compiler\TotsParser.output" />
-    <None Include="Compiler\TotsParser_unused.y" />
-    <CustomBuild Include="Compiler\TotsScanner.l">
-      <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">flex -o Compiler\\%(Filename).yy.cc %(Identity)</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Compiler\\%(Filename).yy.cc</Outputs>
-    </CustomBuild>
+    <ProjectReference Include="..\Tots.Compiler.Lib\Tots.Compiler.Lib.vcxproj">
+      <Project>{89c9304c-9762-40fd-aa7a-95ec978cfbd3}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
