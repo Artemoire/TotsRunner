@@ -40,6 +40,9 @@
     <Filter Include="Language\Syntax::Parser\Generated Files">
       <UniqueIdentifier>{e7f0048c-3f69-4cdd-94aa-39f6cba9d512}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Language\Compiler\Symbols">
+      <UniqueIdentifier>{f33edb5a-bfb0-4bbb-9c4d-0fab1f530c58}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ArgumentSyntax.cpp">
@@ -107,6 +110,9 @@
     </ClCompile>
     <ClCompile Include="TotsScanner.yy.cc">
       <Filter>Language\Syntax::Parser\Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SymbolTable.cpp">
+      <Filter>Language\Compiler\Symbols</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -196,6 +202,9 @@
     </ClInclude>
     <ClInclude Include="TotsParser.tab.hh">
       <Filter>Language\Syntax::Parser\Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SymbolTable.h">
+      <Filter>Language\Compiler\Symbols</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

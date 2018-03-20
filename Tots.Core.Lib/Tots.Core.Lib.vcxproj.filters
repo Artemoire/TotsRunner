@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Core">
+      <UniqueIdentifier>{867b2092-64a6-4649-8580-80481d13c5ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\InstructionSet">
+      <UniqueIdentifier>{18e4e179-436d-4695-a2ff-4c8b24c54932}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Defs">
+      <UniqueIdentifier>{e4587b7a-8a4b-47c9-9c23-543399934364}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utillities">
+      <UniqueIdentifier>{e360ba1f-6435-4d6d-9afd-483b2834ebcf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CharCodes.h">
+      <Filter>Core\InstructionSet</Filter>
+    </ClInclude>
+    <ClInclude Include="global_defs.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionDef.h">
+      <Filter>Core\Defs</Filter>
+    </ClInclude>
+    <ClInclude Include="starray.h">
+      <Filter>Utillities</Filter>
+    </ClInclude>
+    <ClInclude Include="TypeDef.h">
+      <Filter>Core\Defs</Filter>
+    </ClInclude>
+    <ClInclude Include="Def.h">
+      <Filter>Core\Defs</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="starray.cpp">
+      <Filter>Utillities</Filter>
+    </ClCompile>
+    <ClCompile Include="Def.cpp">
+      <Filter>Core\Defs</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionDef.cpp">
+      <Filter>Core\Defs</Filter>
+    </ClCompile>
+    <ClCompile Include="TypeDef.cpp">
+      <Filter>Core\Defs</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

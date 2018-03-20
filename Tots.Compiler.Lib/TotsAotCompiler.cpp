@@ -1,32 +1,56 @@
 #include "TotsAotCompiler.h"
+
 #include <iostream>
+
 #include "SyntaxKind.h"
+
+#include "ExpressionStatement.h"
 #include "LocalDeclarationStatement.h"
+
+#include "AssignmentExpression.h"
+#include "BinaryOperatorExpression.h"
+#include "IdentifierExpression.h"
 #include "NumericLiteralExpression.h"
+#include "OperatorAssignExpression.h"
+
 
 using namespace std;
 
-vector<char*> locals;
-
-int findLocal(char * id)
-{
-	for (int i = 0; i < locals.size(); ++i)
-		if (strcmp(locals[i], id) == 0)
-			return i;
-	return -1;
-}
-
-void compileExpression(ExpressionSyntax* e)
+void Tots::Language::Compiler::TotsAotCompiler::compileExpression(ExpressionSyntax* e, bool root)
 {
 	switch (e->kind)
 	{
+		case kAssignmentExpression:
+		{
+			AssignmentExpression * expr = (AssignmentExpression*)e;			
+			int loc = locals.loc_of(((IdentifierExpression*)expr->identifier)->identifier);
+			if (loc != -1)
+			{
+				if (locals.is_valid_loc(loc))
+				{
+					compileExpression(expr->equals, false);
+					cout << "stloc " << loc << endl;
+					if (!root)
+						cout << "ldloc " << loc << endl;
+				}
+				else
+				{
+					cout << " ERROR VAR CANNOT BE USED IN THIS SCOPE" << endl;
+				}
+			}
+			else
+			{
+				cout << "ERROR UNDEFINED VAR" << endl;
+			}
+			
+			break;
+		}
 		case kNumericLiteralExpression:
 		{
 			NumericLiteralExpression * expr = (NumericLiteralExpression*)e;
 			cout << "LVI32 " << expr->value << endl;
 			break;
-		}
-			
+		}			
 		default:			
 		{
 			cout << "ERROR UNKNOWN EXPR" << endl;
@@ -45,27 +69,27 @@ void Tots::Language::Compiler::TotsAotCompiler::compileFunction(vector<Statement
 		{
 			case SyntaxKind::kExpressionStatement:
 			{
-				cout << "TODO EXPR STMT" << endl;
+				ExpressionStatement * stmt = (ExpressionStatement *)statements[i];
+				// TODO : check valid expression statements
+				compileExpression(stmt->expression, true);
 				break;
 			}
 			case SyntaxKind::kLocalDeclarationStatement:
 			{
 				LocalDeclarationStatement * stmt = (LocalDeclarationStatement*)statements[i];
-				int idx = locals.size();
-				if (findLocal(stmt->declarator->identifier) == -1)
+				int loc = locals.add(stmt->declarator->identifier);
+				if (loc != -1)
 				{
-					locals.push_back(stmt->declarator->identifier);
 					if (stmt->declarator->initializer != nullptr)
 					{
-						compileExpression(stmt->declarator->initializer);
-						cout << "stloc " << idx << endl;
+						compileExpression(stmt->declarator->initializer, false);
+						cout << "stloc " << loc << endl;
 					}
 				}
 				else
 				{
 					cout << "ERROR LOCAL VARIABLE REDEFINITION" << endl;
 				}
-				//stmt->declarator->identifier map
 				break;
 			}			
 			case SyntaxKind::kStatementBlock:

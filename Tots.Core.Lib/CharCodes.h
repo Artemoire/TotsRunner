@@ -1,0 +1,156 @@
+#pragma once
+
+#include "global_defs.h"
+
+#define BASE(V)	\
+V(kNOP)			\
+V(kPOP)			\
+V(kDUP)			\
+V(kRET)			\
+V(kCALL)		\
+
+#define LOADS(V)\
+V(kLCNEG1)		\
+V(kLC0)			\
+V(kLC1)			\
+V(kLC2)			\
+V(kLC3)			\
+V(kLVI8)		\
+V(kLVI16)		\
+V(kLVI32)		\
+V(kLVF32)		\
+V(kLVLOC0)		\
+V(kLVLOC1)		\
+V(kLVLOC2)		\
+V(kLVLOC3)		\
+V(kLVLOCI8)		\
+V(kLVLOCI16)	\
+V(kLVALOCI16)	\
+V(kLVARG0)		\
+V(kLVARG1)		\
+V(kLVARG2)		\
+V(kLVARG3)		\
+V(kLVARGI8)		\
+V(kLVARGI16)	\
+V(kLVAARGI8)	\
+V(kLVAARGI16)	\
+V(kLVINDI8)		\
+V(kLVINDI16)	\
+V(kLVINDI32)	\
+V(kLVINDF32)	\
+V(kLVINDREF)	\
+
+
+#define STORES(V)\
+V(kSTLOC0)	 	 \
+V(kSTLOC1)	  	 \
+V(kSTLOC2)		 \
+V(kSTLOC3)		 \
+V(kSTLOCI8)		 \
+V(kSTLOCI16)	 \
+V(kSTARGI8)		 \
+V(kSTARGI16)	 \
+V(kSTINDI8)		 \
+V(kSTINDI16)	 \
+V(kSTINDI32)	 \
+V(kSTINDF32)	 \
+V(kSTINDREF)	 \
+
+
+#define OPS(V)	\
+V(kOP)			\
+V(kJMPOP)		\
+V(kCMP)		\
+
+#define OPSX(V) \
+V(kADD_I32)		\
+V(kSUB_I32)		\
+V(kMUL_I32)		\
+V(kDIV_I32)		\
+V(kADD_F32)		\
+V(kSUB_F32)		\
+V(kMUL_F32)		\
+V(kDIV_F32)		\
+V(kAND)			\
+V(kOR)			\
+V(kXOR)			\
+V(kSHR32)		\
+V(kSHL32)		\
+
+#define JMPSX(V)\
+V(kJMP)			\
+V(kJTRUE)		\
+V(kJFALSE)		\
+V(kJEQ32)		\
+V(kJNE32)		\
+V(kJGEI32)		\
+V(kJGEUI32)		\
+V(kJGTI32)		\
+V(kJGTUI32)		\
+V(kJLEI32)		\
+V(kJLEUI32)		\
+V(kJLTI32)		\
+V(kJLTUI32)		\
+\
+V(kJMPs)		\
+V(kJEQ32s)		\
+V(kJNE32s)		\
+V(kJGEI32s)		\
+V(kJGEUI32s)	\
+V(kJGTI32s)		\
+V(kJGTUI32s)	\
+V(kJLEI32s)		\
+V(kJLEUI32s)	\
+V(kJLTI32s)		\
+V(kJLTUI32s)	\
+
+#define CMPSX(V)\
+V(kCEQ32)		\
+V(kCNE32)		\
+V(kCGEI32)		\
+V(kCGEUI32)		\
+V(kCGTI32)		\
+V(kCGTUI32)		\
+V(kCLEI32)		\
+V(kCLEUI32)		\
+V(kCLTI32)		\
+V(kCLTUI32)		\
+
+namespace Tots
+{
+	namespace Core
+	{
+		namespace InstructionSet
+		{
+			enum CharCodes : UChar
+			{
+				BASE(DECLARE_ENUM)
+#undef BASE
+				LOADS(DECLARE_ENUM)
+#undef LOADS
+				STORES(DECLARE_ENUM)
+#undef STORES
+				OPS(DECLARE_ENUM)
+#undef OPS
+			};
+
+			enum OpsExtensions : UChar
+			{
+				OPSX(DECLARE_ENUM)
+#undef OPSX
+			};
+
+			enum JmpExtensions : UChar
+			{
+				JMPSX(DECLARE_ENUM)
+#undef JMPSX
+			};
+
+			enum CmpExtensions : UChar
+			{
+				CMPSX(DECLARE_ENUM)
+#undef CMPSX
+			};
+		}
+	}
+}
