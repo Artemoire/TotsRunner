@@ -1,6 +1,6 @@
 #include "ExpressionDefinedType.h"
 
-ExpressionDefinedType::ExpressionDefinedType() : TypeSyntax((char*)Tots::Language::Keywords::var_keyword)
+ExpressionDefinedType::ExpressionDefinedType()
 {
 	kind = SyntaxKind::kExpressionDefinedType;
 }

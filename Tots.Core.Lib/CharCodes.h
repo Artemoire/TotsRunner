@@ -56,72 +56,56 @@ V(kSTINDI32)	 \
 V(kSTINDF32)	 \
 V(kSTINDREF)	 \
 
+#define ARITH(V) \
+V(kADD)			 \
+V(kSUB)			 \
+V(kDIV)			 \
+V(kMUL)			 \
+V(kREM)			 \
 
-#define OPS(V)	\
-V(kOP)			\
-V(kJMPOP)		\
-V(kCMP)		\
+#define BINOPS(V)	\
+V(kAND)				\
+V(kOR)				\
+V(kXOR)				\
+V(kSHR)				\
+V(kSHL)				\
 
-#define OPSX(V) \
-V(kADD_I32)		\
-V(kSUB_I32)		\
-V(kMUL_I32)		\
-V(kDIV_I32)		\
-V(kADD_F32)		\
-V(kSUB_F32)		\
-V(kMUL_F32)		\
-V(kDIV_F32)		\
-V(kAND)			\
-V(kOR)			\
-V(kXOR)			\
-V(kSHR32)		\
-V(kSHL32)		\
-
-#define JMPSX(V)\
+#define JMPS(V)	\
 V(kJMP)			\
 V(kJTRUE)		\
 V(kJFALSE)		\
-V(kJEQ32)		\
-V(kJNE32)		\
-V(kJGEI32)		\
-V(kJGEUI32)		\
-V(kJGTI32)		\
-V(kJGTUI32)		\
-V(kJLEI32)		\
-V(kJLEUI32)		\
-V(kJLTI32)		\
-V(kJLTUI32)		\
+V(kJEQ)			\
+V(kJNE)			\
+V(kJGE)			\
+V(kJGT)			\
+V(kJLE)			\
+V(kJLT)			\
 \
 V(kJMPs)		\
-V(kJEQ32s)		\
-V(kJNE32s)		\
-V(kJGEI32s)		\
-V(kJGEUI32s)	\
-V(kJGTI32s)		\
-V(kJGTUI32s)	\
-V(kJLEI32s)		\
-V(kJLEUI32s)	\
-V(kJLTI32s)		\
-V(kJLTUI32s)	\
+V(kJTRUEs)		\
+V(kJFALSEs)		\
+V(kJEQs)		\
+V(kJNEs)		\
+V(kJGEs)		\
+V(kJGTs)		\
+V(kJLEs)		\
+V(kJLTs)		\
 
-#define CMPSX(V)\
-V(kCEQ32)		\
-V(kCNE32)		\
-V(kCGEI32)		\
-V(kCGEUI32)		\
-V(kCGTI32)		\
-V(kCGTUI32)		\
-V(kCLEI32)		\
-V(kCLEUI32)		\
-V(kCLTI32)		\
-V(kCLTUI32)		\
+#define CMPS(V)	\
+V(kCEQ)			\
+V(kCNE)			\
+V(kCGE)			\
+V(kCGT)			\
+V(kCLE)			\
+V(kCLT)			\
 
 namespace Tots
 {
 	namespace Core
 	{
-		namespace InstructionSet
+		namespace Execution
 		{
+			// todo dont undef for swtich generatiin
 			enum CharCodes : UChar
 			{
 				BASE(DECLARE_ENUM)
@@ -130,27 +114,15 @@ namespace Tots
 #undef LOADS
 				STORES(DECLARE_ENUM)
 #undef STORES
-				OPS(DECLARE_ENUM)
-#undef OPS
-			};
-
-			enum OpsExtensions : UChar
-			{
-				OPSX(DECLARE_ENUM)
-#undef OPSX
-			};
-
-			enum JmpExtensions : UChar
-			{
-				JMPSX(DECLARE_ENUM)
-#undef JMPSX
-			};
-
-			enum CmpExtensions : UChar
-			{
-				CMPSX(DECLARE_ENUM)
-#undef CMPSX
-			};
+				ARITH(DECLARE_ENUM)
+#undef ARITH
+				BINOPS(DECLARE_ENUM)
+#undef BINOPS
+				JMPS(DECLARE_ENUM)
+#undef JMPS
+				CMPS(DECLARE_ENUM)
+#undef CMPS
+			};			
 		}
 	}
 }

@@ -52,18 +52,11 @@
 	using namespace Tots::Language::Syntax::Parser;
 	using namespace std;
 
-	#include "StatementBlock.h"
-	#include "LocalDeclarationStatement.h"
-	#include "ExpressionStatement.h"
-	#include "VariableDeclaratorSyntax.h"
-	#include "NamedType.h"
-	#include "ExpressionDefinedType.h"
-	#include "PredefinedType.h"
-	#include "AssignmentExpression.h"
-	#include "IdentifierExpression.h"
-	#include "NumericLiteralExpression.h"
-	#include "BinaryOperatorExpression.h"
-	#include "OperatorAssignExpression.h"
+	#include "ExpressionSyntaxDefs.h"
+	#include "StatementSyntaxDefs.h"
+	#include "TypeSyntaxDefs.h"
+	#include "LiteralSyntaxDefs.h"
+	#include "NameSyntaxDefs.h"
 
 #undef yylex
 #define yylex scanner.yylex
@@ -85,12 +78,12 @@
 %token _LCURLY
 %token _RCURLY
 %token _COMMA
-%token _DOT
+%left _DOT
 %token _SEMICOLON
 %right _EQ _ADD_EQ _SUB_EQ _MUL_EQ _DIV_EQ
 %left _ADD _SUB
 %left _MUL _DIV
-%token <char*> _ID
+%token <std::string> _ID
 %token <unsigned long> _INT_LITERAL
 
 %type <SyntaxRoot*> root
@@ -161,14 +154,15 @@ expr_stmt
   ;
 
 expr
-  : id_expr { $$ = $1; }
+  : access_expr { $$ = $1; }
   | num_lit_expr { $$ = $1; }
   | assign_expr { $$ = $1; }
   | bin_expr { $$ = $1; }
   ;
 
-id_expr
-  :  _ID { $$ = new IdentifierExpression($1); }
+access_expr
+  : simple_name { $$ = $1; }
+  | expr _DOT simple_name { $$ = }
   ;
 
 num_lit_expr
@@ -191,18 +185,27 @@ bin_expr
   ;
 
 var_declr
-  :  _ID { $$ = new VariableDeclaratorSyntax($1); }
+  : _ID { $$ = new VariableDeclaratorSyntax($1); }
   | _ID _EQ expr { $$ = new VariableDeclaratorSyntax($1, $3); }
   ;
 
 type
   : _VAR { $$ = new ExpressionDefinedType(); }
-  | _VOID { $$ = new PredefinedType(Tots::Language::PredefTypes::_VOID); }
+  | _VOID { $$ = new VoidType(); }
   | _INT { $$ = new PredefinedType(Tots::Language::PredefTypes::_INT); }
   | _FLOAT { $$ = new PredefinedType(Tots::Language::PredefTypes::_FLOAT); }
   | _BOOL { $$ = new PredefinedType(Tots::Language::PredefTypes::_BOOL); }
   | _CHAR { $$ = new PredefinedType(Tots::Language::PredefTypes::_CHAR); }
-  | _ID { $$ = new NamedType($1); }
+  | name { $$ = $1; }
+  ;
+
+name
+  : simple_name { $$ = $1; }
+  | name _DOT name { $$ = new QualifiedNameSyntax($1, $3); }
+  ;
+
+simple_name
+  : _ID { $$ = new IdentifierNameSyntax($1); }
   ;
 
 %%

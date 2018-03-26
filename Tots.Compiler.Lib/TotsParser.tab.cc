@@ -62,23 +62,14 @@
 	using namespace Tots::Language::Syntax::Parser;
 	using namespace std;
 
-	#include "StatementBlock.h"
-	#include "LocalDeclarationStatement.h"
-	#include "ExpressionStatement.h"
-	#include "VariableDeclaratorSyntax.h"
-	#include "NamedType.h"
-	#include "ExpressionDefinedType.h"
-	#include "PredefinedType.h"
-	#include "AssignmentExpression.h"
-	#include "IdentifierExpression.h"
-	#include "NumericLiteralExpression.h"
-	#include "BinaryOperatorExpression.h"
-	#include "OperatorAssignExpression.h"
+	#include "ExpressionSyntaxDefs.h"
+	#include "StatementSyntaxDefs.h"
+	#include "TypeSyntaxDefs.h"
 
 #undef yylex
 #define yylex scanner.yylex
 
-#line 82 "TotsParser.tab.cc" // lalr1.cc:413
+#line 73 "TotsParser.tab.cc" // lalr1.cc:413
 
 
 #ifndef YY_
@@ -145,7 +136,7 @@
 
 #line 4 "TotsParser.yy" // lalr1.cc:479
 namespace Tots { namespace Language { namespace Syntax { namespace Parser {
-#line 149 "TotsParser.tab.cc" // lalr1.cc:479
+#line 140 "TotsParser.tab.cc" // lalr1.cc:479
 
   /// Build a parser object.
   TotsParser::TotsParser (TotsScanner  &scanner_yyarg, TotsParserDriver  &driver_yyarg)
@@ -1214,247 +1205,247 @@ namespace Tots { namespace Language { namespace Syntax { namespace Parser {
           switch (yyn)
             {
   case 2:
-#line 117 "TotsParser.yy" // lalr1.cc:859
+#line 108 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< SyntaxRoot* > () = new SyntaxRoot(yystack_[0].value.as< std::vector<FunctionDeclarationSyntax*>* > ()); driver.root = yylhs.value.as< SyntaxRoot* > (); }
-#line 1220 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1211 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 3:
-#line 121 "TotsParser.yy" // lalr1.cc:859
+#line 112 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< std::vector<FunctionDeclarationSyntax*>* > () = new vector<FunctionDeclarationSyntax*>(); yylhs.value.as< std::vector<FunctionDeclarationSyntax*>* > ()->push_back(yystack_[0].value.as< FunctionDeclarationSyntax* > ()); }
-#line 1226 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1217 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 4:
-#line 122 "TotsParser.yy" // lalr1.cc:859
+#line 113 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< std::vector<FunctionDeclarationSyntax*>* > () = yystack_[1].value.as< std::vector<FunctionDeclarationSyntax*>* > (); yylhs.value.as< std::vector<FunctionDeclarationSyntax*>* > ()->push_back(yystack_[0].value.as< FunctionDeclarationSyntax* > ()); }
-#line 1232 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1223 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 5:
-#line 127 "TotsParser.yy" // lalr1.cc:859
+#line 118 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< FunctionDeclarationSyntax* > () = new FunctionDeclarationSyntax(yystack_[7].value.as< TypeSyntax* > (), yystack_[6].value.as< char* > (), yystack_[4].value.as< std::vector<ArgumentSyntax*>* > (), yystack_[1].value.as< std::vector<StatementSyntax*>* > ()); }
-#line 1238 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1229 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 6:
-#line 131 "TotsParser.yy" // lalr1.cc:859
+#line 122 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< std::vector<ArgumentSyntax*>* > () = new vector<ArgumentSyntax*>(); }
-#line 1244 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1235 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 7:
-#line 132 "TotsParser.yy" // lalr1.cc:859
+#line 123 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< std::vector<ArgumentSyntax*>* > () = new vector<ArgumentSyntax*>(); yylhs.value.as< std::vector<ArgumentSyntax*>* > ()->push_back(yystack_[0].value.as< ArgumentSyntax* > ()); }
-#line 1250 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1241 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 8:
-#line 133 "TotsParser.yy" // lalr1.cc:859
+#line 124 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< std::vector<ArgumentSyntax*>* > () = yystack_[2].value.as< std::vector<ArgumentSyntax*>* > (); yylhs.value.as< std::vector<ArgumentSyntax*>* > ()->push_back(yystack_[0].value.as< ArgumentSyntax* > ()); }
-#line 1256 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1247 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 9:
-#line 137 "TotsParser.yy" // lalr1.cc:859
+#line 128 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< ArgumentSyntax* > () = new ArgumentSyntax(yystack_[1].value.as< TypeSyntax* > (), yystack_[0].value.as< VariableDeclaratorSyntax* > ()); }
-#line 1262 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1253 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 10:
-#line 141 "TotsParser.yy" // lalr1.cc:859
+#line 132 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< std::vector<StatementSyntax*>* > () = new vector<StatementSyntax*>(); }
-#line 1268 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1259 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 11:
-#line 142 "TotsParser.yy" // lalr1.cc:859
+#line 133 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< std::vector<StatementSyntax*>* > () = yystack_[1].value.as< std::vector<StatementSyntax*>* > (); yylhs.value.as< std::vector<StatementSyntax*>* > ()->push_back(yystack_[0].value.as< StatementSyntax* > ()); }
-#line 1274 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1265 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 12:
-#line 146 "TotsParser.yy" // lalr1.cc:859
+#line 137 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< StatementSyntax* > () = yystack_[0].value.as< StatementSyntax* > (); }
-#line 1280 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1271 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 13:
-#line 147 "TotsParser.yy" // lalr1.cc:859
+#line 138 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< StatementSyntax* > () = yystack_[0].value.as< StatementSyntax* > (); }
-#line 1286 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1277 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 14:
-#line 148 "TotsParser.yy" // lalr1.cc:859
+#line 139 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< StatementSyntax* > () = yystack_[0].value.as< StatementSyntax* > (); }
-#line 1292 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1283 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 15:
-#line 152 "TotsParser.yy" // lalr1.cc:859
+#line 143 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< StatementSyntax* > () = new StatementBlock(yystack_[1].value.as< std::vector<StatementSyntax*>* > ()); }
-#line 1298 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1289 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 16:
-#line 156 "TotsParser.yy" // lalr1.cc:859
+#line 147 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< StatementSyntax* > () = new LocalDeclarationStatement(yystack_[2].value.as< TypeSyntax* > (), yystack_[1].value.as< VariableDeclaratorSyntax* > ()); }
-#line 1304 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1295 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 17:
-#line 160 "TotsParser.yy" // lalr1.cc:859
+#line 151 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< StatementSyntax* > () = new ExpressionStatement(yystack_[1].value.as< ExpressionSyntax* > ()); }
-#line 1310 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1301 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 18:
-#line 164 "TotsParser.yy" // lalr1.cc:859
+#line 155 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< ExpressionSyntax* > () = yystack_[0].value.as< ExpressionSyntax* > (); }
-#line 1316 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1307 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 19:
-#line 165 "TotsParser.yy" // lalr1.cc:859
+#line 156 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< ExpressionSyntax* > () = yystack_[0].value.as< ExpressionSyntax* > (); }
-#line 1322 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1313 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 20:
-#line 166 "TotsParser.yy" // lalr1.cc:859
+#line 157 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< ExpressionSyntax* > () = yystack_[0].value.as< ExpressionSyntax* > (); }
-#line 1328 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1319 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 21:
-#line 167 "TotsParser.yy" // lalr1.cc:859
+#line 158 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< ExpressionSyntax* > () = yystack_[0].value.as< ExpressionSyntax* > (); }
-#line 1334 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1325 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 22:
-#line 171 "TotsParser.yy" // lalr1.cc:859
+#line 162 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< ExpressionSyntax* > () = new IdentifierExpression(yystack_[0].value.as< char* > ()); }
-#line 1340 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1331 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 23:
-#line 175 "TotsParser.yy" // lalr1.cc:859
+#line 166 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< ExpressionSyntax* > () = new NumericLiteralExpression(yystack_[0].value.as< unsigned long > ()); }
-#line 1346 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1337 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 24:
-#line 179 "TotsParser.yy" // lalr1.cc:859
+#line 170 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< ExpressionSyntax* > () = new AssignmentExpression(yystack_[2].value.as< ExpressionSyntax* > (), yystack_[0].value.as< ExpressionSyntax* > ()); }
-#line 1352 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1343 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 25:
-#line 180 "TotsParser.yy" // lalr1.cc:859
+#line 171 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< ExpressionSyntax* > () = new OperatorAssignExpression(yystack_[2].value.as< ExpressionSyntax* > (), yystack_[0].value.as< ExpressionSyntax* > (), Tots::Language::Operators::Add); }
-#line 1358 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1349 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 26:
-#line 181 "TotsParser.yy" // lalr1.cc:859
+#line 172 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< ExpressionSyntax* > () = new OperatorAssignExpression(yystack_[2].value.as< ExpressionSyntax* > (), yystack_[0].value.as< ExpressionSyntax* > (), Tots::Language::Operators::Sub); }
-#line 1364 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1355 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 27:
-#line 182 "TotsParser.yy" // lalr1.cc:859
+#line 173 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< ExpressionSyntax* > () = new OperatorAssignExpression(yystack_[2].value.as< ExpressionSyntax* > (), yystack_[0].value.as< ExpressionSyntax* > (), Tots::Language::Operators::Mul); }
-#line 1370 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1361 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 28:
-#line 183 "TotsParser.yy" // lalr1.cc:859
+#line 174 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< ExpressionSyntax* > () = new OperatorAssignExpression(yystack_[2].value.as< ExpressionSyntax* > (), yystack_[0].value.as< ExpressionSyntax* > (), Tots::Language::Operators::Div); }
-#line 1376 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1367 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 29:
-#line 187 "TotsParser.yy" // lalr1.cc:859
+#line 178 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< ExpressionSyntax* > () = new BinaryOperatorExpression(yystack_[2].value.as< ExpressionSyntax* > (), yystack_[0].value.as< ExpressionSyntax* > (), Tots::Language::Operators::Add); }
-#line 1382 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1373 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 30:
-#line 188 "TotsParser.yy" // lalr1.cc:859
+#line 179 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< ExpressionSyntax* > () = new BinaryOperatorExpression(yystack_[2].value.as< ExpressionSyntax* > (), yystack_[0].value.as< ExpressionSyntax* > (), Tots::Language::Operators::Sub); }
-#line 1388 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1379 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 31:
-#line 189 "TotsParser.yy" // lalr1.cc:859
+#line 180 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< ExpressionSyntax* > () = new BinaryOperatorExpression(yystack_[2].value.as< ExpressionSyntax* > (), yystack_[0].value.as< ExpressionSyntax* > (), Tots::Language::Operators::Mul); }
-#line 1394 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1385 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 32:
-#line 190 "TotsParser.yy" // lalr1.cc:859
+#line 181 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< ExpressionSyntax* > () = new BinaryOperatorExpression(yystack_[2].value.as< ExpressionSyntax* > (), yystack_[0].value.as< ExpressionSyntax* > (), Tots::Language::Operators::Div); }
-#line 1400 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1391 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 33:
-#line 194 "TotsParser.yy" // lalr1.cc:859
+#line 185 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< VariableDeclaratorSyntax* > () = new VariableDeclaratorSyntax(yystack_[0].value.as< char* > ()); }
-#line 1406 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1397 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 34:
-#line 195 "TotsParser.yy" // lalr1.cc:859
+#line 186 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< VariableDeclaratorSyntax* > () = new VariableDeclaratorSyntax(yystack_[2].value.as< char* > (), yystack_[0].value.as< ExpressionSyntax* > ()); }
-#line 1412 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1403 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 35:
-#line 199 "TotsParser.yy" // lalr1.cc:859
+#line 190 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< TypeSyntax* > () = new ExpressionDefinedType(); }
-#line 1418 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1409 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 36:
-#line 200 "TotsParser.yy" // lalr1.cc:859
-    { yylhs.value.as< TypeSyntax* > () = new PredefinedType(Tots::Language::PredefTypes::_VOID); }
-#line 1424 "TotsParser.tab.cc" // lalr1.cc:859
+#line 191 "TotsParser.yy" // lalr1.cc:859
+    { yylhs.value.as< TypeSyntax* > () = new VoidType(); }
+#line 1415 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 37:
-#line 201 "TotsParser.yy" // lalr1.cc:859
+#line 192 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< TypeSyntax* > () = new PredefinedType(Tots::Language::PredefTypes::_INT); }
-#line 1430 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1421 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 38:
-#line 202 "TotsParser.yy" // lalr1.cc:859
+#line 193 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< TypeSyntax* > () = new PredefinedType(Tots::Language::PredefTypes::_FLOAT); }
-#line 1436 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1427 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 39:
-#line 203 "TotsParser.yy" // lalr1.cc:859
+#line 194 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< TypeSyntax* > () = new PredefinedType(Tots::Language::PredefTypes::_BOOL); }
-#line 1442 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1433 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 40:
-#line 204 "TotsParser.yy" // lalr1.cc:859
+#line 195 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< TypeSyntax* > () = new PredefinedType(Tots::Language::PredefTypes::_CHAR); }
-#line 1448 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1439 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
   case 41:
-#line 205 "TotsParser.yy" // lalr1.cc:859
+#line 196 "TotsParser.yy" // lalr1.cc:859
     { yylhs.value.as< TypeSyntax* > () = new NamedType(yystack_[0].value.as< char* > ()); }
-#line 1454 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1445 "TotsParser.tab.cc" // lalr1.cc:859
     break;
 
 
-#line 1458 "TotsParser.tab.cc" // lalr1.cc:859
+#line 1449 "TotsParser.tab.cc" // lalr1.cc:859
             default:
               break;
             }
@@ -1738,11 +1729,11 @@ namespace Tots { namespace Language { namespace Syntax { namespace Parser {
   const unsigned char
   TotsParser::yyrline_[] =
   {
-       0,   117,   117,   121,   122,   126,   131,   132,   133,   137,
-     141,   142,   146,   147,   148,   152,   156,   160,   164,   165,
-     166,   167,   171,   175,   179,   180,   181,   182,   183,   187,
-     188,   189,   190,   194,   195,   199,   200,   201,   202,   203,
-     204,   205
+       0,   108,   108,   112,   113,   117,   122,   123,   124,   128,
+     132,   133,   137,   138,   139,   143,   147,   151,   155,   156,
+     157,   158,   162,   166,   170,   171,   172,   173,   174,   178,
+     179,   180,   181,   185,   186,   190,   191,   192,   193,   194,
+     195,   196
   };
 
   // Print the state stack on the debug stream.
@@ -1826,8 +1817,8 @@ namespace Tots { namespace Language { namespace Syntax { namespace Parser {
 
 #line 4 "TotsParser.yy" // lalr1.cc:1167
 } } } } // Tots::Language::Syntax::Parser
-#line 1830 "TotsParser.tab.cc" // lalr1.cc:1167
-#line 208 "TotsParser.yy" // lalr1.cc:1168
+#line 1821 "TotsParser.tab.cc" // lalr1.cc:1167
+#line 199 "TotsParser.yy" // lalr1.cc:1168
 
 
 

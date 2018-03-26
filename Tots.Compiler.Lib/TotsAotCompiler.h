@@ -1,8 +1,10 @@
 #pragma once
 
 #include <vector>
-#include "StatementSyntax.h"
-#include "ExpressionSyntax.h"
+#include "ExpressionSyntaxDefs.h"
+#include "StatementSyntaxDefs.h"
+#include "TypeSyntaxDefs.h"
+
 #include "SymbolTable.h"
 
 namespace Tots
@@ -13,10 +15,8 @@ namespace Tots
 		{
 			class TotsAotCompiler
 			{
-				SymbolTable locals;
-
 				public:
-					void compileExpression(ExpressionSyntax*, bool);
+					TypeSymbol compileExpression(ExpressionSyntax*, bool);
 					void compileFunction(std::vector<StatementSyntax*>*);
 			};
 		}

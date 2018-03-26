@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="CharCodes.h" />
     <ClInclude Include="Def.h" />
+    <ClInclude Include="Flags.h" />
     <ClInclude Include="FunctionDef.h" />
     <ClInclude Include="global_defs.h" />
     <ClInclude Include="starray.h" />

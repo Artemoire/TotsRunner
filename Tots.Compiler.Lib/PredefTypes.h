@@ -1,7 +1,6 @@
 #pragma once
 
 #define PTYPES(V)	\
-V(_VOID)	        \
 V(_INT)				\
 V(_FLOAT)			\
 V(_BOOL)			\

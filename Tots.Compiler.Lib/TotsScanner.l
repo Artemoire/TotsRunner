@@ -61,7 +61,7 @@ using token = TotsParser::token;
 "-="					{ return token::_SUB_EQ; }
 "*="					{ return token::_MUL_EQ; }
 "/="					{ return token::_DIV_EQ; }
-[a-zA-Z][a-zA-Z0-9]*	{ yylval->build<char*>(_strdup(yytext)); return token::_ID; }
+[a-zA-Z][a-zA-Z0-9]*	{ yylval->build<std::string>(yytext); return token::_ID; }
 [0-9]+		{ int i = atoi(yytext); yylval->build<unsigned long>(*(unsigned long *)&i); return token::_INT_LITERAL; }
 .
 %%

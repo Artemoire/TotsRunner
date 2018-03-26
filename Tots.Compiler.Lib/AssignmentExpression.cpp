@@ -4,7 +4,12 @@
 AssignmentExpression::AssignmentExpression(ExpressionSyntax * id, ExpressionSyntax * e)
 {
 	kind = SyntaxKind::kAssignmentExpression;
-	identifier = id;
+	identifier = (IdentifierExpression*)id;
+	if (id->kind != SyntaxKind::kIdentifierExpression)
+	{
+		identifier = nullptr;
+		// TODO: SEMANTIC ERROR
+	}		
 	equals = e;
 	if (id->kind != SyntaxKind::kIdentifierExpression)
 	{

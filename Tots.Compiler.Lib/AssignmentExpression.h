@@ -1,11 +1,12 @@
 #pragma once
 
 #include "ExpressionSyntax.h"
+#include "IdentifierExpression.h"
 
 class AssignmentExpression : public ExpressionSyntax
 {
 public:
-	ExpressionSyntax * identifier;
+	IdentifierExpression * identifier;
 	ExpressionSyntax * equals;
 
 	AssignmentExpression(ExpressionSyntax *, ExpressionSyntax *);

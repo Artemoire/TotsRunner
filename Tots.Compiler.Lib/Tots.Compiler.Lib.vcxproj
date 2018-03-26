@@ -26,12 +26,15 @@
     <ClCompile Include="ExpressionStatement.cpp" />
     <ClCompile Include="FunctionDeclarationSyntax.cpp" />
     <ClCompile Include="IdentifierExpression.cpp" />
+    <ClCompile Include="IdentifierNameSyntax.cpp" />
     <ClCompile Include="LocalDeclarationStatement.cpp" />
-    <ClCompile Include="NamedType.cpp" />
     <ClCompile Include="NumericLiteralExpression.cpp" />
     <ClCompile Include="OperatorAssignExpression.cpp" />
     <ClCompile Include="PredefinedType.cpp" />
+    <ClCompile Include="QualifiedNameSyntax.cpp" />
+    <ClCompile Include="QualifiedNameSyntax.h" />
     <ClCompile Include="StatementBlock.cpp" />
+    <ClCompile Include="StaticModifierSyntax.cpp" />
     <ClCompile Include="SymbolTable.cpp" />
     <ClCompile Include="SyntaxError.cpp" />
     <ClCompile Include="SyntaxNode.cpp" />
@@ -40,8 +43,9 @@
     <ClCompile Include="TotsParser.tab.cc" />
     <ClCompile Include="TotsParserDriver.cpp" />
     <ClCompile Include="TotsScanner.yy.cc" />
-    <ClCompile Include="TypeSyntax.cpp" />
     <ClCompile Include="VariableDeclaratorSyntax.cpp" />
+    <ClCompile Include="VisibilityModifierSyntax.cpp" />
+    <ClCompile Include="VoidType.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArgumentSyntax.h" />
@@ -50,19 +54,29 @@
     <ClInclude Include="ExpressionDefinedType.h" />
     <ClInclude Include="ExpressionStatement.h" />
     <ClInclude Include="ExpressionSyntax.h" />
+    <ClInclude Include="ExpressionSyntaxDefs.h" />
     <ClInclude Include="FunctionDeclarationSyntax.h" />
+    <ClInclude Include="FunctionDefBuilder.h" />
     <ClInclude Include="IdentifierExpression.h" />
+    <ClInclude Include="IdentifierNameSyntax.h" />
     <ClInclude Include="Keywords.h" />
+    <ClInclude Include="LiteralSyntaxDefs.h" />
     <ClInclude Include="LocalDeclarationStatement.h" />
-    <ClInclude Include="NamedType.h" />
+    <ClInclude Include="ModuleBuilder.h" />
+    <ClInclude Include="NamespaceDeclarationSyntax.h" />
+    <ClInclude Include="NameSyntax.h" />
+    <ClInclude Include="NameSyntaxDefs.h" />
     <ClInclude Include="NumericLiteralExpression.h" />
     <ClInclude Include="OperatorAssignExpression.h" />
     <ClInclude Include="Operators.h" />
+    <ClInclude Include="SimpleNameSyntax.h" />
+    <ClInclude Include="StaticModifierSyntax.h" />
     <ClInclude Include="PredefinedType.h" />
     <ClInclude Include="PredefTypes.h" />
     <ClInclude Include="stack.hh" />
     <ClInclude Include="StatementBlock.h" />
     <ClInclude Include="StatementSyntax.h" />
+    <ClInclude Include="StatementSyntaxDefs.h" />
     <ClInclude Include="SymbolTable.h" />
     <ClInclude Include="SyntaxError.h" />
     <ClInclude Include="SyntaxKind.h" />
@@ -73,7 +87,10 @@
     <ClInclude Include="TotsParserDriver.h" />
     <ClInclude Include="TotsScanner.h" />
     <ClInclude Include="TypeSyntax.h" />
+    <ClInclude Include="TypeSyntaxDefs.h" />
     <ClInclude Include="VariableDeclaratorSyntax.h" />
+    <ClInclude Include="VisibilityModifierSyntax.h" />
+    <ClInclude Include="VoidType.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="TotsLexer_unused.l" />
@@ -89,6 +106,11 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">flex -o %(Filename).yy.cc %(Identity)</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename).yy.cc</Outputs>
     </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Tots.Core.Lib\Tots.Core.Lib.vcxproj">
+      <Project>{6daf8139-1d52-4a2a-a851-ab25f47f9b95}</Project>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -163,6 +185,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\User\Source\Repos\TotsRunner\Tots.Core.Lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

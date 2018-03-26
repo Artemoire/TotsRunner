@@ -1,15 +1,28 @@
 #include "SymbolTable.h"
 #include <string>
 
-LocalSymbol::LocalSymbol(int l, char * i)
+LocalSymbol::LocalSymbol(int l, char * i, TypeSymbol t)
 {
 	loc = l;
 	id = i;
+	type = t;
 }
 
 SymbolTable::SymbolTable()
 {
 	ptr = 0;
+}
+
+void SymbolTable::curr(char * c)
+{
+	building = c;
+}
+
+bool SymbolTable::is_curr(char * c)
+{
+	if (building == nullptr)
+		return false;
+	return strcmp(building, c) == 0;
 }
 
 bool SymbolTable::is_valid_loc(int loc)
@@ -28,13 +41,18 @@ int SymbolTable::loc_of(char * id)
 	return -1;
 }
 
-int SymbolTable::add(char * id)
+LocalSymbol SymbolTable::get(int idx)
+{
+	return symbols[idx];
+}
+
+int SymbolTable::add(char * id, TypeSymbol t)
 {
 	if (loc_of(id) != -1)
 		return -1;
 
 	int loc = symbols.size();
-	symbols.insert(symbols.begin() + ptr, LocalSymbol(loc, id));
+	symbols.insert(symbols.begin() + ptr, LocalSymbol(loc, id, t));
 	ptr++;
 	return loc;
 }
@@ -58,4 +76,14 @@ void SymbolTable::pop_scope()
 
 	ptr = scopes.back();
 	scopes.pop_back();
+}
+
+TypeSymbol::TypeSymbol()
+{
+}
+
+TypeSymbol::TypeSymbol(Tots::Language::PredefTypes p)
+{
+	predefined = true;
+	ptype = p;
 }

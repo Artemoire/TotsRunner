@@ -1,12 +1,7 @@
 #pragma once
 
-#include "SyntaxNode.h"
+#include "ExpressionSyntax.h"
 
-class TypeSyntax : public SyntaxNode
+class TypeSyntax : public ExpressionSyntax
 {	
-public:
-	char *identifier;
-
-	TypeSyntax();
-	TypeSyntax(char*);
 };

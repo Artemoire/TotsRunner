@@ -43,6 +43,18 @@
     <Filter Include="Language\Compiler\Symbols">
       <UniqueIdentifier>{f33edb5a-bfb0-4bbb-9c4d-0fab1f530c58}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Language\Syntax\Accessibility">
+      <UniqueIdentifier>{f20650f0-32db-4693-afaa-bfae0db015a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Language\Syntax\TypeDeclarations">
+      <UniqueIdentifier>{1e59d2ae-b370-4537-bf41-9f74194fcb72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Language\Syntax\Names">
+      <UniqueIdentifier>{fffcac80-839d-40cb-ad60-44a0b11535fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Language\Syntax\Literals">
+      <UniqueIdentifier>{2680ad9a-78b0-473c-a064-a3b89bda54b5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ArgumentSyntax.cpp">
@@ -66,12 +78,6 @@
     <ClCompile Include="IdentifierExpression.cpp">
       <Filter>Language\Syntax\Expressions</Filter>
     </ClCompile>
-    <ClCompile Include="LocalDeclarationStatement.cpp">
-      <Filter>Language\Syntax\Functions</Filter>
-    </ClCompile>
-    <ClCompile Include="NamedType.cpp">
-      <Filter>Language\Syntax\Types</Filter>
-    </ClCompile>
     <ClCompile Include="PredefinedType.cpp">
       <Filter>Language\Syntax\Types</Filter>
     </ClCompile>
@@ -80,12 +86,6 @@
     </ClCompile>
     <ClCompile Include="VariableDeclaratorSyntax.cpp">
       <Filter>Language\Syntax\Variable</Filter>
-    </ClCompile>
-    <ClCompile Include="TypeSyntax.cpp">
-      <Filter>Language\Syntax\Types</Filter>
-    </ClCompile>
-    <ClCompile Include="NumericLiteralExpression.cpp">
-      <Filter>Language\Syntax\Expressions</Filter>
     </ClCompile>
     <ClCompile Include="OperatorAssignExpression.cpp">
       <Filter>Language\Syntax\Expressions</Filter>
@@ -114,6 +114,30 @@
     <ClCompile Include="SymbolTable.cpp">
       <Filter>Language\Compiler\Symbols</Filter>
     </ClCompile>
+    <ClCompile Include="LocalDeclarationStatement.cpp">
+      <Filter>Language\Syntax\Statements</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticModifierSyntax.cpp">
+      <Filter>Language\Syntax\Accessibility</Filter>
+    </ClCompile>
+    <ClCompile Include="VisibilityModifierSyntax.cpp">
+      <Filter>Language\Syntax\Accessibility</Filter>
+    </ClCompile>
+    <ClCompile Include="VoidType.cpp">
+      <Filter>Language\Syntax\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="NumericLiteralExpression.cpp">
+      <Filter>Language\Syntax\Literals</Filter>
+    </ClCompile>
+    <ClCompile Include="IdentifierNameSyntax.cpp">
+      <Filter>Language\Syntax\Names</Filter>
+    </ClCompile>
+    <ClCompile Include="QualifiedNameSyntax.h">
+      <Filter>Language\Syntax\Names</Filter>
+    </ClCompile>
+    <ClCompile Include="QualifiedNameSyntax.cpp">
+      <Filter>Language\Syntax\Names</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArgumentSyntax.h">
@@ -140,12 +164,6 @@
     <ClInclude Include="IdentifierExpression.h">
       <Filter>Language\Syntax\Expressions</Filter>
     </ClInclude>
-    <ClInclude Include="LocalDeclarationStatement.h">
-      <Filter>Language\Syntax\Functions</Filter>
-    </ClInclude>
-    <ClInclude Include="NamedType.h">
-      <Filter>Language\Syntax\Types</Filter>
-    </ClInclude>
     <ClInclude Include="PredefinedType.h">
       <Filter>Language\Syntax\Types</Filter>
     </ClInclude>
@@ -160,9 +178,6 @@
     </ClInclude>
     <ClInclude Include="TypeSyntax.h">
       <Filter>Language\Syntax\Types</Filter>
-    </ClInclude>
-    <ClInclude Include="NumericLiteralExpression.h">
-      <Filter>Language\Syntax\Expressions</Filter>
     </ClInclude>
     <ClInclude Include="OperatorAssignExpression.h">
       <Filter>Language\Syntax\Expressions</Filter>
@@ -205,6 +220,54 @@
     </ClInclude>
     <ClInclude Include="SymbolTable.h">
       <Filter>Language\Compiler\Symbols</Filter>
+    </ClInclude>
+    <ClInclude Include="VoidType.h">
+      <Filter>Language\Syntax\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="LocalDeclarationStatement.h">
+      <Filter>Language\Syntax\Statements</Filter>
+    </ClInclude>
+    <ClInclude Include="TypeSyntaxDefs.h">
+      <Filter>Language\Syntax\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="StatementSyntaxDefs.h">
+      <Filter>Language\Syntax\Statements</Filter>
+    </ClInclude>
+    <ClInclude Include="ExpressionSyntaxDefs.h">
+      <Filter>Language\Syntax\Expressions</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleBuilder.h">
+      <Filter>Language\Compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionDefBuilder.h">
+      <Filter>Language\Compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="VisibilityModifierSyntax.h">
+      <Filter>Language\Syntax\Accessibility</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticModifierSyntax.h">
+      <Filter>Language\Syntax\Accessibility</Filter>
+    </ClInclude>
+    <ClInclude Include="NamespaceDeclarationSyntax.h">
+      <Filter>Language\Syntax\Accessibility</Filter>
+    </ClInclude>
+    <ClInclude Include="NameSyntax.h">
+      <Filter>Language\Syntax\Names</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleNameSyntax.h">
+      <Filter>Language\Syntax\Names</Filter>
+    </ClInclude>
+    <ClInclude Include="NumericLiteralExpression.h">
+      <Filter>Language\Syntax\Literals</Filter>
+    </ClInclude>
+    <ClInclude Include="IdentifierNameSyntax.h">
+      <Filter>Language\Syntax\Names</Filter>
+    </ClInclude>
+    <ClInclude Include="NameSyntaxDefs.h">
+      <Filter>Language\Syntax\Names</Filter>
+    </ClInclude>
+    <ClInclude Include="LiteralSyntaxDefs.h">
+      <Filter>Language\Syntax\Literals</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

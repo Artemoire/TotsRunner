@@ -10,5 +10,6 @@ public:
 	TypeSyntax *type;
 	VariableDeclaratorSyntax *declarator;
 
+	// TODO: SEMANTIC CHECK VOID OR VAR AND NO DECLARATOR
 	LocalDeclarationStatement(TypeSyntax *, VariableDeclaratorSyntax *);
 };
