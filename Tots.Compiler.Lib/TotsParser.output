@@ -1,942 +1,1318 @@
-Terminals unused in grammar
-
-   _DOT
+State 71 conflicts: 1 reduce/reduce
 
 
 Grammar
 
     0 $accept: root $end
 
-    1 root: function_decl_list
+    1 root: base_decl_list
 
-    2 function_decl_list: function_decl
-    3                   | function_decl_list function_decl
+    2 base_decl_list: %empty
+    3               | base_decl_list base_decl
 
-    4 function_decl: type _ID _LPAREN argument_list _RPAREN _LCURLY statement_list _RCURLY
+    4 base_decl: namespace_decl
+    5          | class_decl
 
-    5 argument_list: %empty
-    6              | argument
-    7              | argument_list _COMMA argument
+    6 namespace_decl: _NAMESPACE name _LCURLY base_decl_list _RCURLY
 
-    8 argument: type var_declr
+    7 class_decl: visibility_mod static_mod _CLASS simple_name _LCURLY member_decl_list _RCURLY
 
-    9 statement_list: %empty
-   10               | statement_list statement
+    8 visibility_mod: %empty
+    9               | _INTERNAL
+   10               | _PRIVATE
+   11               | _PROTECTED
+   12               | _PUBLIC
 
-   11 statement: statement_block
-   12          | local_decl_stmt
-   13          | expr_stmt
+   13 static_mod: %empty
+   14           | _STATIC
 
-   14 statement_block: _LCURLY statement_list _RCURLY
+   15 member_decl_list: %empty
+   16                 | member_decl_list member_decl
 
-   15 local_decl_stmt: type var_declr _SEMICOLON
+   17 member_decl: function_decl
+   18            | field_decl
+   19            | class_decl
 
-   16 expr_stmt: expr _SEMICOLON
+   20 function_decl: visibility_mod static_mod type simple_name _LPAREN argument_list _RPAREN _LCURLY statement_list _RCURLY
 
-   17 expr: id_expr
-   18     | num_lit_expr
-   19     | assign_expr
-   20     | bin_expr
+   21 field_decl: visibility_mod static_mod type simple_name _SEMICOLON
 
-   21 id_expr: _ID
+   22 argument_list: %empty
+   23              | argument
+   24              | argument_list _COMMA argument
 
-   22 num_lit_expr: _INT_LITERAL
+   25 argument: type var_declr
 
-   23 assign_expr: expr _EQ expr
-   24            | expr _ADD_EQ expr
-   25            | expr _SUB_EQ expr
-   26            | expr _MUL_EQ expr
-   27            | expr _DIV_EQ expr
+   26 statement_list: %empty
+   27               | statement_list statement
 
-   28 bin_expr: expr _ADD expr
-   29         | expr _SUB expr
-   30         | expr _MUL expr
-   31         | expr _DIV expr
+   28 statement: statement_block
+   29          | local_decl_stmt
+   30          | expr_stmt
 
-   32 var_declr: _ID
-   33          | _ID _EQ expr
+   31 statement_block: _LCURLY statement_list _RCURLY
 
-   34 type: _VAR
-   35     | _VOID
-   36     | _INT
-   37     | _FLOAT
-   38     | _BOOL
-   39     | _CHAR
-   40     | _ID
+   32 local_decl_stmt: type var_declr _SEMICOLON
+
+   33 expr_stmt: expr _SEMICOLON
+
+   34 expr: simple_name
+   35     | access_expr
+   36     | num_lit_expr
+   37     | assign_expr
+   38     | bin_expr
+
+   39 access_expr: expr _DOT simple_name
+
+   40 num_lit_expr: _INT_LITERAL
+
+   41 assign_expr: expr _EQ expr
+   42            | expr _ADD_EQ expr
+   43            | expr _SUB_EQ expr
+   44            | expr _MUL_EQ expr
+   45            | expr _DIV_EQ expr
+
+   46 bin_expr: expr _ADD expr
+   47         | expr _SUB expr
+   48         | expr _MUL expr
+   49         | expr _DIV expr
+
+   50 var_declr: simple_name
+   51          | simple_name _EQ expr
+
+   52 type: _VAR
+   53     | _VOID
+   54     | _INT
+   55     | _FLOAT
+   56     | _BOOL
+   57     | _CHAR
+   58     | name
+
+   59 name: simple_name
+   60     | name _DOT name
+
+   61 simple_name: _ID
 
 
 Terminals, with rules where they appear
 
 $end (0) 0
 error (256)
-_VAR (258) 34
-_VOID (259) 35
-_INT (260) 36
-_FLOAT (261) 37
-_BOOL (262) 38
-_CHAR (263) 39
-_LPAREN (264) 4
-_RPAREN (265) 4
-_LCURLY (266) 4 14
-_RCURLY (267) 4 14
-_COMMA (268) 7
-_DOT (269)
-_SEMICOLON (270) 15 16
-_EQ (271) 23 33
-_ADD_EQ (272) 24
-_SUB_EQ (273) 25
-_MUL_EQ (274) 26
-_DIV_EQ (275) 27
-_ADD (276) 28
-_SUB (277) 29
-_MUL (278) 30
-_DIV (279) 31
-_ID (280) 4 21 32 33 40
-_INT_LITERAL (281) 22
+_NAMESPACE (258) 6
+_CLASS (259) 7
+_INTERNAL (260) 9
+_PRIVATE (261) 10
+_PROTECTED (262) 11
+_PUBLIC (263) 12
+_STATIC (264) 14
+_VAR (265) 52
+_VOID (266) 53
+_INT (267) 54
+_FLOAT (268) 55
+_BOOL (269) 56
+_CHAR (270) 57
+_LPAREN (271) 20
+_RPAREN (272) 20
+_LCURLY (273) 6 7 20 31
+_RCURLY (274) 6 7 20 31
+_COMMA (275) 24
+_DOT (276) 39 60
+_SEMICOLON (277) 21 32 33
+_EQ (278) 41 51
+_ADD_EQ (279) 42
+_SUB_EQ (280) 43
+_MUL_EQ (281) 44
+_DIV_EQ (282) 45
+_ADD (283) 46
+_SUB (284) 47
+_MUL (285) 48
+_DIV (286) 49
+_ID (287) 61
+_INT_LITERAL (288) 40
 
 
 Nonterminals, with rules where they appear
 
-$accept (27)
+$accept (34)
     on left: 0
-root (28)
+root (35)
     on left: 1, on right: 0
-function_decl_list (29)
-    on left: 2 3, on right: 1 3
-function_decl (30)
-    on left: 4, on right: 2 3
-argument_list (31)
-    on left: 5 6 7, on right: 4 7
-argument (32)
-    on left: 8, on right: 6 7
-statement_list (33)
-    on left: 9 10, on right: 4 10 14
-statement (34)
-    on left: 11 12 13, on right: 10
-statement_block (35)
-    on left: 14, on right: 11
-local_decl_stmt (36)
-    on left: 15, on right: 12
-expr_stmt (37)
-    on left: 16, on right: 13
-expr (38)
-    on left: 17 18 19 20, on right: 16 23 24 25 26 27 28 29 30 31 33
-id_expr (39)
-    on left: 21, on right: 17
-num_lit_expr (40)
-    on left: 22, on right: 18
-assign_expr (41)
-    on left: 23 24 25 26 27, on right: 19
-bin_expr (42)
-    on left: 28 29 30 31, on right: 20
-var_declr (43)
-    on left: 32 33, on right: 8 15
-type (44)
-    on left: 34 35 36 37 38 39 40, on right: 4 8 15
+base_decl_list (36)
+    on left: 2 3, on right: 1 3 6
+base_decl (37)
+    on left: 4 5, on right: 3
+namespace_decl (38)
+    on left: 6, on right: 4
+class_decl (39)
+    on left: 7, on right: 5 19
+visibility_mod (40)
+    on left: 8 9 10 11 12, on right: 7 20 21
+static_mod (41)
+    on left: 13 14, on right: 7 20 21
+member_decl_list (42)
+    on left: 15 16, on right: 7 16
+member_decl (43)
+    on left: 17 18 19, on right: 16
+function_decl (44)
+    on left: 20, on right: 17
+field_decl (45)
+    on left: 21, on right: 18
+argument_list (46)
+    on left: 22 23 24, on right: 20 24
+argument (47)
+    on left: 25, on right: 23 24
+statement_list (48)
+    on left: 26 27, on right: 20 27 31
+statement (49)
+    on left: 28 29 30, on right: 27
+statement_block (50)
+    on left: 31, on right: 28
+local_decl_stmt (51)
+    on left: 32, on right: 29
+expr_stmt (52)
+    on left: 33, on right: 30
+expr (53)
+    on left: 34 35 36 37 38, on right: 33 39 41 42 43 44 45 46 47 48
+    49 51
+access_expr (54)
+    on left: 39, on right: 35
+num_lit_expr (55)
+    on left: 40, on right: 36
+assign_expr (56)
+    on left: 41 42 43 44 45, on right: 37
+bin_expr (57)
+    on left: 46 47 48 49, on right: 38
+var_declr (58)
+    on left: 50 51, on right: 25 32
+type (59)
+    on left: 52 53 54 55 56 57 58, on right: 20 21 25 32
+name (60)
+    on left: 59 60, on right: 6 58 60
+simple_name (61)
+    on left: 61, on right: 7 20 21 34 39 50 51 59
 
 
 State 0
 
     0 $accept: . root $end
 
-    _VAR    shift, and go to state 1
-    _VOID   shift, and go to state 2
-    _INT    shift, and go to state 3
-    _FLOAT  shift, and go to state 4
-    _BOOL   shift, and go to state 5
-    _CHAR   shift, and go to state 6
-    _ID     shift, and go to state 7
+    $default  reduce using rule 2 (base_decl_list)
 
-    root                go to state 8
-    function_decl_list  go to state 9
-    function_decl       go to state 10
-    type                go to state 11
+    root            go to state 1
+    base_decl_list  go to state 2
 
 
 State 1
 
-   34 type: _VAR .
+    0 $accept: root . $end
 
-    $default  reduce using rule 34 (type)
+    $end  shift, and go to state 3
 
 
 State 2
 
-   35 type: _VOID .
+    1 root: base_decl_list .
+    3 base_decl_list: base_decl_list . base_decl
 
-    $default  reduce using rule 35 (type)
+    _NAMESPACE  shift, and go to state 4
+    _INTERNAL   shift, and go to state 5
+    _PRIVATE    shift, and go to state 6
+    _PROTECTED  shift, and go to state 7
+    _PUBLIC     shift, and go to state 8
+
+    $end      reduce using rule 1 (root)
+    $default  reduce using rule 8 (visibility_mod)
+
+    base_decl       go to state 9
+    namespace_decl  go to state 10
+    class_decl      go to state 11
+    visibility_mod  go to state 12
 
 
 State 3
-
-   36 type: _INT .
-
-    $default  reduce using rule 36 (type)
-
-
-State 4
-
-   37 type: _FLOAT .
-
-    $default  reduce using rule 37 (type)
-
-
-State 5
-
-   38 type: _BOOL .
-
-    $default  reduce using rule 38 (type)
-
-
-State 6
-
-   39 type: _CHAR .
-
-    $default  reduce using rule 39 (type)
-
-
-State 7
-
-   40 type: _ID .
-
-    $default  reduce using rule 40 (type)
-
-
-State 8
-
-    0 $accept: root . $end
-
-    $end  shift, and go to state 12
-
-
-State 9
-
-    1 root: function_decl_list .
-    3 function_decl_list: function_decl_list . function_decl
-
-    _VAR    shift, and go to state 1
-    _VOID   shift, and go to state 2
-    _INT    shift, and go to state 3
-    _FLOAT  shift, and go to state 4
-    _BOOL   shift, and go to state 5
-    _CHAR   shift, and go to state 6
-    _ID     shift, and go to state 7
-
-    $default  reduce using rule 1 (root)
-
-    function_decl  go to state 13
-    type           go to state 11
-
-
-State 10
-
-    2 function_decl_list: function_decl .
-
-    $default  reduce using rule 2 (function_decl_list)
-
-
-State 11
-
-    4 function_decl: type . _ID _LPAREN argument_list _RPAREN _LCURLY statement_list _RCURLY
-
-    _ID  shift, and go to state 14
-
-
-State 12
 
     0 $accept: root $end .
 
     $default  accept
 
 
+State 4
+
+    6 namespace_decl: _NAMESPACE . name _LCURLY base_decl_list _RCURLY
+
+    _ID  shift, and go to state 13
+
+    name         go to state 14
+    simple_name  go to state 15
+
+
+State 5
+
+    9 visibility_mod: _INTERNAL .
+
+    $default  reduce using rule 9 (visibility_mod)
+
+
+State 6
+
+   10 visibility_mod: _PRIVATE .
+
+    $default  reduce using rule 10 (visibility_mod)
+
+
+State 7
+
+   11 visibility_mod: _PROTECTED .
+
+    $default  reduce using rule 11 (visibility_mod)
+
+
+State 8
+
+   12 visibility_mod: _PUBLIC .
+
+    $default  reduce using rule 12 (visibility_mod)
+
+
+State 9
+
+    3 base_decl_list: base_decl_list base_decl .
+
+    $default  reduce using rule 3 (base_decl_list)
+
+
+State 10
+
+    4 base_decl: namespace_decl .
+
+    $default  reduce using rule 4 (base_decl)
+
+
+State 11
+
+    5 base_decl: class_decl .
+
+    $default  reduce using rule 5 (base_decl)
+
+
+State 12
+
+    7 class_decl: visibility_mod . static_mod _CLASS simple_name _LCURLY member_decl_list _RCURLY
+
+    _STATIC  shift, and go to state 16
+
+    $default  reduce using rule 13 (static_mod)
+
+    static_mod  go to state 17
+
+
 State 13
 
-    3 function_decl_list: function_decl_list function_decl .
+   61 simple_name: _ID .
 
-    $default  reduce using rule 3 (function_decl_list)
+    $default  reduce using rule 61 (simple_name)
 
 
 State 14
 
-    4 function_decl: type _ID . _LPAREN argument_list _RPAREN _LCURLY statement_list _RCURLY
+    6 namespace_decl: _NAMESPACE name . _LCURLY base_decl_list _RCURLY
+   60 name: name . _DOT name
 
-    _LPAREN  shift, and go to state 15
+    _LCURLY  shift, and go to state 18
+    _DOT     shift, and go to state 19
 
 
 State 15
 
-    4 function_decl: type _ID _LPAREN . argument_list _RPAREN _LCURLY statement_list _RCURLY
+   59 name: simple_name .
 
-    _VAR    shift, and go to state 1
-    _VOID   shift, and go to state 2
-    _INT    shift, and go to state 3
-    _FLOAT  shift, and go to state 4
-    _BOOL   shift, and go to state 5
-    _CHAR   shift, and go to state 6
-    _ID     shift, and go to state 7
-
-    $default  reduce using rule 5 (argument_list)
-
-    argument_list  go to state 16
-    argument       go to state 17
-    type           go to state 18
+    $default  reduce using rule 59 (name)
 
 
 State 16
 
-    4 function_decl: type _ID _LPAREN argument_list . _RPAREN _LCURLY statement_list _RCURLY
-    7 argument_list: argument_list . _COMMA argument
+   14 static_mod: _STATIC .
 
-    _RPAREN  shift, and go to state 19
-    _COMMA   shift, and go to state 20
+    $default  reduce using rule 14 (static_mod)
 
 
 State 17
 
-    6 argument_list: argument .
+    7 class_decl: visibility_mod static_mod . _CLASS simple_name _LCURLY member_decl_list _RCURLY
 
-    $default  reduce using rule 6 (argument_list)
+    _CLASS  shift, and go to state 20
 
 
 State 18
 
-    8 argument: type . var_declr
+    6 namespace_decl: _NAMESPACE name _LCURLY . base_decl_list _RCURLY
 
-    _ID  shift, and go to state 21
+    $default  reduce using rule 2 (base_decl_list)
 
-    var_declr  go to state 22
+    base_decl_list  go to state 21
 
 
 State 19
 
-    4 function_decl: type _ID _LPAREN argument_list _RPAREN . _LCURLY statement_list _RCURLY
+   60 name: name _DOT . name
 
-    _LCURLY  shift, and go to state 23
+    _ID  shift, and go to state 13
+
+    name         go to state 22
+    simple_name  go to state 15
 
 
 State 20
 
-    7 argument_list: argument_list _COMMA . argument
+    7 class_decl: visibility_mod static_mod _CLASS . simple_name _LCURLY member_decl_list _RCURLY
 
-    _VAR    shift, and go to state 1
-    _VOID   shift, and go to state 2
-    _INT    shift, and go to state 3
-    _FLOAT  shift, and go to state 4
-    _BOOL   shift, and go to state 5
-    _CHAR   shift, and go to state 6
-    _ID     shift, and go to state 7
+    _ID  shift, and go to state 13
 
-    argument  go to state 24
-    type      go to state 18
+    simple_name  go to state 23
 
 
 State 21
 
-   32 var_declr: _ID .
-   33          | _ID . _EQ expr
+    3 base_decl_list: base_decl_list . base_decl
+    6 namespace_decl: _NAMESPACE name _LCURLY base_decl_list . _RCURLY
 
-    _EQ  shift, and go to state 25
+    _NAMESPACE  shift, and go to state 4
+    _INTERNAL   shift, and go to state 5
+    _PRIVATE    shift, and go to state 6
+    _PROTECTED  shift, and go to state 7
+    _PUBLIC     shift, and go to state 8
+    _RCURLY     shift, and go to state 24
 
-    $default  reduce using rule 32 (var_declr)
+    $default  reduce using rule 8 (visibility_mod)
+
+    base_decl       go to state 9
+    namespace_decl  go to state 10
+    class_decl      go to state 11
+    visibility_mod  go to state 12
 
 
 State 22
 
-    8 argument: type var_declr .
+   60 name: name . _DOT name
+   60     | name _DOT name .
 
-    $default  reduce using rule 8 (argument)
+    $default  reduce using rule 60 (name)
 
 
 State 23
 
-    4 function_decl: type _ID _LPAREN argument_list _RPAREN _LCURLY . statement_list _RCURLY
+    7 class_decl: visibility_mod static_mod _CLASS simple_name . _LCURLY member_decl_list _RCURLY
 
-    $default  reduce using rule 9 (statement_list)
-
-    statement_list  go to state 26
+    _LCURLY  shift, and go to state 25
 
 
 State 24
 
-    7 argument_list: argument_list _COMMA argument .
+    6 namespace_decl: _NAMESPACE name _LCURLY base_decl_list _RCURLY .
 
-    $default  reduce using rule 7 (argument_list)
+    $default  reduce using rule 6 (namespace_decl)
 
 
 State 25
 
-   33 var_declr: _ID _EQ . expr
+    7 class_decl: visibility_mod static_mod _CLASS simple_name _LCURLY . member_decl_list _RCURLY
 
-    _ID           shift, and go to state 27
-    _INT_LITERAL  shift, and go to state 28
+    $default  reduce using rule 15 (member_decl_list)
 
-    expr          go to state 29
-    id_expr       go to state 30
-    num_lit_expr  go to state 31
-    assign_expr   go to state 32
-    bin_expr      go to state 33
+    member_decl_list  go to state 26
 
 
 State 26
 
-    4 function_decl: type _ID _LPAREN argument_list _RPAREN _LCURLY statement_list . _RCURLY
-   10 statement_list: statement_list . statement
+    7 class_decl: visibility_mod static_mod _CLASS simple_name _LCURLY member_decl_list . _RCURLY
+   16 member_decl_list: member_decl_list . member_decl
 
-    _VAR          shift, and go to state 1
-    _VOID         shift, and go to state 2
-    _INT          shift, and go to state 3
-    _FLOAT        shift, and go to state 4
-    _BOOL         shift, and go to state 5
-    _CHAR         shift, and go to state 6
-    _LCURLY       shift, and go to state 34
-    _RCURLY       shift, and go to state 35
-    _ID           shift, and go to state 36
-    _INT_LITERAL  shift, and go to state 28
+    _INTERNAL   shift, and go to state 5
+    _PRIVATE    shift, and go to state 6
+    _PROTECTED  shift, and go to state 7
+    _PUBLIC     shift, and go to state 8
+    _RCURLY     shift, and go to state 27
 
-    statement        go to state 37
-    statement_block  go to state 38
-    local_decl_stmt  go to state 39
-    expr_stmt        go to state 40
-    expr             go to state 41
-    id_expr          go to state 30
-    num_lit_expr     go to state 31
-    assign_expr      go to state 32
-    bin_expr         go to state 33
-    type             go to state 42
+    $default  reduce using rule 8 (visibility_mod)
+
+    class_decl      go to state 28
+    visibility_mod  go to state 29
+    member_decl     go to state 30
+    function_decl   go to state 31
+    field_decl      go to state 32
 
 
 State 27
 
-   21 id_expr: _ID .
+    7 class_decl: visibility_mod static_mod _CLASS simple_name _LCURLY member_decl_list _RCURLY .
 
-    $default  reduce using rule 21 (id_expr)
+    $default  reduce using rule 7 (class_decl)
 
 
 State 28
 
-   22 num_lit_expr: _INT_LITERAL .
+   19 member_decl: class_decl .
 
-    $default  reduce using rule 22 (num_lit_expr)
+    $default  reduce using rule 19 (member_decl)
 
 
 State 29
 
-   23 assign_expr: expr . _EQ expr
-   24            | expr . _ADD_EQ expr
-   25            | expr . _SUB_EQ expr
-   26            | expr . _MUL_EQ expr
-   27            | expr . _DIV_EQ expr
-   28 bin_expr: expr . _ADD expr
-   29         | expr . _SUB expr
-   30         | expr . _MUL expr
-   31         | expr . _DIV expr
-   33 var_declr: _ID _EQ expr .
+    7 class_decl: visibility_mod . static_mod _CLASS simple_name _LCURLY member_decl_list _RCURLY
+   20 function_decl: visibility_mod . static_mod type simple_name _LPAREN argument_list _RPAREN _LCURLY statement_list _RCURLY
+   21 field_decl: visibility_mod . static_mod type simple_name _SEMICOLON
 
-    _EQ      shift, and go to state 43
-    _ADD_EQ  shift, and go to state 44
-    _SUB_EQ  shift, and go to state 45
-    _MUL_EQ  shift, and go to state 46
-    _DIV_EQ  shift, and go to state 47
-    _ADD     shift, and go to state 48
-    _SUB     shift, and go to state 49
-    _MUL     shift, and go to state 50
-    _DIV     shift, and go to state 51
+    _STATIC  shift, and go to state 16
 
-    $default  reduce using rule 33 (var_declr)
+    $default  reduce using rule 13 (static_mod)
+
+    static_mod  go to state 33
 
 
 State 30
 
-   17 expr: id_expr .
+   16 member_decl_list: member_decl_list member_decl .
 
-    $default  reduce using rule 17 (expr)
+    $default  reduce using rule 16 (member_decl_list)
 
 
 State 31
 
-   18 expr: num_lit_expr .
+   17 member_decl: function_decl .
 
-    $default  reduce using rule 18 (expr)
+    $default  reduce using rule 17 (member_decl)
 
 
 State 32
 
-   19 expr: assign_expr .
+   18 member_decl: field_decl .
 
-    $default  reduce using rule 19 (expr)
+    $default  reduce using rule 18 (member_decl)
 
 
 State 33
 
-   20 expr: bin_expr .
+    7 class_decl: visibility_mod static_mod . _CLASS simple_name _LCURLY member_decl_list _RCURLY
+   20 function_decl: visibility_mod static_mod . type simple_name _LPAREN argument_list _RPAREN _LCURLY statement_list _RCURLY
+   21 field_decl: visibility_mod static_mod . type simple_name _SEMICOLON
 
-    $default  reduce using rule 20 (expr)
+    _CLASS  shift, and go to state 20
+    _VAR    shift, and go to state 34
+    _VOID   shift, and go to state 35
+    _INT    shift, and go to state 36
+    _FLOAT  shift, and go to state 37
+    _BOOL   shift, and go to state 38
+    _CHAR   shift, and go to state 39
+    _ID     shift, and go to state 13
+
+    type         go to state 40
+    name         go to state 41
+    simple_name  go to state 15
 
 
 State 34
 
-   14 statement_block: _LCURLY . statement_list _RCURLY
+   52 type: _VAR .
 
-    $default  reduce using rule 9 (statement_list)
-
-    statement_list  go to state 52
+    $default  reduce using rule 52 (type)
 
 
 State 35
 
-    4 function_decl: type _ID _LPAREN argument_list _RPAREN _LCURLY statement_list _RCURLY .
+   53 type: _VOID .
 
-    $default  reduce using rule 4 (function_decl)
+    $default  reduce using rule 53 (type)
 
 
 State 36
 
-   21 id_expr: _ID .
-   40 type: _ID .
+   54 type: _INT .
 
-    _ID       reduce using rule 40 (type)
-    $default  reduce using rule 21 (id_expr)
+    $default  reduce using rule 54 (type)
 
 
 State 37
 
-   10 statement_list: statement_list statement .
+   55 type: _FLOAT .
 
-    $default  reduce using rule 10 (statement_list)
+    $default  reduce using rule 55 (type)
 
 
 State 38
 
-   11 statement: statement_block .
+   56 type: _BOOL .
 
-    $default  reduce using rule 11 (statement)
+    $default  reduce using rule 56 (type)
 
 
 State 39
 
-   12 statement: local_decl_stmt .
+   57 type: _CHAR .
 
-    $default  reduce using rule 12 (statement)
+    $default  reduce using rule 57 (type)
 
 
 State 40
 
-   13 statement: expr_stmt .
+   20 function_decl: visibility_mod static_mod type . simple_name _LPAREN argument_list _RPAREN _LCURLY statement_list _RCURLY
+   21 field_decl: visibility_mod static_mod type . simple_name _SEMICOLON
 
-    $default  reduce using rule 13 (statement)
+    _ID  shift, and go to state 13
+
+    simple_name  go to state 42
 
 
 State 41
 
-   16 expr_stmt: expr . _SEMICOLON
-   23 assign_expr: expr . _EQ expr
-   24            | expr . _ADD_EQ expr
-   25            | expr . _SUB_EQ expr
-   26            | expr . _MUL_EQ expr
-   27            | expr . _DIV_EQ expr
-   28 bin_expr: expr . _ADD expr
-   29         | expr . _SUB expr
-   30         | expr . _MUL expr
-   31         | expr . _DIV expr
+   58 type: name .
+   60 name: name . _DOT name
 
-    _SEMICOLON  shift, and go to state 53
-    _EQ         shift, and go to state 43
-    _ADD_EQ     shift, and go to state 44
-    _SUB_EQ     shift, and go to state 45
-    _MUL_EQ     shift, and go to state 46
-    _DIV_EQ     shift, and go to state 47
-    _ADD        shift, and go to state 48
-    _SUB        shift, and go to state 49
-    _MUL        shift, and go to state 50
-    _DIV        shift, and go to state 51
+    _DOT  shift, and go to state 19
+
+    $default  reduce using rule 58 (type)
 
 
 State 42
 
-   15 local_decl_stmt: type . var_declr _SEMICOLON
+   20 function_decl: visibility_mod static_mod type simple_name . _LPAREN argument_list _RPAREN _LCURLY statement_list _RCURLY
+   21 field_decl: visibility_mod static_mod type simple_name . _SEMICOLON
 
-    _ID  shift, and go to state 21
-
-    var_declr  go to state 54
+    _LPAREN     shift, and go to state 43
+    _SEMICOLON  shift, and go to state 44
 
 
 State 43
 
-   23 assign_expr: expr _EQ . expr
+   20 function_decl: visibility_mod static_mod type simple_name _LPAREN . argument_list _RPAREN _LCURLY statement_list _RCURLY
 
-    _ID           shift, and go to state 27
-    _INT_LITERAL  shift, and go to state 28
+    _VAR    shift, and go to state 34
+    _VOID   shift, and go to state 35
+    _INT    shift, and go to state 36
+    _FLOAT  shift, and go to state 37
+    _BOOL   shift, and go to state 38
+    _CHAR   shift, and go to state 39
+    _ID     shift, and go to state 13
 
-    expr          go to state 55
-    id_expr       go to state 30
-    num_lit_expr  go to state 31
-    assign_expr   go to state 32
-    bin_expr      go to state 33
+    $default  reduce using rule 22 (argument_list)
+
+    argument_list  go to state 45
+    argument       go to state 46
+    type           go to state 47
+    name           go to state 41
+    simple_name    go to state 15
 
 
 State 44
 
-   24 assign_expr: expr _ADD_EQ . expr
+   21 field_decl: visibility_mod static_mod type simple_name _SEMICOLON .
 
-    _ID           shift, and go to state 27
-    _INT_LITERAL  shift, and go to state 28
-
-    expr          go to state 56
-    id_expr       go to state 30
-    num_lit_expr  go to state 31
-    assign_expr   go to state 32
-    bin_expr      go to state 33
+    $default  reduce using rule 21 (field_decl)
 
 
 State 45
 
-   25 assign_expr: expr _SUB_EQ . expr
+   20 function_decl: visibility_mod static_mod type simple_name _LPAREN argument_list . _RPAREN _LCURLY statement_list _RCURLY
+   24 argument_list: argument_list . _COMMA argument
 
-    _ID           shift, and go to state 27
-    _INT_LITERAL  shift, and go to state 28
-
-    expr          go to state 57
-    id_expr       go to state 30
-    num_lit_expr  go to state 31
-    assign_expr   go to state 32
-    bin_expr      go to state 33
+    _RPAREN  shift, and go to state 48
+    _COMMA   shift, and go to state 49
 
 
 State 46
 
-   26 assign_expr: expr _MUL_EQ . expr
+   23 argument_list: argument .
 
-    _ID           shift, and go to state 27
-    _INT_LITERAL  shift, and go to state 28
-
-    expr          go to state 58
-    id_expr       go to state 30
-    num_lit_expr  go to state 31
-    assign_expr   go to state 32
-    bin_expr      go to state 33
+    $default  reduce using rule 23 (argument_list)
 
 
 State 47
 
-   27 assign_expr: expr _DIV_EQ . expr
+   25 argument: type . var_declr
 
-    _ID           shift, and go to state 27
-    _INT_LITERAL  shift, and go to state 28
+    _ID  shift, and go to state 13
 
-    expr          go to state 59
-    id_expr       go to state 30
-    num_lit_expr  go to state 31
-    assign_expr   go to state 32
-    bin_expr      go to state 33
+    var_declr    go to state 50
+    simple_name  go to state 51
 
 
 State 48
 
-   28 bin_expr: expr _ADD . expr
+   20 function_decl: visibility_mod static_mod type simple_name _LPAREN argument_list _RPAREN . _LCURLY statement_list _RCURLY
 
-    _ID           shift, and go to state 27
-    _INT_LITERAL  shift, and go to state 28
-
-    expr          go to state 60
-    id_expr       go to state 30
-    num_lit_expr  go to state 31
-    assign_expr   go to state 32
-    bin_expr      go to state 33
+    _LCURLY  shift, and go to state 52
 
 
 State 49
 
-   29 bin_expr: expr _SUB . expr
+   24 argument_list: argument_list _COMMA . argument
 
-    _ID           shift, and go to state 27
-    _INT_LITERAL  shift, and go to state 28
+    _VAR    shift, and go to state 34
+    _VOID   shift, and go to state 35
+    _INT    shift, and go to state 36
+    _FLOAT  shift, and go to state 37
+    _BOOL   shift, and go to state 38
+    _CHAR   shift, and go to state 39
+    _ID     shift, and go to state 13
 
-    expr          go to state 61
-    id_expr       go to state 30
-    num_lit_expr  go to state 31
-    assign_expr   go to state 32
-    bin_expr      go to state 33
+    argument     go to state 53
+    type         go to state 47
+    name         go to state 41
+    simple_name  go to state 15
 
 
 State 50
 
-   30 bin_expr: expr _MUL . expr
+   25 argument: type var_declr .
 
-    _ID           shift, and go to state 27
-    _INT_LITERAL  shift, and go to state 28
-
-    expr          go to state 62
-    id_expr       go to state 30
-    num_lit_expr  go to state 31
-    assign_expr   go to state 32
-    bin_expr      go to state 33
+    $default  reduce using rule 25 (argument)
 
 
 State 51
 
-   31 bin_expr: expr _DIV . expr
+   50 var_declr: simple_name .
+   51          | simple_name . _EQ expr
 
-    _ID           shift, and go to state 27
-    _INT_LITERAL  shift, and go to state 28
+    _EQ  shift, and go to state 54
 
-    expr          go to state 63
-    id_expr       go to state 30
-    num_lit_expr  go to state 31
-    assign_expr   go to state 32
-    bin_expr      go to state 33
+    $default  reduce using rule 50 (var_declr)
 
 
 State 52
 
-   10 statement_list: statement_list . statement
-   14 statement_block: _LCURLY statement_list . _RCURLY
+   20 function_decl: visibility_mod static_mod type simple_name _LPAREN argument_list _RPAREN _LCURLY . statement_list _RCURLY
 
-    _VAR          shift, and go to state 1
-    _VOID         shift, and go to state 2
-    _INT          shift, and go to state 3
-    _FLOAT        shift, and go to state 4
-    _BOOL         shift, and go to state 5
-    _CHAR         shift, and go to state 6
-    _LCURLY       shift, and go to state 34
-    _RCURLY       shift, and go to state 64
-    _ID           shift, and go to state 36
-    _INT_LITERAL  shift, and go to state 28
+    $default  reduce using rule 26 (statement_list)
 
-    statement        go to state 37
-    statement_block  go to state 38
-    local_decl_stmt  go to state 39
-    expr_stmt        go to state 40
-    expr             go to state 41
-    id_expr          go to state 30
-    num_lit_expr     go to state 31
-    assign_expr      go to state 32
-    bin_expr         go to state 33
-    type             go to state 42
+    statement_list  go to state 55
 
 
 State 53
 
-   16 expr_stmt: expr _SEMICOLON .
+   24 argument_list: argument_list _COMMA argument .
 
-    $default  reduce using rule 16 (expr_stmt)
+    $default  reduce using rule 24 (argument_list)
 
 
 State 54
 
-   15 local_decl_stmt: type var_declr . _SEMICOLON
+   51 var_declr: simple_name _EQ . expr
 
-    _SEMICOLON  shift, and go to state 65
+    _ID           shift, and go to state 13
+    _INT_LITERAL  shift, and go to state 56
+
+    expr          go to state 57
+    access_expr   go to state 58
+    num_lit_expr  go to state 59
+    assign_expr   go to state 60
+    bin_expr      go to state 61
+    simple_name   go to state 62
 
 
 State 55
 
-   23 assign_expr: expr . _EQ expr
-   23            | expr _EQ expr .
-   24            | expr . _ADD_EQ expr
-   25            | expr . _SUB_EQ expr
-   26            | expr . _MUL_EQ expr
-   27            | expr . _DIV_EQ expr
-   28 bin_expr: expr . _ADD expr
-   29         | expr . _SUB expr
-   30         | expr . _MUL expr
-   31         | expr . _DIV expr
+   20 function_decl: visibility_mod static_mod type simple_name _LPAREN argument_list _RPAREN _LCURLY statement_list . _RCURLY
+   27 statement_list: statement_list . statement
 
-    _EQ      shift, and go to state 43
-    _ADD_EQ  shift, and go to state 44
-    _SUB_EQ  shift, and go to state 45
-    _MUL_EQ  shift, and go to state 46
-    _DIV_EQ  shift, and go to state 47
-    _ADD     shift, and go to state 48
-    _SUB     shift, and go to state 49
-    _MUL     shift, and go to state 50
-    _DIV     shift, and go to state 51
+    _VAR          shift, and go to state 34
+    _VOID         shift, and go to state 35
+    _INT          shift, and go to state 36
+    _FLOAT        shift, and go to state 37
+    _BOOL         shift, and go to state 38
+    _CHAR         shift, and go to state 39
+    _LCURLY       shift, and go to state 63
+    _RCURLY       shift, and go to state 64
+    _ID           shift, and go to state 13
+    _INT_LITERAL  shift, and go to state 56
 
-    $default  reduce using rule 23 (assign_expr)
+    statement        go to state 65
+    statement_block  go to state 66
+    local_decl_stmt  go to state 67
+    expr_stmt        go to state 68
+    expr             go to state 69
+    access_expr      go to state 58
+    num_lit_expr     go to state 59
+    assign_expr      go to state 60
+    bin_expr         go to state 61
+    type             go to state 70
+    name             go to state 41
+    simple_name      go to state 71
 
 
 State 56
 
-   23 assign_expr: expr . _EQ expr
-   24            | expr . _ADD_EQ expr
-   24            | expr _ADD_EQ expr .
-   25            | expr . _SUB_EQ expr
-   26            | expr . _MUL_EQ expr
-   27            | expr . _DIV_EQ expr
-   28 bin_expr: expr . _ADD expr
-   29         | expr . _SUB expr
-   30         | expr . _MUL expr
-   31         | expr . _DIV expr
+   40 num_lit_expr: _INT_LITERAL .
 
-    _EQ      shift, and go to state 43
-    _ADD_EQ  shift, and go to state 44
-    _SUB_EQ  shift, and go to state 45
-    _MUL_EQ  shift, and go to state 46
-    _DIV_EQ  shift, and go to state 47
-    _ADD     shift, and go to state 48
-    _SUB     shift, and go to state 49
-    _MUL     shift, and go to state 50
-    _DIV     shift, and go to state 51
-
-    $default  reduce using rule 24 (assign_expr)
+    $default  reduce using rule 40 (num_lit_expr)
 
 
 State 57
 
-   23 assign_expr: expr . _EQ expr
-   24            | expr . _ADD_EQ expr
-   25            | expr . _SUB_EQ expr
-   25            | expr _SUB_EQ expr .
-   26            | expr . _MUL_EQ expr
-   27            | expr . _DIV_EQ expr
-   28 bin_expr: expr . _ADD expr
-   29         | expr . _SUB expr
-   30         | expr . _MUL expr
-   31         | expr . _DIV expr
+   39 access_expr: expr . _DOT simple_name
+   41 assign_expr: expr . _EQ expr
+   42            | expr . _ADD_EQ expr
+   43            | expr . _SUB_EQ expr
+   44            | expr . _MUL_EQ expr
+   45            | expr . _DIV_EQ expr
+   46 bin_expr: expr . _ADD expr
+   47         | expr . _SUB expr
+   48         | expr . _MUL expr
+   49         | expr . _DIV expr
+   51 var_declr: simple_name _EQ expr .
 
-    _EQ      shift, and go to state 43
-    _ADD_EQ  shift, and go to state 44
-    _SUB_EQ  shift, and go to state 45
-    _MUL_EQ  shift, and go to state 46
-    _DIV_EQ  shift, and go to state 47
-    _ADD     shift, and go to state 48
-    _SUB     shift, and go to state 49
-    _MUL     shift, and go to state 50
-    _DIV     shift, and go to state 51
+    _DOT     shift, and go to state 72
+    _EQ      shift, and go to state 73
+    _ADD_EQ  shift, and go to state 74
+    _SUB_EQ  shift, and go to state 75
+    _MUL_EQ  shift, and go to state 76
+    _DIV_EQ  shift, and go to state 77
+    _ADD     shift, and go to state 78
+    _SUB     shift, and go to state 79
+    _MUL     shift, and go to state 80
+    _DIV     shift, and go to state 81
 
-    $default  reduce using rule 25 (assign_expr)
+    $default  reduce using rule 51 (var_declr)
 
 
 State 58
 
-   23 assign_expr: expr . _EQ expr
-   24            | expr . _ADD_EQ expr
-   25            | expr . _SUB_EQ expr
-   26            | expr . _MUL_EQ expr
-   26            | expr _MUL_EQ expr .
-   27            | expr . _DIV_EQ expr
-   28 bin_expr: expr . _ADD expr
-   29         | expr . _SUB expr
-   30         | expr . _MUL expr
-   31         | expr . _DIV expr
+   35 expr: access_expr .
 
-    _EQ      shift, and go to state 43
-    _ADD_EQ  shift, and go to state 44
-    _SUB_EQ  shift, and go to state 45
-    _MUL_EQ  shift, and go to state 46
-    _DIV_EQ  shift, and go to state 47
-    _ADD     shift, and go to state 48
-    _SUB     shift, and go to state 49
-    _MUL     shift, and go to state 50
-    _DIV     shift, and go to state 51
-
-    $default  reduce using rule 26 (assign_expr)
+    $default  reduce using rule 35 (expr)
 
 
 State 59
 
-   23 assign_expr: expr . _EQ expr
-   24            | expr . _ADD_EQ expr
-   25            | expr . _SUB_EQ expr
-   26            | expr . _MUL_EQ expr
-   27            | expr . _DIV_EQ expr
-   27            | expr _DIV_EQ expr .
-   28 bin_expr: expr . _ADD expr
-   29         | expr . _SUB expr
-   30         | expr . _MUL expr
-   31         | expr . _DIV expr
+   36 expr: num_lit_expr .
 
-    _EQ      shift, and go to state 43
-    _ADD_EQ  shift, and go to state 44
-    _SUB_EQ  shift, and go to state 45
-    _MUL_EQ  shift, and go to state 46
-    _DIV_EQ  shift, and go to state 47
-    _ADD     shift, and go to state 48
-    _SUB     shift, and go to state 49
-    _MUL     shift, and go to state 50
-    _DIV     shift, and go to state 51
-
-    $default  reduce using rule 27 (assign_expr)
+    $default  reduce using rule 36 (expr)
 
 
 State 60
 
-   23 assign_expr: expr . _EQ expr
-   24            | expr . _ADD_EQ expr
-   25            | expr . _SUB_EQ expr
-   26            | expr . _MUL_EQ expr
-   27            | expr . _DIV_EQ expr
-   28 bin_expr: expr . _ADD expr
-   28         | expr _ADD expr .
-   29         | expr . _SUB expr
-   30         | expr . _MUL expr
-   31         | expr . _DIV expr
+   37 expr: assign_expr .
 
-    _MUL  shift, and go to state 50
-    _DIV  shift, and go to state 51
-
-    $default  reduce using rule 28 (bin_expr)
+    $default  reduce using rule 37 (expr)
 
 
 State 61
 
-   23 assign_expr: expr . _EQ expr
-   24            | expr . _ADD_EQ expr
-   25            | expr . _SUB_EQ expr
-   26            | expr . _MUL_EQ expr
-   27            | expr . _DIV_EQ expr
-   28 bin_expr: expr . _ADD expr
-   29         | expr . _SUB expr
-   29         | expr _SUB expr .
-   30         | expr . _MUL expr
-   31         | expr . _DIV expr
+   38 expr: bin_expr .
 
-    _MUL  shift, and go to state 50
-    _DIV  shift, and go to state 51
-
-    $default  reduce using rule 29 (bin_expr)
+    $default  reduce using rule 38 (expr)
 
 
 State 62
 
-   23 assign_expr: expr . _EQ expr
-   24            | expr . _ADD_EQ expr
-   25            | expr . _SUB_EQ expr
-   26            | expr . _MUL_EQ expr
-   27            | expr . _DIV_EQ expr
-   28 bin_expr: expr . _ADD expr
-   29         | expr . _SUB expr
-   30         | expr . _MUL expr
-   30         | expr _MUL expr .
-   31         | expr . _DIV expr
+   34 expr: simple_name .
 
-    $default  reduce using rule 30 (bin_expr)
+    $default  reduce using rule 34 (expr)
 
 
 State 63
 
-   23 assign_expr: expr . _EQ expr
-   24            | expr . _ADD_EQ expr
-   25            | expr . _SUB_EQ expr
-   26            | expr . _MUL_EQ expr
-   27            | expr . _DIV_EQ expr
-   28 bin_expr: expr . _ADD expr
-   29         | expr . _SUB expr
-   30         | expr . _MUL expr
-   31         | expr . _DIV expr
-   31         | expr _DIV expr .
+   31 statement_block: _LCURLY . statement_list _RCURLY
 
-    $default  reduce using rule 31 (bin_expr)
+    $default  reduce using rule 26 (statement_list)
+
+    statement_list  go to state 82
 
 
 State 64
 
-   14 statement_block: _LCURLY statement_list _RCURLY .
+   20 function_decl: visibility_mod static_mod type simple_name _LPAREN argument_list _RPAREN _LCURLY statement_list _RCURLY .
 
-    $default  reduce using rule 14 (statement_block)
+    $default  reduce using rule 20 (function_decl)
 
 
 State 65
 
-   15 local_decl_stmt: type var_declr _SEMICOLON .
+   27 statement_list: statement_list statement .
 
-    $default  reduce using rule 15 (local_decl_stmt)
+    $default  reduce using rule 27 (statement_list)
+
+
+State 66
+
+   28 statement: statement_block .
+
+    $default  reduce using rule 28 (statement)
+
+
+State 67
+
+   29 statement: local_decl_stmt .
+
+    $default  reduce using rule 29 (statement)
+
+
+State 68
+
+   30 statement: expr_stmt .
+
+    $default  reduce using rule 30 (statement)
+
+
+State 69
+
+   33 expr_stmt: expr . _SEMICOLON
+   39 access_expr: expr . _DOT simple_name
+   41 assign_expr: expr . _EQ expr
+   42            | expr . _ADD_EQ expr
+   43            | expr . _SUB_EQ expr
+   44            | expr . _MUL_EQ expr
+   45            | expr . _DIV_EQ expr
+   46 bin_expr: expr . _ADD expr
+   47         | expr . _SUB expr
+   48         | expr . _MUL expr
+   49         | expr . _DIV expr
+
+    _DOT        shift, and go to state 72
+    _SEMICOLON  shift, and go to state 83
+    _EQ         shift, and go to state 73
+    _ADD_EQ     shift, and go to state 74
+    _SUB_EQ     shift, and go to state 75
+    _MUL_EQ     shift, and go to state 76
+    _DIV_EQ     shift, and go to state 77
+    _ADD        shift, and go to state 78
+    _SUB        shift, and go to state 79
+    _MUL        shift, and go to state 80
+    _DIV        shift, and go to state 81
+
+
+State 70
+
+   32 local_decl_stmt: type . var_declr _SEMICOLON
+
+    _ID  shift, and go to state 13
+
+    var_declr    go to state 84
+    simple_name  go to state 51
+
+
+State 71
+
+   34 expr: simple_name .
+   59 name: simple_name .
+
+    _DOT      reduce using rule 34 (expr)
+    _DOT      [reduce using rule 59 (name)]
+    _ID       reduce using rule 59 (name)
+    $default  reduce using rule 34 (expr)
+
+
+State 72
+
+   39 access_expr: expr _DOT . simple_name
+
+    _ID  shift, and go to state 13
+
+    simple_name  go to state 85
+
+
+State 73
+
+   41 assign_expr: expr _EQ . expr
+
+    _ID           shift, and go to state 13
+    _INT_LITERAL  shift, and go to state 56
+
+    expr          go to state 86
+    access_expr   go to state 58
+    num_lit_expr  go to state 59
+    assign_expr   go to state 60
+    bin_expr      go to state 61
+    simple_name   go to state 62
+
+
+State 74
+
+   42 assign_expr: expr _ADD_EQ . expr
+
+    _ID           shift, and go to state 13
+    _INT_LITERAL  shift, and go to state 56
+
+    expr          go to state 87
+    access_expr   go to state 58
+    num_lit_expr  go to state 59
+    assign_expr   go to state 60
+    bin_expr      go to state 61
+    simple_name   go to state 62
+
+
+State 75
+
+   43 assign_expr: expr _SUB_EQ . expr
+
+    _ID           shift, and go to state 13
+    _INT_LITERAL  shift, and go to state 56
+
+    expr          go to state 88
+    access_expr   go to state 58
+    num_lit_expr  go to state 59
+    assign_expr   go to state 60
+    bin_expr      go to state 61
+    simple_name   go to state 62
+
+
+State 76
+
+   44 assign_expr: expr _MUL_EQ . expr
+
+    _ID           shift, and go to state 13
+    _INT_LITERAL  shift, and go to state 56
+
+    expr          go to state 89
+    access_expr   go to state 58
+    num_lit_expr  go to state 59
+    assign_expr   go to state 60
+    bin_expr      go to state 61
+    simple_name   go to state 62
+
+
+State 77
+
+   45 assign_expr: expr _DIV_EQ . expr
+
+    _ID           shift, and go to state 13
+    _INT_LITERAL  shift, and go to state 56
+
+    expr          go to state 90
+    access_expr   go to state 58
+    num_lit_expr  go to state 59
+    assign_expr   go to state 60
+    bin_expr      go to state 61
+    simple_name   go to state 62
+
+
+State 78
+
+   46 bin_expr: expr _ADD . expr
+
+    _ID           shift, and go to state 13
+    _INT_LITERAL  shift, and go to state 56
+
+    expr          go to state 91
+    access_expr   go to state 58
+    num_lit_expr  go to state 59
+    assign_expr   go to state 60
+    bin_expr      go to state 61
+    simple_name   go to state 62
+
+
+State 79
+
+   47 bin_expr: expr _SUB . expr
+
+    _ID           shift, and go to state 13
+    _INT_LITERAL  shift, and go to state 56
+
+    expr          go to state 92
+    access_expr   go to state 58
+    num_lit_expr  go to state 59
+    assign_expr   go to state 60
+    bin_expr      go to state 61
+    simple_name   go to state 62
+
+
+State 80
+
+   48 bin_expr: expr _MUL . expr
+
+    _ID           shift, and go to state 13
+    _INT_LITERAL  shift, and go to state 56
+
+    expr          go to state 93
+    access_expr   go to state 58
+    num_lit_expr  go to state 59
+    assign_expr   go to state 60
+    bin_expr      go to state 61
+    simple_name   go to state 62
+
+
+State 81
+
+   49 bin_expr: expr _DIV . expr
+
+    _ID           shift, and go to state 13
+    _INT_LITERAL  shift, and go to state 56
+
+    expr          go to state 94
+    access_expr   go to state 58
+    num_lit_expr  go to state 59
+    assign_expr   go to state 60
+    bin_expr      go to state 61
+    simple_name   go to state 62
+
+
+State 82
+
+   27 statement_list: statement_list . statement
+   31 statement_block: _LCURLY statement_list . _RCURLY
+
+    _VAR          shift, and go to state 34
+    _VOID         shift, and go to state 35
+    _INT          shift, and go to state 36
+    _FLOAT        shift, and go to state 37
+    _BOOL         shift, and go to state 38
+    _CHAR         shift, and go to state 39
+    _LCURLY       shift, and go to state 63
+    _RCURLY       shift, and go to state 95
+    _ID           shift, and go to state 13
+    _INT_LITERAL  shift, and go to state 56
+
+    statement        go to state 65
+    statement_block  go to state 66
+    local_decl_stmt  go to state 67
+    expr_stmt        go to state 68
+    expr             go to state 69
+    access_expr      go to state 58
+    num_lit_expr     go to state 59
+    assign_expr      go to state 60
+    bin_expr         go to state 61
+    type             go to state 70
+    name             go to state 41
+    simple_name      go to state 71
+
+
+State 83
+
+   33 expr_stmt: expr _SEMICOLON .
+
+    $default  reduce using rule 33 (expr_stmt)
+
+
+State 84
+
+   32 local_decl_stmt: type var_declr . _SEMICOLON
+
+    _SEMICOLON  shift, and go to state 96
+
+
+State 85
+
+   39 access_expr: expr _DOT simple_name .
+
+    $default  reduce using rule 39 (access_expr)
+
+
+State 86
+
+   39 access_expr: expr . _DOT simple_name
+   41 assign_expr: expr . _EQ expr
+   41            | expr _EQ expr .
+   42            | expr . _ADD_EQ expr
+   43            | expr . _SUB_EQ expr
+   44            | expr . _MUL_EQ expr
+   45            | expr . _DIV_EQ expr
+   46 bin_expr: expr . _ADD expr
+   47         | expr . _SUB expr
+   48         | expr . _MUL expr
+   49         | expr . _DIV expr
+
+    _EQ      shift, and go to state 73
+    _ADD_EQ  shift, and go to state 74
+    _SUB_EQ  shift, and go to state 75
+    _MUL_EQ  shift, and go to state 76
+    _DIV_EQ  shift, and go to state 77
+    _ADD     shift, and go to state 78
+    _SUB     shift, and go to state 79
+    _MUL     shift, and go to state 80
+    _DIV     shift, and go to state 81
+
+    $default  reduce using rule 41 (assign_expr)
+
+
+State 87
+
+   39 access_expr: expr . _DOT simple_name
+   41 assign_expr: expr . _EQ expr
+   42            | expr . _ADD_EQ expr
+   42            | expr _ADD_EQ expr .
+   43            | expr . _SUB_EQ expr
+   44            | expr . _MUL_EQ expr
+   45            | expr . _DIV_EQ expr
+   46 bin_expr: expr . _ADD expr
+   47         | expr . _SUB expr
+   48         | expr . _MUL expr
+   49         | expr . _DIV expr
+
+    _EQ      shift, and go to state 73
+    _ADD_EQ  shift, and go to state 74
+    _SUB_EQ  shift, and go to state 75
+    _MUL_EQ  shift, and go to state 76
+    _DIV_EQ  shift, and go to state 77
+    _ADD     shift, and go to state 78
+    _SUB     shift, and go to state 79
+    _MUL     shift, and go to state 80
+    _DIV     shift, and go to state 81
+
+    $default  reduce using rule 42 (assign_expr)
+
+
+State 88
+
+   39 access_expr: expr . _DOT simple_name
+   41 assign_expr: expr . _EQ expr
+   42            | expr . _ADD_EQ expr
+   43            | expr . _SUB_EQ expr
+   43            | expr _SUB_EQ expr .
+   44            | expr . _MUL_EQ expr
+   45            | expr . _DIV_EQ expr
+   46 bin_expr: expr . _ADD expr
+   47         | expr . _SUB expr
+   48         | expr . _MUL expr
+   49         | expr . _DIV expr
+
+    _EQ      shift, and go to state 73
+    _ADD_EQ  shift, and go to state 74
+    _SUB_EQ  shift, and go to state 75
+    _MUL_EQ  shift, and go to state 76
+    _DIV_EQ  shift, and go to state 77
+    _ADD     shift, and go to state 78
+    _SUB     shift, and go to state 79
+    _MUL     shift, and go to state 80
+    _DIV     shift, and go to state 81
+
+    $default  reduce using rule 43 (assign_expr)
+
+
+State 89
+
+   39 access_expr: expr . _DOT simple_name
+   41 assign_expr: expr . _EQ expr
+   42            | expr . _ADD_EQ expr
+   43            | expr . _SUB_EQ expr
+   44            | expr . _MUL_EQ expr
+   44            | expr _MUL_EQ expr .
+   45            | expr . _DIV_EQ expr
+   46 bin_expr: expr . _ADD expr
+   47         | expr . _SUB expr
+   48         | expr . _MUL expr
+   49         | expr . _DIV expr
+
+    _EQ      shift, and go to state 73
+    _ADD_EQ  shift, and go to state 74
+    _SUB_EQ  shift, and go to state 75
+    _MUL_EQ  shift, and go to state 76
+    _DIV_EQ  shift, and go to state 77
+    _ADD     shift, and go to state 78
+    _SUB     shift, and go to state 79
+    _MUL     shift, and go to state 80
+    _DIV     shift, and go to state 81
+
+    $default  reduce using rule 44 (assign_expr)
+
+
+State 90
+
+   39 access_expr: expr . _DOT simple_name
+   41 assign_expr: expr . _EQ expr
+   42            | expr . _ADD_EQ expr
+   43            | expr . _SUB_EQ expr
+   44            | expr . _MUL_EQ expr
+   45            | expr . _DIV_EQ expr
+   45            | expr _DIV_EQ expr .
+   46 bin_expr: expr . _ADD expr
+   47         | expr . _SUB expr
+   48         | expr . _MUL expr
+   49         | expr . _DIV expr
+
+    _EQ      shift, and go to state 73
+    _ADD_EQ  shift, and go to state 74
+    _SUB_EQ  shift, and go to state 75
+    _MUL_EQ  shift, and go to state 76
+    _DIV_EQ  shift, and go to state 77
+    _ADD     shift, and go to state 78
+    _SUB     shift, and go to state 79
+    _MUL     shift, and go to state 80
+    _DIV     shift, and go to state 81
+
+    $default  reduce using rule 45 (assign_expr)
+
+
+State 91
+
+   39 access_expr: expr . _DOT simple_name
+   41 assign_expr: expr . _EQ expr
+   42            | expr . _ADD_EQ expr
+   43            | expr . _SUB_EQ expr
+   44            | expr . _MUL_EQ expr
+   45            | expr . _DIV_EQ expr
+   46 bin_expr: expr . _ADD expr
+   46         | expr _ADD expr .
+   47         | expr . _SUB expr
+   48         | expr . _MUL expr
+   49         | expr . _DIV expr
+
+    _MUL  shift, and go to state 80
+    _DIV  shift, and go to state 81
+
+    $default  reduce using rule 46 (bin_expr)
+
+
+State 92
+
+   39 access_expr: expr . _DOT simple_name
+   41 assign_expr: expr . _EQ expr
+   42            | expr . _ADD_EQ expr
+   43            | expr . _SUB_EQ expr
+   44            | expr . _MUL_EQ expr
+   45            | expr . _DIV_EQ expr
+   46 bin_expr: expr . _ADD expr
+   47         | expr . _SUB expr
+   47         | expr _SUB expr .
+   48         | expr . _MUL expr
+   49         | expr . _DIV expr
+
+    _MUL  shift, and go to state 80
+    _DIV  shift, and go to state 81
+
+    $default  reduce using rule 47 (bin_expr)
+
+
+State 93
+
+   39 access_expr: expr . _DOT simple_name
+   41 assign_expr: expr . _EQ expr
+   42            | expr . _ADD_EQ expr
+   43            | expr . _SUB_EQ expr
+   44            | expr . _MUL_EQ expr
+   45            | expr . _DIV_EQ expr
+   46 bin_expr: expr . _ADD expr
+   47         | expr . _SUB expr
+   48         | expr . _MUL expr
+   48         | expr _MUL expr .
+   49         | expr . _DIV expr
+
+    $default  reduce using rule 48 (bin_expr)
+
+
+State 94
+
+   39 access_expr: expr . _DOT simple_name
+   41 assign_expr: expr . _EQ expr
+   42            | expr . _ADD_EQ expr
+   43            | expr . _SUB_EQ expr
+   44            | expr . _MUL_EQ expr
+   45            | expr . _DIV_EQ expr
+   46 bin_expr: expr . _ADD expr
+   47         | expr . _SUB expr
+   48         | expr . _MUL expr
+   49         | expr . _DIV expr
+   49         | expr _DIV expr .
+
+    $default  reduce using rule 49 (bin_expr)
+
+
+State 95
+
+   31 statement_block: _LCURLY statement_list _RCURLY .
+
+    $default  reduce using rule 31 (statement_block)
+
+
+State 96
+
+   32 local_decl_stmt: type var_declr _SEMICOLON .
+
+    $default  reduce using rule 32 (local_decl_stmt)

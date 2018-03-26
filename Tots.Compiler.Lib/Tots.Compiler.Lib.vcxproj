@@ -22,17 +22,20 @@
     <ClCompile Include="ArgumentSyntax.cpp" />
     <ClCompile Include="AssignmentExpression.cpp" />
     <ClCompile Include="BinaryOperatorExpression.cpp" />
+    <ClCompile Include="ClassDeclaration.cpp" />
+    <ClCompile Include="DeclarationBuilder.cpp" />
     <ClCompile Include="ExpressionDefinedType.cpp" />
     <ClCompile Include="ExpressionStatement.cpp" />
-    <ClCompile Include="FunctionDeclarationSyntax.cpp" />
-    <ClCompile Include="IdentifierExpression.cpp" />
+    <ClCompile Include="FieldDeclaration.cpp" />
+    <ClCompile Include="FunctionDeclaration.cpp" />
     <ClCompile Include="IdentifierNameSyntax.cpp" />
     <ClCompile Include="LocalDeclarationStatement.cpp" />
+    <ClCompile Include="MemberAccessExpression.cpp" />
+    <ClCompile Include="NamespaceDeclaration.cpp" />
     <ClCompile Include="NumericLiteralExpression.cpp" />
     <ClCompile Include="OperatorAssignExpression.cpp" />
     <ClCompile Include="PredefinedType.cpp" />
     <ClCompile Include="QualifiedNameSyntax.cpp" />
-    <ClCompile Include="QualifiedNameSyntax.h" />
     <ClCompile Include="StatementBlock.cpp" />
     <ClCompile Include="StaticModifierSyntax.cpp" />
     <ClCompile Include="SymbolTable.cpp" />
@@ -50,25 +53,33 @@
   <ItemGroup>
     <ClInclude Include="ArgumentSyntax.h" />
     <ClInclude Include="AssignmentExpression.h" />
+    <ClInclude Include="DeclarationBuilder.h" />
+    <ClInclude Include="TypeDeclarationDefs.h" />
+    <ClInclude Include="BaseTypeDeclaration.h" />
     <ClInclude Include="BinaryOperatorExpression.h" />
+    <ClInclude Include="ClassDeclaration.h" />
     <ClInclude Include="ExpressionDefinedType.h" />
     <ClInclude Include="ExpressionStatement.h" />
     <ClInclude Include="ExpressionSyntax.h" />
     <ClInclude Include="ExpressionSyntaxDefs.h" />
-    <ClInclude Include="FunctionDeclarationSyntax.h" />
+    <ClInclude Include="FieldDeclaration.h" />
+    <ClInclude Include="FunctionDeclaration.h" />
     <ClInclude Include="FunctionDefBuilder.h" />
-    <ClInclude Include="IdentifierExpression.h" />
     <ClInclude Include="IdentifierNameSyntax.h" />
     <ClInclude Include="Keywords.h" />
     <ClInclude Include="LiteralSyntaxDefs.h" />
     <ClInclude Include="LocalDeclarationStatement.h" />
+    <ClInclude Include="MemberAccessExpression.h" />
+    <ClInclude Include="MemberDeclarationDefs.h" />
+    <ClInclude Include="MemberDeclarationSyntax.h" />
     <ClInclude Include="ModuleBuilder.h" />
-    <ClInclude Include="NamespaceDeclarationSyntax.h" />
+    <ClInclude Include="NamespaceDeclaration.h" />
     <ClInclude Include="NameSyntax.h" />
     <ClInclude Include="NameSyntaxDefs.h" />
     <ClInclude Include="NumericLiteralExpression.h" />
     <ClInclude Include="OperatorAssignExpression.h" />
     <ClInclude Include="Operators.h" />
+    <ClInclude Include="QualifiedNameSyntax.h" />
     <ClInclude Include="SimpleNameSyntax.h" />
     <ClInclude Include="StaticModifierSyntax.h" />
     <ClInclude Include="PredefinedType.h" />
@@ -88,6 +99,7 @@
     <ClInclude Include="TotsScanner.h" />
     <ClInclude Include="TypeSyntax.h" />
     <ClInclude Include="TypeSyntaxDefs.h" />
+    <ClInclude Include="TypeVisibility.h" />
     <ClInclude Include="VariableDeclaratorSyntax.h" />
     <ClInclude Include="VisibilityModifierSyntax.h" />
     <ClInclude Include="VoidType.h" />
@@ -185,7 +197,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\User\Source\Repos\TotsRunner\Tots.Core.Lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\User\Source\Repos\TotsRunner\Flex.Dist;C:\Users\User\Source\Repos\TotsRunner\Tots.Core.Lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -194,7 +206,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>

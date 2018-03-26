@@ -1,19 +1,12 @@
 #pragma once
 
 #include "SyntaxNode.h"
-
-enum TypeVisibility
-{
-	Internal,
-	Private,
-	Protected,
-	Public
-};
+#include "TypeVisibility.h"
 
 class VisibilityModifierSyntax : public SyntaxNode
 {
 public:
-	TypeVisibility visibility;
+	Tots::Language::TypeVisibility visibility;
 
-	VisibilityModifierSyntax(TypeVisibility);
+	VisibilityModifierSyntax(Tots::Language::TypeVisibility);
 };

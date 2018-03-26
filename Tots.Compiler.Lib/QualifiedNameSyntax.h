@@ -6,7 +6,9 @@ class QualifiedNameSyntax : public NameSyntax
 {
 public:
 	NameSyntax * left;
-	SimpleNameSyntax * right;
+	NameSyntax * right;
 
-	QualifiedNameSyntax(NameSyntax *, SimpleNameSyntax *);
+	QualifiedNameSyntax(NameSyntax *, NameSyntax *);
+
+	std::string to_string();
 };

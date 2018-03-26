@@ -2,5 +2,5 @@
 
 #include "AssignmentExpression.h"
 #include "BinaryOperatorExpression.h"
-#include "IdentifierExpression.h"
+#include "MemberAccessExpression.h"
 #include "OperatorAssignExpression.h"

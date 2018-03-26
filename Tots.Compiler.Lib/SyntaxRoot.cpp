@@ -1,7 +1,7 @@
 #include "SyntaxRoot.h"
 
-SyntaxRoot::SyntaxRoot(std::vector<FunctionDeclarationSyntax*>* functions)
+SyntaxRoot::SyntaxRoot(std::vector<MemberDeclarationSyntax*>* d)
 {
 	kind = SyntaxKind::kSyntaxRoot;
-	this->functions = functions;
+	this->declarations = d;
 }

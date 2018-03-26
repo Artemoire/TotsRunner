@@ -2,12 +2,12 @@
 
 #include <vector>
 #include "SyntaxNode.h"
-#include "FunctionDeclarationSyntax.h"
+#include "MemberDeclarationSyntax.h"
 
 class SyntaxRoot : public SyntaxNode
 {
 public:
-	std::vector<FunctionDeclarationSyntax*>* functions;
+	std::vector<MemberDeclarationSyntax*>* declarations;
 
-	SyntaxRoot(std::vector<FunctionDeclarationSyntax*>* functions);
+	SyntaxRoot(std::vector<MemberDeclarationSyntax*>*);
 };

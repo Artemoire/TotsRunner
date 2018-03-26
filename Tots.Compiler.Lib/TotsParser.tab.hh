@@ -46,6 +46,14 @@
 
 	#include "SyntaxRoot.h"  
 	#include "VariableDeclaratorSyntax.h"
+	#include "MemberDeclarationSyntax.h"
+		
+	#include "VisibilityModifierSyntax.h"
+	#include "StaticModifierSyntax.h"
+
+	#include "ArgumentSyntax.h"
+	#include "StatementSyntax.h"
+
 	#include "SyntaxError.h"
 
 	namespace Tots
@@ -73,7 +81,7 @@
 # endif
 
 
-#line 77 "TotsParser.tab.hh" // lalr1.cc:377
+#line 85 "TotsParser.tab.hh" // lalr1.cc:377
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -150,7 +158,7 @@
 
 #line 4 "TotsParser.yy" // lalr1.cc:377
 namespace Tots { namespace Language { namespace Syntax { namespace Parser {
-#line 154 "TotsParser.tab.hh" // lalr1.cc:377
+#line 162 "TotsParser.tab.hh" // lalr1.cc:377
 
 
 
@@ -321,44 +329,62 @@ namespace Tots { namespace Language { namespace Syntax { namespace Parser {
       char dummy1[sizeof(ArgumentSyntax*)];
 
       // expr
-      // id_expr
+      // access_expr
       // num_lit_expr
       // assign_expr
       // bin_expr
       char dummy2[sizeof(ExpressionSyntax*)];
 
+      // base_decl
+      // namespace_decl
+      // class_decl
+      // member_decl
       // function_decl
-      char dummy3[sizeof(FunctionDeclarationSyntax*)];
+      // field_decl
+      char dummy3[sizeof(MemberDeclarationSyntax*)];
+
+      // name
+      char dummy4[sizeof(NameSyntax*)];
+
+      // simple_name
+      char dummy5[sizeof(SimpleNameSyntax*)];
 
       // statement
       // statement_block
       // local_decl_stmt
       // expr_stmt
-      char dummy4[sizeof(StatementSyntax*)];
+      char dummy6[sizeof(StatementSyntax*)];
+
+      // static_mod
+      char dummy7[sizeof(StaticModifierSyntax*)];
 
       // root
-      char dummy5[sizeof(SyntaxRoot*)];
+      char dummy8[sizeof(SyntaxRoot*)];
 
       // type
-      char dummy6[sizeof(TypeSyntax*)];
+      char dummy9[sizeof(TypeSyntax*)];
 
       // var_declr
-      char dummy7[sizeof(VariableDeclaratorSyntax*)];
+      char dummy10[sizeof(VariableDeclaratorSyntax*)];
+
+      // visibility_mod
+      char dummy11[sizeof(VisibilityModifierSyntax*)];
 
       // _ID
-      char dummy8[sizeof(char*)];
+      char dummy12[sizeof(std::string)];
 
       // argument_list
-      char dummy9[sizeof(std::vector<ArgumentSyntax*>*)];
+      char dummy13[sizeof(std::vector<ArgumentSyntax*>*)];
 
-      // function_decl_list
-      char dummy10[sizeof(std::vector<FunctionDeclarationSyntax*>*)];
+      // base_decl_list
+      // member_decl_list
+      char dummy14[sizeof(std::vector<MemberDeclarationSyntax*>*)];
 
       // statement_list
-      char dummy11[sizeof(std::vector<StatementSyntax*>*)];
+      char dummy15[sizeof(std::vector<StatementSyntax*>*)];
 
       // _INT_LITERAL
-      char dummy12[sizeof(unsigned long)];
+      char dummy16[sizeof(unsigned long)];
 };
 
     /// Symbol semantic values.
@@ -378,30 +404,37 @@ namespace Tots { namespace Language { namespace Syntax { namespace Parser {
     {
       enum yytokentype
       {
-        _VAR = 258,
-        _VOID = 259,
-        _INT = 260,
-        _FLOAT = 261,
-        _BOOL = 262,
-        _CHAR = 263,
-        _LPAREN = 264,
-        _RPAREN = 265,
-        _LCURLY = 266,
-        _RCURLY = 267,
-        _COMMA = 268,
-        _DOT = 269,
-        _SEMICOLON = 270,
-        _EQ = 271,
-        _ADD_EQ = 272,
-        _SUB_EQ = 273,
-        _MUL_EQ = 274,
-        _DIV_EQ = 275,
-        _ADD = 276,
-        _SUB = 277,
-        _MUL = 278,
-        _DIV = 279,
-        _ID = 280,
-        _INT_LITERAL = 281
+        _NAMESPACE = 258,
+        _CLASS = 259,
+        _INTERNAL = 260,
+        _PRIVATE = 261,
+        _PROTECTED = 262,
+        _PUBLIC = 263,
+        _STATIC = 264,
+        _VAR = 265,
+        _VOID = 266,
+        _INT = 267,
+        _FLOAT = 268,
+        _BOOL = 269,
+        _CHAR = 270,
+        _LPAREN = 271,
+        _RPAREN = 272,
+        _LCURLY = 273,
+        _RCURLY = 274,
+        _COMMA = 275,
+        _DOT = 276,
+        _SEMICOLON = 277,
+        _EQ = 278,
+        _ADD_EQ = 279,
+        _SUB_EQ = 280,
+        _MUL_EQ = 281,
+        _DIV_EQ = 282,
+        _ADD = 283,
+        _SUB = 284,
+        _MUL = 285,
+        _DIV = 286,
+        _ID = 287,
+        _INT_LITERAL = 288
       };
     };
 
@@ -443,9 +476,15 @@ namespace Tots { namespace Language { namespace Syntax { namespace Parser {
 
   basic_symbol (typename Base::kind_type t, const ExpressionSyntax* v);
 
-  basic_symbol (typename Base::kind_type t, const FunctionDeclarationSyntax* v);
+  basic_symbol (typename Base::kind_type t, const MemberDeclarationSyntax* v);
+
+  basic_symbol (typename Base::kind_type t, const NameSyntax* v);
+
+  basic_symbol (typename Base::kind_type t, const SimpleNameSyntax* v);
 
   basic_symbol (typename Base::kind_type t, const StatementSyntax* v);
+
+  basic_symbol (typename Base::kind_type t, const StaticModifierSyntax* v);
 
   basic_symbol (typename Base::kind_type t, const SyntaxRoot* v);
 
@@ -453,11 +492,13 @@ namespace Tots { namespace Language { namespace Syntax { namespace Parser {
 
   basic_symbol (typename Base::kind_type t, const VariableDeclaratorSyntax* v);
 
-  basic_symbol (typename Base::kind_type t, const char* v);
+  basic_symbol (typename Base::kind_type t, const VisibilityModifierSyntax* v);
+
+  basic_symbol (typename Base::kind_type t, const std::string v);
 
   basic_symbol (typename Base::kind_type t, const std::vector<ArgumentSyntax*>* v);
 
-  basic_symbol (typename Base::kind_type t, const std::vector<FunctionDeclarationSyntax*>* v);
+  basic_symbol (typename Base::kind_type t, const std::vector<MemberDeclarationSyntax*>* v);
 
   basic_symbol (typename Base::kind_type t, const std::vector<StatementSyntax*>* v);
 
@@ -526,6 +567,34 @@ namespace Tots { namespace Language { namespace Syntax { namespace Parser {
     typedef basic_symbol<by_type> symbol_type;
 
     // Symbol constructors declarations.
+    static inline
+    symbol_type
+    make__NAMESPACE ();
+
+    static inline
+    symbol_type
+    make__CLASS ();
+
+    static inline
+    symbol_type
+    make__INTERNAL ();
+
+    static inline
+    symbol_type
+    make__PRIVATE ();
+
+    static inline
+    symbol_type
+    make__PROTECTED ();
+
+    static inline
+    symbol_type
+    make__PUBLIC ();
+
+    static inline
+    symbol_type
+    make__STATIC ();
+
     static inline
     symbol_type
     make__VAR ();
@@ -616,7 +685,7 @@ namespace Tots { namespace Language { namespace Syntax { namespace Parser {
 
     static inline
     symbol_type
-    make__ID (const char*& v);
+    make__ID (const std::string& v);
 
     static inline
     symbol_type
@@ -724,7 +793,7 @@ namespace Tots { namespace Language { namespace Syntax { namespace Parser {
     static const char* const yytname_[];
 
   // YYRLINE[YYN] -- Source line where rule number YYN was defined.
-  static const unsigned char yyrline_[];
+  static const unsigned short int yyrline_[];
     /// Report on the debug stream that the rule \a r is going to be reduced.
     virtual void yy_reduce_print_ (int r);
     /// Print the state stack on the debug stream.
@@ -823,12 +892,12 @@ namespace Tots { namespace Language { namespace Syntax { namespace Parser {
     enum
     {
       yyeof_ = 0,
-      yylast_ = 85,     ///< Last index in yytable_.
-      yynnts_ = 18,  ///< Number of nonterminal symbols.
-      yyfinal_ = 12, ///< Termination state number.
+      yylast_ = 150,     ///< Last index in yytable_.
+      yynnts_ = 28,  ///< Number of nonterminal symbols.
+      yyfinal_ = 3, ///< Termination state number.
       yyterror_ = 1,
       yyerrcode_ = 256,
-      yyntokens_ = 27  ///< Number of tokens.
+      yyntokens_ = 34  ///< Number of tokens.
     };
 
 
@@ -840,7 +909,7 @@ namespace Tots { namespace Language { namespace Syntax { namespace Parser {
 
 #line 4 "TotsParser.yy" // lalr1.cc:377
 } } } } // Tots::Language::Syntax::Parser
-#line 844 "TotsParser.tab.hh" // lalr1.cc:377
+#line 913 "TotsParser.tab.hh" // lalr1.cc:377
 
 
 

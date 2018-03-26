@@ -9,6 +9,14 @@
 
 	#include "SyntaxRoot.h"  
 	#include "VariableDeclaratorSyntax.h"
+	#include "MemberDeclarationSyntax.h"
+		
+	#include "VisibilityModifierSyntax.h"
+	#include "StaticModifierSyntax.h"
+
+	#include "ArgumentSyntax.h"
+	#include "StatementSyntax.h"
+
 	#include "SyntaxError.h"
 
 	namespace Tots
@@ -57,6 +65,9 @@
 	#include "TypeSyntaxDefs.h"
 	#include "LiteralSyntaxDefs.h"
 	#include "NameSyntaxDefs.h"
+	#include "MemberDeclarationDefs.h"
+	#include "TypeDeclarationDefs.h"
+	#include "ArgumentSyntax.h"
 
 #undef yylex
 #define yylex scanner.yylex
@@ -66,6 +77,16 @@
 %define parse.assert
 
 %start root
+
+%token _NAMESPACE
+%token _CLASS
+
+%token _INTERNAL
+%token _PRIVATE
+%token _PROTECTED
+%token _PUBLIC
+
+%token _STATIC
 
 %token _VAR
 %token _VOID
@@ -87,8 +108,24 @@
 %token <unsigned long> _INT_LITERAL
 
 %type <SyntaxRoot*> root
-%type <std::vector<FunctionDeclarationSyntax*>*> function_decl_list
-%type <FunctionDeclarationSyntax*> function_decl
+
+%type <NameSyntax*> name
+%type <SimpleNameSyntax*> simple_name
+
+%type <std::vector<MemberDeclarationSyntax*>*> base_decl_list
+%type <MemberDeclarationSyntax*> base_decl
+%type <MemberDeclarationSyntax*> namespace_decl
+%type <MemberDeclarationSyntax*> class_decl
+
+%type <VisibilityModifierSyntax*> visibility_mod
+%type <StaticModifierSyntax*> static_mod
+
+%type <std::vector<MemberDeclarationSyntax*>*> member_decl_list
+%type <MemberDeclarationSyntax*> member_decl
+
+%type <MemberDeclarationSyntax*> function_decl
+%type <MemberDeclarationSyntax*> field_decl
+
 %type <std::vector<ArgumentSyntax*>*> argument_list
 %type <ArgumentSyntax*> argument
 %type <std::vector<StatementSyntax*>*> statement_list
@@ -99,7 +136,7 @@
 %type <VariableDeclaratorSyntax*> var_declr;
 %type <TypeSyntax*> type
 %type <ExpressionSyntax*> expr
-%type <ExpressionSyntax*> id_expr
+%type <ExpressionSyntax*> access_expr
 %type <ExpressionSyntax*> num_lit_expr
 %type <ExpressionSyntax*> assign_expr
 %type <ExpressionSyntax*> bin_expr
@@ -107,17 +144,60 @@
 %%
 
 root
-  : function_decl_list { $$ = new SyntaxRoot($1); driver.root = $$; }
+  : base_decl_list { $$ = new SyntaxRoot($1); driver.root = $$; }
   ;
 
-function_decl_list
-  : function_decl { $$ = new vector<FunctionDeclarationSyntax*>(); $$->push_back($1); }
-  | function_decl_list function_decl { $$ = $1; $$->push_back($2); }
+base_decl_list
+  : { $$ = new vector<MemberDeclarationSyntax*>(); }
+  | base_decl_list base_decl { $$ = $1; $$->push_back($2); }
+  ;
+
+base_decl
+  : namespace_decl { $$ = $1; }
+  | class_decl { $$ = $1; }
+  ;
+
+namespace_decl
+  : _NAMESPACE name _LCURLY base_decl_list _RCURLY { $$ = new NamespaceDeclaration($2, $4); }
+  ;
+
+class_decl
+  : visibility_mod static_mod _CLASS simple_name _LCURLY member_decl_list _RCURLY
+  { $$ = new ClassDeclaration($1, $2, $4, $6); }
+  ;
+
+visibility_mod
+  : { $$ = new VisibilityModifierSyntax(Tots::Language::TypeVisibility::Internal); }
+  | _INTERNAL { $$ = new VisibilityModifierSyntax(Tots::Language::TypeVisibility::Internal); }
+  | _PRIVATE { $$ = new VisibilityModifierSyntax(Tots::Language::TypeVisibility::Private); }
+  | _PROTECTED { $$ = new VisibilityModifierSyntax(Tots::Language::TypeVisibility::Protected); }
+  | _PUBLIC { $$ = new VisibilityModifierSyntax(Tots::Language::TypeVisibility::Public); }
+  ;
+
+static_mod
+  : { $$ = nullptr; }
+  | _STATIC { $$ = new StaticModifierSyntax(); }
+  ;
+
+member_decl_list
+  : { $$ = new vector<MemberDeclarationSyntax*>(); }
+  | member_decl_list member_decl { $$ = $1; $$->push_back($2); }
+  ;
+
+member_decl
+  : function_decl { $$ = $1;}
+  | field_decl { $$ = $1; }
+  | class_decl { $$ = $1; }
   ;
 
 function_decl
-  : type _ID _LPAREN argument_list _RPAREN _LCURLY statement_list _RCURLY
-  { $$ = new FunctionDeclarationSyntax($1, $2, $4, $7); }
+  : visibility_mod static_mod type simple_name _LPAREN argument_list _RPAREN _LCURLY statement_list _RCURLY
+  { $$ = new FunctionDeclaration($1, $2, $3, $4, $6, $9); }
+  ;
+
+field_decl
+  : visibility_mod static_mod type simple_name _SEMICOLON
+  { $$ = new FieldDeclaration($1, $2, $3, $4); }
   ;
 
 argument_list
@@ -154,15 +234,15 @@ expr_stmt
   ;
 
 expr
-  : access_expr { $$ = $1; }
+  : simple_name { $$ = $1; }
+  | access_expr { $$ = $1; }
   | num_lit_expr { $$ = $1; }
   | assign_expr { $$ = $1; }
   | bin_expr { $$ = $1; }
   ;
 
 access_expr
-  : simple_name { $$ = $1; }
-  | expr _DOT simple_name { $$ = }
+  : expr _DOT simple_name { $$ = new MemberAccessExpression($1, $3); }
   ;
 
 num_lit_expr
@@ -185,8 +265,8 @@ bin_expr
   ;
 
 var_declr
-  : _ID { $$ = new VariableDeclaratorSyntax($1); }
-  | _ID _EQ expr { $$ = new VariableDeclaratorSyntax($1, $3); }
+  : simple_name { $$ = new VariableDeclaratorSyntax($1); }
+  | simple_name _EQ expr { $$ = new VariableDeclaratorSyntax($1, $3); }
   ;
 
 type

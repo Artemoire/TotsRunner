@@ -1,13 +1,14 @@
 #pragma once
 
 #include "ExpressionSyntax.h"
+#include "SimpleNameSyntax.h"
 
 class VariableDeclaratorSyntax : public SyntaxNode
 {
 public:
-	char * identifier;
+	SimpleNameSyntax * identifier;
 	ExpressionSyntax * initializer;
 
-	VariableDeclaratorSyntax(char *);
-	VariableDeclaratorSyntax(char *, ExpressionSyntax *);
+	VariableDeclaratorSyntax(SimpleNameSyntax *);
+	VariableDeclaratorSyntax(SimpleNameSyntax *, ExpressionSyntax *);
 };

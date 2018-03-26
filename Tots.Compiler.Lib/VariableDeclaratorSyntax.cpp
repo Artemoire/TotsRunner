@@ -1,13 +1,13 @@
 #include "VariableDeclaratorSyntax.h"
 
-VariableDeclaratorSyntax::VariableDeclaratorSyntax(char *id)
+VariableDeclaratorSyntax::VariableDeclaratorSyntax(SimpleNameSyntax *id)
 {
 	kind = SyntaxKind::kVariableDeclaratorSyntax;
 	identifier = id;
 	initializer = nullptr;
 }
 
-VariableDeclaratorSyntax::VariableDeclaratorSyntax(char *id, ExpressionSyntax *init)
+VariableDeclaratorSyntax::VariableDeclaratorSyntax(SimpleNameSyntax *id, ExpressionSyntax *init)
 {
 	kind = SyntaxKind::kVariableDeclaratorSyntax;
 	identifier = id;

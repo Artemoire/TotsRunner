@@ -16,9 +16,6 @@
     <Filter Include="Language\Syntax\Expressions">
       <UniqueIdentifier>{e2505907-f083-495d-8f9b-1cfe66a5b335}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Language\Syntax\Functions">
-      <UniqueIdentifier>{beef4f1f-b52c-49dc-9b1e-c15b8912db3e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Language\Syntax\Types">
       <UniqueIdentifier>{f160fed8-1cde-4a71-bd78-97c47a08f0e4}</UniqueIdentifier>
     </Filter>
@@ -46,19 +43,22 @@
     <Filter Include="Language\Syntax\Accessibility">
       <UniqueIdentifier>{f20650f0-32db-4693-afaa-bfae0db015a8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Language\Syntax\TypeDeclarations">
-      <UniqueIdentifier>{1e59d2ae-b370-4537-bf41-9f74194fcb72}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Language\Syntax\Names">
       <UniqueIdentifier>{fffcac80-839d-40cb-ad60-44a0b11535fc}</UniqueIdentifier>
     </Filter>
     <Filter Include="Language\Syntax\Literals">
       <UniqueIdentifier>{2680ad9a-78b0-473c-a064-a3b89bda54b5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Language\Syntax\Members">
+      <UniqueIdentifier>{beef4f1f-b52c-49dc-9b1e-c15b8912db3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Language\Syntax\TypeDeclarations">
+      <UniqueIdentifier>{1e59d2ae-b370-4537-bf41-9f74194fcb72}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ArgumentSyntax.cpp">
-      <Filter>Language\Syntax\Functions</Filter>
+      <Filter>Language\Syntax\Members</Filter>
     </ClCompile>
     <ClCompile Include="AssignmentExpression.cpp">
       <Filter>Language\Syntax\Expressions</Filter>
@@ -71,12 +71,6 @@
     </ClCompile>
     <ClCompile Include="ExpressionStatement.cpp">
       <Filter>Language\Syntax\Statements</Filter>
-    </ClCompile>
-    <ClCompile Include="FunctionDeclarationSyntax.cpp">
-      <Filter>Language\Syntax\Functions</Filter>
-    </ClCompile>
-    <ClCompile Include="IdentifierExpression.cpp">
-      <Filter>Language\Syntax\Expressions</Filter>
     </ClCompile>
     <ClCompile Include="PredefinedType.cpp">
       <Filter>Language\Syntax\Types</Filter>
@@ -132,16 +126,31 @@
     <ClCompile Include="IdentifierNameSyntax.cpp">
       <Filter>Language\Syntax\Names</Filter>
     </ClCompile>
-    <ClCompile Include="QualifiedNameSyntax.h">
-      <Filter>Language\Syntax\Names</Filter>
+    <ClCompile Include="MemberAccessExpression.cpp">
+      <Filter>Language\Syntax\Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassDeclaration.cpp">
+      <Filter>Language\Syntax\TypeDeclarations</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionDeclaration.cpp">
+      <Filter>Language\Syntax\Members</Filter>
+    </ClCompile>
+    <ClCompile Include="FieldDeclaration.cpp">
+      <Filter>Language\Syntax\Members</Filter>
+    </ClCompile>
+    <ClCompile Include="NamespaceDeclaration.cpp">
+      <Filter>Language\Syntax\Members</Filter>
     </ClCompile>
     <ClCompile Include="QualifiedNameSyntax.cpp">
       <Filter>Language\Syntax\Names</Filter>
     </ClCompile>
+    <ClCompile Include="DeclarationBuilder.cpp">
+      <Filter>Language\Compiler</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArgumentSyntax.h">
-      <Filter>Language\Syntax\Functions</Filter>
+      <Filter>Language\Syntax\Members</Filter>
     </ClInclude>
     <ClInclude Include="AssignmentExpression.h">
       <Filter>Language\Syntax\Expressions</Filter>
@@ -156,12 +165,6 @@
       <Filter>Language\Syntax\Statements</Filter>
     </ClInclude>
     <ClInclude Include="ExpressionSyntax.h">
-      <Filter>Language\Syntax\Expressions</Filter>
-    </ClInclude>
-    <ClInclude Include="FunctionDeclarationSyntax.h">
-      <Filter>Language\Syntax\Functions</Filter>
-    </ClInclude>
-    <ClInclude Include="IdentifierExpression.h">
       <Filter>Language\Syntax\Expressions</Filter>
     </ClInclude>
     <ClInclude Include="PredefinedType.h">
@@ -248,9 +251,6 @@
     <ClInclude Include="StaticModifierSyntax.h">
       <Filter>Language\Syntax\Accessibility</Filter>
     </ClInclude>
-    <ClInclude Include="NamespaceDeclarationSyntax.h">
-      <Filter>Language\Syntax\Accessibility</Filter>
-    </ClInclude>
     <ClInclude Include="NameSyntax.h">
       <Filter>Language\Syntax\Names</Filter>
     </ClInclude>
@@ -268,6 +268,42 @@
     </ClInclude>
     <ClInclude Include="LiteralSyntaxDefs.h">
       <Filter>Language\Syntax\Literals</Filter>
+    </ClInclude>
+    <ClInclude Include="MemberAccessExpression.h">
+      <Filter>Language\Syntax\Expressions</Filter>
+    </ClInclude>
+    <ClInclude Include="TypeVisibility.h">
+      <Filter>Language</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseTypeDeclaration.h">
+      <Filter>Language\Syntax\TypeDeclarations</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassDeclaration.h">
+      <Filter>Language\Syntax\TypeDeclarations</Filter>
+    </ClInclude>
+    <ClInclude Include="MemberDeclarationSyntax.h">
+      <Filter>Language\Syntax\Members</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionDeclaration.h">
+      <Filter>Language\Syntax\Members</Filter>
+    </ClInclude>
+    <ClInclude Include="FieldDeclaration.h">
+      <Filter>Language\Syntax\Members</Filter>
+    </ClInclude>
+    <ClInclude Include="MemberDeclarationDefs.h">
+      <Filter>Language\Syntax\Members</Filter>
+    </ClInclude>
+    <ClInclude Include="NamespaceDeclaration.h">
+      <Filter>Language\Syntax\Members</Filter>
+    </ClInclude>
+    <ClInclude Include="TypeDeclarationDefs.h">
+      <Filter>Language\Syntax\TypeDeclarations</Filter>
+    </ClInclude>
+    <ClInclude Include="DeclarationBuilder.h">
+      <Filter>Language\Compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="QualifiedNameSyntax.h">
+      <Filter>Language\Syntax\Names</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

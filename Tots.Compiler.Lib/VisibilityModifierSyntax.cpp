@@ -1,7 +1,7 @@
 #include "VisibilityModifierSyntax.h"
 
-VisibilityModifierSyntax::VisibilityModifierSyntax(TypeVisibility v)
+VisibilityModifierSyntax::VisibilityModifierSyntax(Tots::Language::TypeVisibility v)
 {
-	kind = kVisibilityModifierSyntax;
+	kind = SyntaxKind::kVisibilityModifierSyntax;
 	visibility = v;
 }

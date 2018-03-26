@@ -37,6 +37,16 @@ using token = TotsParser::token;
 
 [ \t\n]+             { /* skip */ }
 
+"namespace"				{ return token::_NAMESPACE; }
+"class"					{ return token::_CLASS; }
+
+"internal"				{ return token::_INTERNAL; }
+"private"				{ return token::_PRIVATE; }
+"protected"				{ return token::_PROTECTED; }
+"public"				{ return token::_PUBLIC; }
+
+"static"				{ return token::_STATIC; }
+
 "var"					{ return token::_VAR; }
 
 "void"					{ return token::_VOID; }
